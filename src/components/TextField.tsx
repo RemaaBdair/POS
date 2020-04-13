@@ -24,6 +24,7 @@ const styles = createStyles({
       borderWidth: 2,
     },
     margin: "5px 0px",
+    minWidth: 300,
   },
   notchedOutline: {},
   disabled: {},
@@ -42,6 +43,7 @@ const HigherOrderComponent: React.FunctionComponent<
         label={labelName}
         color="primary"
         variant="outlined"
+        fullWidth
         InputProps={{
           classes: {
             root: classes.root,
