@@ -12,8 +12,6 @@ const styles = createStyles({
     background: (props: Props) => props.bgColor,
     color: (props: Props) => props.color,
     height: 50,
-    padding: "0 120px",
-    margin: 16,
     borderRadius: 0,
     textTransform: "none",
   },
