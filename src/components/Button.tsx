@@ -11,11 +11,11 @@ const styles = createStyles({
   root: {
     background: (props: Props) => props.bgColor,
     color: (props: Props) => props.color,
-    height: 50,
     borderRadius: 0,
     textTransform: "none",
     width: "100%",
     margin: "5px 0px",
+    padding: "16px",
   },
 });
 
