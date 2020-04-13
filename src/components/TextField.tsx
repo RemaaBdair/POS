@@ -23,6 +23,7 @@ const styles = createStyles({
       borderColor: "#1861ab",
       borderWidth: 2,
     },
+    margin: "5px 0px",
   },
   notchedOutline: {},
   disabled: {},
