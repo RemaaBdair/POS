@@ -14,6 +14,8 @@ const styles = createStyles({
     height: 50,
     borderRadius: 0,
     textTransform: "none",
+    width: "100%",
+    margin: "5px 0px",
   },
 });
 
