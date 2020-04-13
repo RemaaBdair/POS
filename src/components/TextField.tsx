@@ -1,6 +1,6 @@
-import React, { FunctionComponent } from "react";
+import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createMuiTheme, WithStyles } from "@material-ui/core/styles";
 import {
   withStyles,
   createStyles,
@@ -9,10 +9,6 @@ import {
 interface Props {
   type: string;
   labelName: string;
-  classes: {
-    root: string;
-    notchedOutline: string;
-  };
 }
 const theme = createMuiTheme({
   palette: {
@@ -33,7 +29,9 @@ const styles = createStyles({
   focused: {},
   error: {},
 });
-const HigherOrderComponent: FunctionComponent<Props> = (props) => {
+const HigherOrderComponent: React.FunctionComponent<
+  Props & WithStyles<typeof styles>
+> = (props) => {
   const { classes, labelName, type } = props;
   return (
     <ThemeProvider theme={theme}>
