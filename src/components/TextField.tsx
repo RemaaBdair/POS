@@ -25,6 +25,7 @@ const styles = createStyles({
     },
     margin: "5px 0px",
     minWidth: 300,
+    borderRadius: 0,
   },
   notchedOutline: {},
   disabled: {},
