@@ -1,13 +1,10 @@
 import React from "react";
 import Button from "@material-ui/core/Button";
-import { withStyles, createStyles } from "@material-ui/core/styles";
+import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 interface Props {
   color: string;
   bgColor: string;
-  children: React.ReactElement;
-  classes: {
-    root: string;
-  };
+  children: string;
 }
 
 const styles = createStyles({
@@ -22,12 +19,13 @@ const styles = createStyles({
   },
 });
 
-function HigherOrderComponent(props: Props) {
-  const { children, classes } = props;
+const HigherOrderComponent: React.FunctionComponent<
+  Props & WithStyles<typeof styles>
+> = (props) => {
   return (
-    <Button variant="contained" size="large" className={classes.root}>
-      {children}
+    <Button variant="contained" size="large" className={props.classes.root}>
+      {props.children}
     </Button>
   );
-}
+};
 export const MyButton = withStyles(styles)(HigherOrderComponent);
