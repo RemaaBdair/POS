@@ -9,6 +9,7 @@ import {
 interface Props {
   type: string;
   labelName: string;
+  handle: (arg: string) => void;
 }
 const theme = createMuiTheme({
   palette: {
@@ -23,7 +24,7 @@ const styles = createStyles({
       borderColor: "#1861ab",
       borderWidth: 2,
     },
-    margin: "5px 0px",
+    margin: "7px 0px",
     minWidth: 300,
     borderRadius: 0,
   },
@@ -35,7 +36,7 @@ const styles = createStyles({
 const HigherOrderComponent: React.FunctionComponent<
   Props & WithStyles<typeof styles>
 > = (props) => {
-  const { classes, labelName, type } = props;
+  const { classes, labelName, type, handle } = props;
   return (
     <ThemeProvider theme={theme}>
       <TextField
@@ -45,6 +46,7 @@ const HigherOrderComponent: React.FunctionComponent<
         color="primary"
         variant="outlined"
         fullWidth
+        onChange={(event) => handle(event.target.value)}
         InputProps={{
           classes: {
             root: classes.root,

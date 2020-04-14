@@ -5,6 +5,7 @@ interface Props {
   color: string;
   bgColor: string;
   children: string;
+  handle: () => void;
 }
 
 const styles = createStyles({
@@ -14,7 +15,7 @@ const styles = createStyles({
     borderRadius: 0,
     textTransform: "none",
     width: "100%",
-    margin: "5px 0px",
+    margin: "7px 0px",
     padding: "16px",
   },
 });
@@ -23,7 +24,12 @@ const HigherOrderComponent: React.FunctionComponent<
   Props & WithStyles<typeof styles>
 > = (props) => {
   return (
-    <Button variant="contained" size="large" className={props.classes.root}>
+    <Button
+      variant="contained"
+      size="large"
+      className={props.classes.root}
+      onClick={props.handle}
+    >
       {props.children}
     </Button>
   );
