@@ -3,12 +3,12 @@
     {
       "id": 1,
       "email": "remaa@gmail.com",
-      "password": "remaa"
+      "password": "remaa1"
     },
     {
       "id": 2,
       "email": "admin",
-      "password": "admin"
+      "password": "admin1"
     }
   ]
 }
