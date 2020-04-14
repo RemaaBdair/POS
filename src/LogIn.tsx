@@ -9,7 +9,6 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import Background from "./login.jpg";
 import Logo from "./logo.png";
-import MainPage from "./MainPage";
 import { navigate } from "@reach/router";
 import { RouteComponentProps } from "@reach/router";
 const styles = createStyles({
@@ -52,13 +51,23 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(false);
-  const onClickHandle = () => {
+  const [emailErrorText, setEmailErrorText] = useState("");
+  const [passwordErrorText, setPasswordErrorText] = useState("");
+  const validtaeInput = () => {
+    if (email === "") setEmailErrorText("this field can't be empty");
+    if (password === "") setPasswordErrorText("this field can't be empty");
+    else if (password.length < 4)
+      setPasswordErrorText("Password must be at least 4 chars");
+    else if (!password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/))
+      setPasswordErrorText("Password must contains chars and numbers");
+    else login();
+  };
+  const login = () => {
     fetch("http://localhost:3001/users")
       .then((response) => response.json())
       .then((data) => {
         data.forEach((e: { id: string; password: string; email: string }) => {
           if (e.email === email && e.password === password) {
-            console.log(`${e.id}, ${e.password}, ${e.email}`);
             setError(false);
             navigate("/Main/");
           } else setError(true);
@@ -67,6 +76,12 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
       .catch((error) => {
         console.log(error);
       });
+  };
+  const onClickHandle = () => {
+    setError(false);
+    setPasswordErrorText("");
+    setEmailErrorText("");
+    validtaeInput();
   };
   return (
     <Card classes={{ root: classes.card }}>
@@ -88,6 +103,7 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
         <MyTextField
           labelName="Email"
           type="text"
+          errorText={emailErrorText}
           handle={(email) => setEmail(email)}
         >
           Email
@@ -95,6 +111,7 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
         <MyTextField
           labelName="Password"
           type="password"
+          errorText={passwordErrorText}
           handle={(password) => setPassword(password)}
         >
           Password
