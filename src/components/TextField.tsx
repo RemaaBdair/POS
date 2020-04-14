@@ -10,6 +10,7 @@ interface Props {
   type: string;
   labelName: string;
   handle: (arg: string) => void;
+  errorText: string;
 }
 const theme = createMuiTheme({
   palette: {
@@ -36,7 +37,7 @@ const styles = createStyles({
 const HigherOrderComponent: React.FunctionComponent<
   Props & WithStyles<typeof styles>
 > = (props) => {
-  const { classes, labelName, type, handle } = props;
+  const { classes, labelName, type, handle, errorText } = props;
   return (
     <ThemeProvider theme={theme}>
       <TextField
@@ -47,6 +48,9 @@ const HigherOrderComponent: React.FunctionComponent<
         variant="outlined"
         fullWidth
         onChange={(event) => handle(event.target.value)}
+        required
+        helperText={errorText}
+        error={errorText ? true : false}
         InputProps={{
           classes: {
             root: classes.root,
