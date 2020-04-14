@@ -9,6 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
 import Background from "./login.jpg";
 import Logo from "./logo.png";
+import MainPage from "./MainPage";
+import { navigate } from "@reach/router";
+import { RouteComponentProps } from "@reach/router";
 const styles = createStyles({
   "@global body": {
     backgroundImage: `url(${Background})`,
@@ -44,7 +47,7 @@ const styles = createStyles({
     display: "inline-flex",
   },
 });
-const HOC = (props: WithStyles<typeof styles>) => {
+const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   const { classes } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -57,6 +60,7 @@ const HOC = (props: WithStyles<typeof styles>) => {
           if (e.email === email && e.password === password) {
             console.log(`${e.id}, ${e.password}, ${e.email}`);
             setError(false);
+            navigate("/Main/");
           } else setError(true);
         });
       })
