@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -53,6 +53,10 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   const [error, setError] = useState(false);
   const [emailErrorText, setEmailErrorText] = useState("");
   const [passwordErrorText, setPasswordErrorText] = useState("");
+  const token = localStorage.getItem("LoggedIn");
+  useEffect(() => {
+    if (token === "true") navigate("/Main/");
+  }, [token]);
   const validtaeInput = () => {
     if (email === "") setEmailErrorText("this field can't be empty");
     if (password === "") setPasswordErrorText("this field can't be empty");
@@ -69,6 +73,7 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
         data.forEach((e: { id: string; password: string; email: string }) => {
           if (e.email === email && e.password === password) {
             setError(false);
+            localStorage.setItem("LoggedIn", "true");
             navigate("/Main/");
           } else setError(true);
         });
