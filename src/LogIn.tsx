@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -12,7 +12,6 @@ import Logo from "./logo.png";
 const styles = createStyles({
   "@global body": {
     backgroundImage: `url(${Background})`,
-    fontFamily: "Lato",
     backgroundPosition: "center center",
     display: "flex",
     justifyContent: "center",
@@ -45,8 +44,26 @@ const styles = createStyles({
     display: "inline-flex",
   },
 });
-function HOC(props: WithStyles<typeof styles>) {
+const HOC = (props: WithStyles<typeof styles>) => {
   const { classes } = props;
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const onClickHandle = () => {
+    fetch("http://localhost:3001/users")
+      .then((response) => response.json())
+      .then((data) => {
+        data.forEach((e: { id: string; password: string; email: string }) => {
+          if (e.email === email && e.password === password) {
+            console.log(`${e.id}, ${e.password}, ${e.email}`);
+            setError(false);
+          } else setError(true);
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <Card classes={{ root: classes.card }}>
       <CardMedia className={classes.logo} image={Logo} title="Logo" />
@@ -54,21 +71,39 @@ function HOC(props: WithStyles<typeof styles>) {
         <Typography variant="h5" component="h5">
           Login To Your Account
         </Typography>
-        <MyTextField labelName="Email" type="text">
+        {error ? (
+          <Typography
+            component="span"
+            style={{ color: "red", margin: 10, fontSize: 18 }}
+          >
+            Your email or password is incorrect
+          </Typography>
+        ) : (
+          ""
+        )}
+        <MyTextField
+          labelName="Email"
+          type="text"
+          handle={(email) => setEmail(email)}
+        >
           Email
         </MyTextField>
-        <MyTextField labelName="Password" type="password">
+        <MyTextField
+          labelName="Password"
+          type="password"
+          handle={(password) => setPassword(password)}
+        >
           Password
         </MyTextField>
       </CardContent>
       <CardActions className={classes.controls}>
-        <MyButton color="white" bgColor="#1861ab">
+        <MyButton color="white" bgColor="#1861ab" handle={onClickHandle}>
           LogIn
         </MyButton>
       </CardActions>
     </Card>
   );
-}
+};
 
 const LogIn = withStyles(styles)(HOC);
 export default LogIn;
