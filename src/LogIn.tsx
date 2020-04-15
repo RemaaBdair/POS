@@ -51,7 +51,9 @@ const styles = createStyles({
     fontSize: 18,
   },
 });
-const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
+const HigherOrderComponent = (
+  props: WithStyles<typeof styles> & RouteComponentProps
+) => {
   const { classes } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -133,4 +135,4 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   );
 };
 
-export default withStyles(styles)(HOC);
+export default withStyles(styles)(HigherOrderComponent);
