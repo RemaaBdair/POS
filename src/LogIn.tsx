@@ -6,11 +6,24 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { MyButton } from "./components/Button";
 import { MyTextField } from "./components/TextField";
 import Typography from "@material-ui/core/Typography";
-import { withStyles, createStyles, WithStyles } from "@material-ui/core/styles";
+import {
+  withStyles,
+  createStyles,
+  WithStyles,
+  createMuiTheme,
+  ThemeProvider,
+} from "@material-ui/core/styles";
 import Background from "./login.jpg";
 import Logo from "./logo.png";
 import { navigate } from "@reach/router";
 import { RouteComponentProps } from "@reach/router";
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: "#1861ab",
+    },
+  },
+});
 const styles = createStyles({
   "@global body": {
     backgroundImage: `url(${Background})`,
@@ -109,42 +122,44 @@ const HigherOrderComponent = (
     if (validateInputs()) fetchLogin(email, password, setError);
   };
   return (
-    <Card classes={{ root: classes.card }}>
-      <CardMedia className={classes.logo} image={Logo} title="Logo" />
-      <CardContent className={classes.content}>
-        <Typography variant="h5" component="h5">
-          Login To Your Account
-        </Typography>
-        {error ? (
-          <Typography component="span" className={classes.errorText}>
-            Your email or password is incorrect
+    <ThemeProvider theme={theme}>
+      <Card classes={{ root: classes.card }}>
+        <CardMedia className={classes.logo} image={Logo} title="Logo" />
+        <CardContent className={classes.content}>
+          <Typography variant="h5" component="h5">
+            Login To Your Account
           </Typography>
-        ) : (
-          ""
-        )}
-        <MyTextField
-          labelName="Email"
-          type="text"
-          errorText={emailErrorText}
-          OnChangehandle={(email) => setEmail(email)}
-        >
-          Email
-        </MyTextField>
-        <MyTextField
-          labelName="Password"
-          type="password"
-          errorText={passwordErrorText}
-          OnChangehandle={(password) => setPassword(password)}
-        >
-          Password
-        </MyTextField>
-      </CardContent>
-      <CardActions className={classes.controls}>
-        <MyButton color="white" bgColor="#1861ab" handle={onClickHandle}>
-          LogIn
-        </MyButton>
-      </CardActions>
-    </Card>
+          {error ? (
+            <Typography component="span" className={classes.errorText}>
+              Your email or password is incorrect
+            </Typography>
+          ) : (
+            ""
+          )}
+          <MyTextField
+            labelName="Email"
+            type="text"
+            errorText={emailErrorText}
+            OnChangehandle={(email) => setEmail(email)}
+          >
+            Email
+          </MyTextField>
+          <MyTextField
+            labelName="Password"
+            type="password"
+            errorText={passwordErrorText}
+            OnChangehandle={(password) => setPassword(password)}
+          >
+            Password
+          </MyTextField>
+        </CardContent>
+        <CardActions className={classes.controls}>
+          <MyButton color="white" bgColor="#1861ab" handle={onClickHandle}>
+            LogIn
+          </MyButton>
+        </CardActions>
+      </Card>
+    </ThemeProvider>
   );
 };
 

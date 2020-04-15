@@ -1,24 +1,12 @@
 import React from "react";
 import TextField from "@material-ui/core/TextField";
-import { createMuiTheme, WithStyles } from "@material-ui/core/styles";
-import {
-  withStyles,
-  createStyles,
-  ThemeProvider,
-} from "@material-ui/core/styles";
+import { WithStyles, withStyles, createStyles } from "@material-ui/core/styles";
 interface Props {
   type: string;
   labelName: string;
   OnChangehandle: (arg: string) => void;
   errorText: string;
 }
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#1861ab",
-    },
-  },
-});
 const styles = createStyles({
   root: {
     "&:hover:not($disabled):not($focused):not($error) $notchedOutline": {
@@ -39,26 +27,24 @@ const HigherOrderComponent: React.FunctionComponent<
 > = (props) => {
   const { classes, labelName, type, OnChangehandle, errorText } = props;
   return (
-    <ThemeProvider theme={theme}>
-      <TextField
-        id="outlined-basic"
-        type={type}
-        label={labelName}
-        color="primary"
-        variant="outlined"
-        fullWidth
-        onChange={(event) => OnChangehandle(event.target.value)}
-        required
-        helperText={errorText}
-        error={errorText ? true : false}
-        InputProps={{
-          classes: {
-            root: classes.root,
-            notchedOutline: classes.notchedOutline,
-          },
-        }}
-      />
-    </ThemeProvider>
+    <TextField
+      id="outlined-basic"
+      type={type}
+      label={labelName}
+      color="primary"
+      variant="outlined"
+      fullWidth
+      onChange={(event) => OnChangehandle(event.target.value)}
+      required
+      helperText={errorText}
+      error={errorText ? true : false}
+      InputProps={{
+        classes: {
+          root: classes.root,
+          notchedOutline: classes.notchedOutline,
+        },
+      }}
+    />
   );
 };
 export const MyTextField = withStyles(styles)(HigherOrderComponent);
