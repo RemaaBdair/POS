@@ -113,7 +113,7 @@ const HigherOrderComponent = (
           labelName="Email"
           type="text"
           errorText={emailErrorText}
-          handle={(email) => setEmail(email)}
+          OnChangehandle={(email) => setEmail(email)}
         >
           Email
         </MyTextField>
@@ -121,7 +121,7 @@ const HigherOrderComponent = (
           labelName="Password"
           type="password"
           errorText={passwordErrorText}
-          handle={(password) => setPassword(password)}
+          OnChangehandle={(password) => setPassword(password)}
         >
           Password
         </MyTextField>
