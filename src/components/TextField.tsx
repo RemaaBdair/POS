@@ -9,7 +9,7 @@ import {
 interface Props {
   type: string;
   labelName: string;
-  handle: (arg: string) => void;
+  OnChangehandle: (arg: string) => void;
   errorText: string;
 }
 const theme = createMuiTheme({
@@ -37,7 +37,7 @@ const styles = createStyles({
 const HigherOrderComponent: React.FunctionComponent<
   Props & WithStyles<typeof styles>
 > = (props) => {
-  const { classes, labelName, type, handle, errorText } = props;
+  const { classes, labelName, type, OnChangehandle, errorText } = props;
   return (
     <ThemeProvider theme={theme}>
       <TextField
@@ -47,7 +47,7 @@ const HigherOrderComponent: React.FunctionComponent<
         color="primary"
         variant="outlined"
         fullWidth
-        onChange={(event) => handle(event.target.value)}
+        onChange={(event) => OnChangehandle(event.target.value)}
         required
         helperText={errorText}
         error={errorText ? true : false}
