@@ -85,20 +85,28 @@ const HigherOrderComponent = (
   useEffect(() => {
     if (token === "true") navigate("/Main/");
   }, [token]);
-  const validtaeInput = () => {
-    if (email === "") setEmailErrorText("this field can't be empty");
-    if (password === "") setPasswordErrorText("this field can't be empty");
-    else if (password.length < 4)
-      setPasswordErrorText("Password must be at least 4 chars");
-    else if (!password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/))
-      setPasswordErrorText("Password must contains chars and numbers");
-    else fetchLogin(email, password, setError);
+  const validateInputs = (): boolean => {
+    if (
+      email.length &&
+      password.length >= 4 &&
+      password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/)
+    )
+      return true;
+    else {
+      if (email === "") setEmailErrorText("this field can't be empty");
+      if (password === "") setPasswordErrorText("this field can't be empty");
+      else if (password.length < 4)
+        setPasswordErrorText("Password must be at least 4 chars");
+      else if (!password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/))
+        setPasswordErrorText("Password must contains chars and numbers");
+      return false;
+    }
   };
   const onClickHandle = () => {
     setError(false);
     setPasswordErrorText("");
     setEmailErrorText("");
-    validtaeInput();
+    if (validateInputs()) fetchLogin(email, password, setError);
   };
   return (
     <Card classes={{ root: classes.card }}>
