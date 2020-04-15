@@ -16,6 +16,7 @@ const styles = createStyles({
     backgroundImage: `url(${Background})`,
     backgroundPosition: "center center",
     display: "flex",
+    fontFamily: "lato",
     justifyContent: "center",
     alignItems: "center",
     flexDirection: "column",
@@ -51,6 +52,26 @@ const styles = createStyles({
     fontSize: 18,
   },
 });
+const fetchLogin = (
+  email: string,
+  password: string,
+  setError: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  fetch("http://localhost:3001/users")
+    .then((response) => response.json())
+    .then((data) => {
+      data.forEach((e: { id: string; password: string; email: string }) => {
+        if (e.email === email && e.password === password) {
+          setError(false);
+          localStorage.setItem("LoggedIn", "true");
+          navigate("/Main/");
+        } else setError(true);
+      });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
 const HigherOrderComponent = (
   props: WithStyles<typeof styles> & RouteComponentProps
 ) => {
@@ -71,23 +92,7 @@ const HigherOrderComponent = (
       setPasswordErrorText("Password must be at least 4 chars");
     else if (!password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/))
       setPasswordErrorText("Password must contains chars and numbers");
-    else login();
-  };
-  const login = () => {
-    fetch("http://localhost:3001/users")
-      .then((response) => response.json())
-      .then((data) => {
-        data.forEach((e: { id: string; password: string; email: string }) => {
-          if (e.email === email && e.password === password) {
-            setError(false);
-            localStorage.setItem("LoggedIn", "true");
-            navigate("/Main/");
-          } else setError(true);
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    else fetchLogin(email, password, setError);
   };
   const onClickHandle = () => {
     setError(false);
