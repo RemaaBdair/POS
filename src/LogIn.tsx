@@ -133,5 +133,4 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   );
 };
 
-const LogIn = withStyles(styles)(HOC);
-export default LogIn;
+export default withStyles(styles)(HOC);
