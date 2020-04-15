@@ -65,21 +65,21 @@ const styles = createStyles({
     fontSize: 18,
   },
 });
-const fetchLogin = (
+const fetchLogin = async (
   email: string,
-  password: string,
-  setError: React.Dispatch<React.SetStateAction<boolean>>
-) => {
-  fetch("http://localhost:3001/users")
+  password: string
+): Promise<boolean | void> => {
+  let loggedIn: boolean = false;
+  return await fetch("http://localhost:3001/users")
     .then((response) => response.json())
     .then((data) => {
-      data.forEach((e: { id: string; password: string; email: string }) => {
-        if (e.email === email && e.password === password) {
-          setError(false);
-          localStorage.setItem("LoggedIn", "true");
-          navigate("/Main/");
-        } else setError(true);
+      data.forEach((elem: { id: string; password: string; email: string }) => {
+        if (elem.email === email && elem.password === password) {
+          loggedIn = true;
+        }
       });
+      if (loggedIn) return true;
+      else return false;
     })
     .catch((error) => {
       console.log(error);
@@ -115,11 +115,16 @@ const HigherOrderComponent = (
       return false;
     }
   };
-  const onClickHandle = () => {
+  const onClickHandle = async () => {
     setError(false);
     setPasswordErrorText("");
     setEmailErrorText("");
-    if (validateInputs()) fetchLogin(email, password, setError);
+    if (validateInputs())
+      if (await fetchLogin(email, password)) {
+        setError(false);
+        localStorage.setItem("LoggedIn", "true");
+        navigate("/Main/");
+      } else setError(true);
   };
   return (
     <ThemeProvider theme={theme}>
