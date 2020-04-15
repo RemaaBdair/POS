@@ -45,6 +45,11 @@ const styles = createStyles({
     width: 149,
     display: "inline-flex",
   },
+  errorText: {
+    color: "red",
+    margin: 10,
+    fontSize: 18,
+  },
 });
 const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   const { classes } = props;
@@ -96,10 +101,7 @@ const HOC = (props: WithStyles<typeof styles> & RouteComponentProps) => {
           Login To Your Account
         </Typography>
         {error ? (
-          <Typography
-            component="span"
-            style={{ color: "red", margin: 10, fontSize: 18 }}
-          >
+          <Typography component="span" className={classes.errorText}>
             Your email or password is incorrect
           </Typography>
         ) : (
