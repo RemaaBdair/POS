@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.9",
+    "@material-ui/system": "^4.9.6",
+    "@storybook/addon-knobs": "^5.3.18",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -22,7 +24,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "mock:api": "json-server --watch api/db.json --port 3001"
   },
   "eslintConfig": {
     "extends": "react-app"
