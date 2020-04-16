@@ -89,19 +89,19 @@ const HigherOrderComponent = (
           <img src={Logo} alt="Logo" className={props.classes.logoImg} />
         </div>
         <Toolbar className={props.classes.toolBar}>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <CreditCardIcon color="inherit" fontSize="small" />
             <Link href="#" onClick={preventDefault} color="inherit">
               POS
             </Link>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <StorefrontIcon color="primary" fontSize="small" />
             <Link href="#" onClick={preventDefault} color="inherit">
               Product
             </Link>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <PeopleIcon color="primary" fontSize="small" />
             <Button
               aria-controls="simple-menu"
@@ -120,7 +120,7 @@ const HigherOrderComponent = (
               onClose={handlePeopleClose}
             >
               <MenuItem onClick={handlePeopleClose}>
-                <Typography color="primary">
+                <Typography className={props.classes.listItem} color="primary">
                   <PersonIcon color="primary" fontSize="small" />
                   <Link href="#" onClick={preventDefault} color="inherit">
                     Customers
@@ -128,7 +128,7 @@ const HigherOrderComponent = (
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handlePeopleClose}>
-                <Typography color="primary">
+                <Typography className={props.classes.listItem} color="primary">
                   <LocalShippingIcon color="primary" fontSize="small" />
                   <Link href="#" onClick={preventDefault} color="inherit">
                     Suppliers
@@ -137,19 +137,19 @@ const HigherOrderComponent = (
               </MenuItem>
             </Menu>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <ReceiptIcon color="primary" fontSize="small" />
             <Link href="#" onClick={preventDefault} color="inherit">
               Sales
             </Link>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <AttachMoneyIcon color="primary" fontSize="small" />
             <Link href="#" onClick={preventDefault} color="inherit">
               Expense
             </Link>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <BookmarkIcon color="primary" fontSize="small" />
             <Button
               aria-controls="simple-menu"
@@ -168,7 +168,7 @@ const HigherOrderComponent = (
               onClose={handleCategoriesClose}
             >
               <MenuItem onClick={handleCategoriesClose}>
-                <Typography color="primary">
+                <Typography className={props.classes.listItem} color="primary">
                   <ReceiptIcon color="primary" fontSize="small" />
                   <Link href="#" onClick={preventDefault} color="inherit">
                     Sales
@@ -176,7 +176,7 @@ const HigherOrderComponent = (
                 </Typography>
               </MenuItem>
               <MenuItem onClick={handleCategoriesClose}>
-                <Typography color="primary">
+                <Typography className={props.classes.listItem} color="primary">
                   <AttachMoneyIcon color="primary" fontSize="small" />
                   <Link href="#" onClick={preventDefault} color="inherit">
                     Expense
@@ -185,13 +185,13 @@ const HigherOrderComponent = (
               </MenuItem>
             </Menu>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <SettingsIcon color="primary" fontSize="small" />
             <Link href="#" onClick={preventDefault} color="inherit">
               Setting
             </Link>
           </Typography>
-          <Typography color="primary">
+          <Typography className={props.classes.listItem} color="primary">
             <BarChartIcon color="primary" fontSize="small" />
             <Link href="#" onClick={preventDefault} color="inherit">
               Reports
