@@ -19,15 +19,21 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import StorefrontIcon from "@material-ui/icons/Storefront";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LanguageIcon from "@material-ui/icons/Language";
-import {
-  withStyles,
-  createStyles,
-} from "@material-ui/core/styles";
+import { withStyles, createStyles } from "@material-ui/core/styles";
 import Logo from "../logo.png";
 import Link from "@material-ui/core/Link";
 import { RouteComponentProps } from "@reach/router";
 import IconButton from "@material-ui/core/IconButton";
+import Background from "../whiteBackground.png";
 const styles = createStyles({
+  "@global": {
+    body: {
+      fontFamily: "lato",
+      backgroundColor: "white",
+      backgroundImage: `url(${Background})`,
+      height: "100%",
+    },
+  },
   root: {
     flexGrow: 1,
     flexDirection: "row",
@@ -45,6 +51,11 @@ const styles = createStyles({
     backgroundColor: "white",
     flexDirection: "row",
     justifyContent: "space-evenly",
+  },
+  listItem: {
+    margin: 5,
+    display: "flex",
+    alignItems: "center",
   },
 });
 const HigherOrderComponent = (
@@ -72,142 +83,141 @@ const HigherOrderComponent = (
     setAnchorCategories(null);
   };
   return (
-      <div className={props.classes.root}>
-        <AppBar position="fixed" className={props.classes.appBar}>
-          <div className={props.classes.logoContainer}>
-            <img src={Logo} alt="Logo" className={props.classes.logoImg} />
-          </div>
-          <Toolbar className={props.classes.toolBar}>
-            <Typography color="primary">
-              <CreditCardIcon color="inherit" fontSize="small" />
-              <Link href="#" onClick={preventDefault} color="inherit">
-                POS
-              </Link>
-            </Typography>
-            <Typography color="primary">
-              <StorefrontIcon color="primary" fontSize="small" />
-              <Link href="#" onClick={preventDefault} color="inherit">
-                Product
-              </Link>
-            </Typography>
-            <Typography color="primary">
-              <PeopleIcon color="primary" fontSize="small" />
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                color="primary"
-                onClick={handlePeopleClick}
-              >
-                People
-              </Button>
-
-              <Menu
-                id="category-menu"
-                anchorEl={anchorPeople}
-                keepMounted
-                open={Boolean(anchorPeople)}
-                onClose={handlePeopleClose}
-              >
-                <MenuItem onClick={handlePeopleClose}>
-                  <Typography color="primary">
-                    <PersonIcon color="primary" fontSize="small" />
-                    <Link href="#" onClick={preventDefault} color="inherit">
-                      Customers
-                    </Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handlePeopleClose}>
-                  <Typography color="primary">
-                    <LocalShippingIcon color="primary" fontSize="small" />
-                    <Link href="#" onClick={preventDefault} color="inherit">
-                      Suppliers
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            </Typography>
-            <Typography color="primary">
-              <ReceiptIcon color="primary" fontSize="small" />
-              <Link href="#" onClick={preventDefault} color="inherit">
-                Sales
-              </Link>
-            </Typography>
-            <Typography color="primary">
-              <AttachMoneyIcon color="primary" fontSize="small" />
-              <Link href="#" onClick={preventDefault} color="inherit">
-                Expense
-              </Link>
-            </Typography>
-            <Typography color="primary">
-              <BookmarkIcon color="primary" fontSize="small" />
-              <Button
-                aria-controls="simple-menu"
-                aria-haspopup="true"
-                color="primary"
-                onClick={handleCategoriesClick}
-              >
-                Categories
-              </Button>
-
-              <Menu
-                id="category-menu"
-                anchorEl={anchorCategories}
-                keepMounted
-                open={Boolean(anchorCategories)}
-                onClose={handleCategoriesClose}
-              >
-                <MenuItem onClick={handleCategoriesClose}>
-                  <Typography color="primary">
-                    <ReceiptIcon color="primary" fontSize="small" />
-                    <Link href="#" onClick={preventDefault} color="inherit">
-                      Sales
-                    </Link>
-                  </Typography>
-                </MenuItem>
-                <MenuItem onClick={handleCategoriesClose}>
-                  <Typography color="primary">
-                    <AttachMoneyIcon color="primary" fontSize="small" />
-                    <Link href="#" onClick={preventDefault} color="inherit">
-                      Expense
-                    </Link>
-                  </Typography>
-                </MenuItem>
-              </Menu>
-            </Typography>
-            <Typography color="primary">
-              <SettingsIcon color="primary" fontSize="small" />
-              <Link href="#" onClick={preventDefault} color="inherit">
-                Setting
-              </Link>
-            </Typography>
-            <Typography color="primary">
-              <BarChartIcon color="primary" fontSize="small" />
-              <Link href="#" onClick={preventDefault} color="inherit">
-                Reports
-              </Link>
-            </Typography>
-          </Toolbar>
-          <Toolbar className={props.classes.toolBar}>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
+    <div className={props.classes.root}>
+      <AppBar position="fixed" className={props.classes.appBar}>
+        <div className={props.classes.logoContainer}>
+          <img src={Logo} alt="Logo" className={props.classes.logoImg} />
+        </div>
+        <Toolbar className={props.classes.toolBar}>
+          <Typography color="primary">
+            <CreditCardIcon color="inherit" fontSize="small" />
+            <Link href="#" onClick={preventDefault} color="inherit">
+              POS
+            </Link>
+          </Typography>
+          <Typography color="primary">
+            <StorefrontIcon color="primary" fontSize="small" />
+            <Link href="#" onClick={preventDefault} color="inherit">
+              Product
+            </Link>
+          </Typography>
+          <Typography color="primary">
+            <PeopleIcon color="primary" fontSize="small" />
+            <Button
+              aria-controls="simple-menu"
               aria-haspopup="true"
               color="primary"
+              onClick={handlePeopleClick}
             >
-              <ExitToAppIcon fontSize="small" />
-            </IconButton>
-            <IconButton
-              edge="end"
-              aria-label="account of current user"
+              People
+            </Button>
+
+            <Menu
+              id="category-menu"
+              anchorEl={anchorPeople}
+              keepMounted
+              open={Boolean(anchorPeople)}
+              onClose={handlePeopleClose}
+            >
+              <MenuItem onClick={handlePeopleClose}>
+                <Typography color="primary">
+                  <PersonIcon color="primary" fontSize="small" />
+                  <Link href="#" onClick={preventDefault} color="inherit">
+                    Customers
+                  </Link>
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handlePeopleClose}>
+                <Typography color="primary">
+                  <LocalShippingIcon color="primary" fontSize="small" />
+                  <Link href="#" onClick={preventDefault} color="inherit">
+                    Suppliers
+                  </Link>
+                </Typography>
+              </MenuItem>
+            </Menu>
+          </Typography>
+          <Typography color="primary">
+            <ReceiptIcon color="primary" fontSize="small" />
+            <Link href="#" onClick={preventDefault} color="inherit">
+              Sales
+            </Link>
+          </Typography>
+          <Typography color="primary">
+            <AttachMoneyIcon color="primary" fontSize="small" />
+            <Link href="#" onClick={preventDefault} color="inherit">
+              Expense
+            </Link>
+          </Typography>
+          <Typography color="primary">
+            <BookmarkIcon color="primary" fontSize="small" />
+            <Button
+              aria-controls="simple-menu"
               aria-haspopup="true"
               color="primary"
+              onClick={handleCategoriesClick}
             >
-              <LanguageIcon fontSize="small" />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-      </div>
+              Categories
+            </Button>
+
+            <Menu
+              id="category-menu"
+              anchorEl={anchorCategories}
+              keepMounted
+              open={Boolean(anchorCategories)}
+              onClose={handleCategoriesClose}
+            >
+              <MenuItem onClick={handleCategoriesClose}>
+                <Typography color="primary">
+                  <ReceiptIcon color="primary" fontSize="small" />
+                  <Link href="#" onClick={preventDefault} color="inherit">
+                    Sales
+                  </Link>
+                </Typography>
+              </MenuItem>
+              <MenuItem onClick={handleCategoriesClose}>
+                <Typography color="primary">
+                  <AttachMoneyIcon color="primary" fontSize="small" />
+                  <Link href="#" onClick={preventDefault} color="inherit">
+                    Expense
+                  </Link>
+                </Typography>
+              </MenuItem>
+            </Menu>
+          </Typography>
+          <Typography color="primary">
+            <SettingsIcon color="primary" fontSize="small" />
+            <Link href="#" onClick={preventDefault} color="inherit">
+              Setting
+            </Link>
+          </Typography>
+          <Typography color="primary">
+            <BarChartIcon color="primary" fontSize="small" />
+            <Link href="#" onClick={preventDefault} color="inherit">
+              Reports
+            </Link>
+          </Typography>
+        </Toolbar>
+        <Toolbar className={props.classes.toolBar}>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <ExitToAppIcon fontSize="small" />
+          </IconButton>
+          <IconButton
+            edge="end"
+            aria-label="account of current user"
+            aria-haspopup="true"
+            color="primary"
+          >
+            <LanguageIcon fontSize="small" />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 export default withStyles(styles)(HigherOrderComponent);
-
