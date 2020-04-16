@@ -4,24 +4,15 @@ import { SvgIconProps } from "@material-ui/core/SvgIcon";
 import {
   withStyles,
   ThemeProvider,
-  createStyles
+  createStyles,
 } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
-import Header from './Components/Header'
+import Header from "./Components/Header";
 import Background from "./whiteBackground.png";
 const theme = createMuiTheme({
   palette: {
     primary: {
       main: "#777",
-    },
-  },
-  overrides: {
-    MuiTypography: {
-      root: {
-        margin: 5,
-        display: "flex",
-        alignItems: "center",
-      },
     },
   },
 });
@@ -45,5 +36,3 @@ const HigherOrderComponent = (
   );
 };
 export default withStyles(styles)(HigherOrderComponent);
-
-
