@@ -1,6 +1,5 @@
 import React from "react";
 import { createMuiTheme, WithStyles } from "@material-ui/core/styles";
-import { SvgIconProps } from "@material-ui/core/SvgIcon";
 import {
   withStyles,
   ThemeProvider,
@@ -26,13 +25,11 @@ const styles = createStyles({
     },
   },
 });
-const HigherOrderComponent = (
-  props: WithStyles<typeof styles> & RouteComponentProps & SvgIconProps
-) => {
+const MainPage = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   return (
     <ThemeProvider theme={theme}>
       <Header />
     </ThemeProvider>
   );
 };
-export default withStyles(styles)(HigherOrderComponent);
+export default withStyles(styles)(MainPage);
