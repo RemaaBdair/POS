@@ -58,7 +58,7 @@ const styles = createStyles({
     alignItems: "center",
   },
 });
-const HigherOrderComponent = (
+const Header = (
   props: WithStyles<typeof styles> & RouteComponentProps & SvgIconProps
 ) => {
   const preventDefault = (event: React.SyntheticEvent) =>
@@ -220,4 +220,4 @@ const HigherOrderComponent = (
     </div>
   );
 };
-export default withStyles(styles)(HigherOrderComponent);
+export default withStyles(styles)(Header);
