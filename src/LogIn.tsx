@@ -85,9 +85,7 @@ const fetchLogin = async (
       console.log(error);
     });
 };
-const HigherOrderComponent = (
-  props: WithStyles<typeof styles> & RouteComponentProps
-) => {
+const logIn = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   const { classes } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -172,4 +170,4 @@ const HigherOrderComponent = (
   );
 };
 
-export default withStyles(styles)(HigherOrderComponent);
+export default withStyles(styles)(logIn);
