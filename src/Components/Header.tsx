@@ -22,7 +22,6 @@ import LanguageIcon from "@material-ui/icons/Language";
 import { withStyles, createStyles } from "@material-ui/core/styles";
 import Logo from "../logo.png";
 import Link from "@material-ui/core/Link";
-import { RouteComponentProps } from "@reach/router";
 import IconButton from "@material-ui/core/IconButton";
 import Background from "../whiteBackground.png";
 const styles = createStyles({
@@ -58,9 +57,7 @@ const styles = createStyles({
     alignItems: "center",
   },
 });
-const Header = (
-  props: WithStyles<typeof styles> & RouteComponentProps & SvgIconProps
-) => {
+const Header = (props: WithStyles<typeof styles> & SvgIconProps) => {
   const preventDefault = (event: React.SyntheticEvent) =>
     event.preventDefault();
   const [anchorPeople, setAnchorPeople] = useState<null | HTMLElement>(null);

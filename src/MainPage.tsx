@@ -6,7 +6,7 @@ import {
   createStyles,
 } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
-import Header from "./Components/Header";
+import Header from "./components/Header";
 import Background from "./whiteBackground.png";
 const theme = createMuiTheme({
   palette: {
