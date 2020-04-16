@@ -159,7 +159,11 @@ const HigherOrderComponent = (
           </MyTextField>
         </CardContent>
         <CardActions className={classes.controls}>
-          <MyButton color="white" bgColor="#1861ab" handle={onClickHandle}>
+          <MyButton
+            color="white"
+            bgColor="#1861ab"
+            OnClickHandle={onClickHandle}
+          >
             LogIn
           </MyButton>
         </CardActions>

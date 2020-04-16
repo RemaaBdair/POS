@@ -5,7 +5,7 @@ interface Props {
   color: string;
   bgColor: string;
   children: string;
-  handle: () => void;
+  OnClickHandle: () => void;
 }
 
 const styles = createStyles({
@@ -28,7 +28,7 @@ const HigherOrderComponent: React.FunctionComponent<
       variant="contained"
       size="large"
       className={props.classes.root}
-      onClick={props.handle}
+      onClick={props.OnClickHandle}
     >
       {props.children}
     </Button>
