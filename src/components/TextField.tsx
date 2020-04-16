@@ -22,9 +22,9 @@ const styles = createStyles({
   focused: {},
   error: {},
 });
-const HigherOrderComponent: React.FunctionComponent<
-  Props & WithStyles<typeof styles>
-> = (props) => {
+const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
+  props
+) => {
   const { classes, labelName, type, OnChangehandle, errorText } = props;
   return (
     <TextField
@@ -47,4 +47,4 @@ const HigherOrderComponent: React.FunctionComponent<
     />
   );
 };
-export const MyTextField = withStyles(styles)(HigherOrderComponent);
+export const MyTextField = withStyles(styles)(textField);
