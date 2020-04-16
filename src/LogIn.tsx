@@ -3,8 +3,8 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import { MyButton } from "./components/Button";
-import { MyTextField } from "./components/TextField";
+import { MyButton } from "./Components/Button";
+import { MyTextField } from "./Components/TextField";
 import Typography from "@material-ui/core/Typography";
 import {
   withStyles,
@@ -85,7 +85,9 @@ const fetchLogin = async (
       console.log(error);
     });
 };
-const logIn = (props: WithStyles<typeof styles> & RouteComponentProps) => {
+const LogInComponent = (
+  props: WithStyles<typeof styles> & RouteComponentProps
+) => {
   const { classes } = props;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -170,4 +172,4 @@ const logIn = (props: WithStyles<typeof styles> & RouteComponentProps) => {
   );
 };
 
-export default withStyles(styles)(logIn);
+export default withStyles(styles)(LogInComponent);
