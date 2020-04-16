@@ -20,9 +20,9 @@ const styles = createStyles({
   },
 });
 
-const HigherOrderComponent: React.FunctionComponent<
-  Props & WithStyles<typeof styles>
-> = (props) => {
+const button: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
+  props
+) => {
   return (
     <Button
       variant="contained"
@@ -34,4 +34,4 @@ const HigherOrderComponent: React.FunctionComponent<
     </Button>
   );
 };
-export const MyButton = withStyles(styles)(HigherOrderComponent);
+export const MyButton = withStyles(styles)(button);
