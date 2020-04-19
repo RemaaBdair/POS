@@ -3,8 +3,8 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import { MyButton } from "./components/Button";
-import { MyTextField } from "./components/TextField";
+import { MyButton } from "./components/Button/Button";
+import { MyTextField } from "./components/TextField/TextField";
 import Typography from "@material-ui/core/Typography";
 import {
   withStyles,
@@ -17,6 +17,10 @@ import Background from "./login.jpg";
 import Logo from "./logo.png";
 import { navigate } from "@reach/router";
 import { RouteComponentProps } from "@reach/router";
+type Inputs={
+  email: string;
+  password:string;
+}
 const theme = createMuiTheme({
   palette: {
     primary: {
@@ -98,33 +102,45 @@ const LogInComponent = (
   useEffect(() => {
     if (token === "true") navigate("/Main/");
   }, [token]);
-  const validateInputs = (): boolean => {
-    if (
-      email.length &&
-      password.length >= 4 &&
-      password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/)
-    )
-      return true;
-    else {
-      if (email === "") setEmailErrorText("this field can't be empty");
-      if (password === "") setPasswordErrorText("this field can't be empty");
-      else if (password.length < 4)
-        setPasswordErrorText("Password must be at least 4 chars");
-      else if (!password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/))
-        setPasswordErrorText("Password must contains chars and numbers");
-      return false;
-    }
+  const validateEmail = (email: string): string => {
+    if (!email) return "Email can't be empy!";
+    return "";
   };
+  const validatePassword = (password: string): string => {
+    if (!password) return "Password can't be empy!";
+    else if (password.length < 4) return "Password must be at least 4 chars";
+    else if (!password.match(/^(?=.*[a-zA-Z])(?=.*[0-9])[a-zA-Z0-9]+$/))
+      return "Password must contains chars and numbers";
+    return "";
+  };
+  const validateInputs = (inputs: Inputs): Inputs=> {
+    return {
+      email: validateEmail(inputs.email),
+      password: validatePassword(inputs.password),
+    };
+  };
+
   const onClickHandle = async () => {
     setError(false);
     setPasswordErrorText("");
     setEmailErrorText("");
-    if (validateInputs())
-      if (await fetchLogin(email, password)) {
-        setError(false);
-        localStorage.setItem("LoggedIn", "true");
-        navigate("/Main/");
-      } else setError(true);
+    const errors = validateInputs({ email, password });
+    if (errors.email) {
+      setEmailErrorText(errors.email);
+      return;
+    }
+    if (errors.password) {
+      setEmailErrorText(errors.password);
+      return;
+    } else {
+      const loginRes = await fetchLogin(email, password);
+      if (!loginRes)
+        setError(true);
+    else {
+      setError(false);
+      localStorage.setItem("LoggedIn", "true");
+      navigate("/Main/");
+    }
   };
   return (
     <ThemeProvider theme={theme}>
