@@ -7,10 +7,8 @@ export default {
 };
 
 export const LogInButton = () => {
-  const bgColor = color("BackGroundColor", "#1861ab");
-  const colorr = color("Color", "#ffffff");
   return (
-    <MyButton bgColor={bgColor} color={colorr} variant="contained" size="large">
+    <MyButton variant="contained" size="large">
       {text("Label", "LogIn")}
     </MyButton>
   );
