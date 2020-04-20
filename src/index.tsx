@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import LogIn from "./LogIn";
+import LogInPage from "./LogInPage";
 import { Router } from "@reach/router";
 import MainPage from "./MainPage";
 import * as serviceWorker from "./serviceWorker";
@@ -22,7 +22,7 @@ ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <Router>
-        <LogIn path="/" />
+        <LogInPage path="/" />
         <MainPage path="/Main/" />
       </Router>
     </ThemeProvider>
