@@ -1,5 +1,5 @@
 import { createStyles } from "@material-ui/core/styles";
-import Background from "../whiteBackground.png";
+import Background from "../../whiteBackground.png";
 export const styles = createStyles({
   "@global": {
     body: {
