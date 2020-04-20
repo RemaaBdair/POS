@@ -3,22 +3,26 @@ import Button from "@material-ui/core/Button";
 import { withStyles, WithStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 export interface Props {
-  color: string;
-  bgColor: string;
+  type: "submit" | "button";
   children: string;
-  OnClickHandle: () => void;
+  size: "large" | "medium" | "small";
+  variant: "contained" | "text" | "outlined";
+  OnClickHandle: (e: React.SyntheticEvent) => void;
 }
 const button: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
   props
 ) => {
+  const { children, classes, OnClickHandle } = props;
   return (
     <Button
-      variant="contained"
-      size="large"
-      className={props.classes.root}
-      onClick={props.OnClickHandle}
+      variant={props.variant}
+      size={props.size}
+      type={props.type}
+      className={classes.root}
+      onClick={OnClickHandle}
+      color="secondary"
     >
-      {props.children}
+      {children}
     </Button>
   );
 };
