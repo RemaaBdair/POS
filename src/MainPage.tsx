@@ -1,20 +1,10 @@
 import React from "react";
-import { createMuiTheme, WithStyles } from "@material-ui/core/styles";
-import {
-  withStyles,
-  ThemeProvider,
-  createStyles,
-} from "@material-ui/core/styles";
+import { WithStyles } from "@material-ui/core/styles";
+import { withStyles, createStyles } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 import Background from "./whiteBackground.png";
-const theme = createMuiTheme({
-  palette: {
-    primary: {
-      main: "#777",
-    },
-  },
-});
+
 const styles = createStyles({
   "@global": {
     body: {
@@ -26,10 +16,6 @@ const styles = createStyles({
   },
 });
 const MainPage = (props: WithStyles<typeof styles> & RouteComponentProps) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <Header />
-    </ThemeProvider>
-  );
+  return <Header />;
 };
 export default withStyles(styles)(MainPage);
