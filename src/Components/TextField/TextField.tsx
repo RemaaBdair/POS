@@ -17,7 +17,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
       id="outlined-basic"
       type={type}
       label={labelName}
-      color="primary"
+      color="secondary"
       variant="outlined"
       fullWidth
       onChange={(event) => OnChangehandle(event.target.value)}
