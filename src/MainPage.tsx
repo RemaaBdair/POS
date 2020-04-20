@@ -15,7 +15,9 @@ const styles = createStyles({
     },
   },
 });
-const MainPage = (props: WithStyles<typeof styles> & RouteComponentProps) => {
+const MainPage: React.FunctionComponent<
+  WithStyles<typeof styles> & RouteComponentProps
+> = (props) => {
   return <Header />;
 };
 export default withStyles(styles)(MainPage);
