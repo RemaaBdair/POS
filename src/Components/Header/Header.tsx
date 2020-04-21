@@ -18,6 +18,7 @@ import Logo from "../../logo.png";
 import IconButton from "@material-ui/core/IconButton";
 import PeopleMenu from "./PeopleMenue";
 import CategoryMenu from "./CategoryMenu";
+import { logOut } from "./util";
 import { styles } from "./styles";
 
 const Header: React.FunctionComponent<
@@ -25,6 +26,7 @@ const Header: React.FunctionComponent<
 > = (props) => {
   const preventDefault = (event: React.SyntheticEvent) =>
     event.preventDefault();
+
   return (
     <div className={props.classes.root}>
       <AppBar position="fixed" className={props.classes.appBar}>
@@ -76,9 +78,10 @@ const Header: React.FunctionComponent<
         <Toolbar className={props.classes.toolBar}>
           <IconButton
             edge="end"
-            aria-label="account of current user"
+            aria-label="Log out"
             aria-haspopup="true"
             color="primary"
+            onClick={logOut}
           >
             <ExitToAppIcon fontSize="small" />
           </IconButton>
