@@ -26,7 +26,7 @@ const LogInComponent = (
   const token = localStorage.getItem("LoggedIn");
   useEffect(() => {
     if (token === "true") navigate("/Main/");
-  }, [token]);
+  });
 
   return <LogInForm />;
 };
