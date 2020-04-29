@@ -28,7 +28,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
     <TextField
       id="outlined-basic"
       type={type}
-      value={value ? value : ""}
+      value={value}
       label={labelName}
       color="secondary"
       variant="outlined"
