@@ -14,7 +14,7 @@ import StorefrontIcon from "@material-ui/icons/Storefront";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import LanguageIcon from "@material-ui/icons/Language";
 import { withStyles } from "@material-ui/core/styles";
-import Logo from "../../logo.png";
+import Logo from "../../images/logo.png";
 import IconButton from "@material-ui/core/IconButton";
 import PeopleMenu from "./PeopleMenue";
 import CategoryMenu from "./CategoryMenu";
