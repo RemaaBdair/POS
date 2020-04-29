@@ -9,6 +9,9 @@ export const styles = createStyles({
     minWidth: 300,
     borderRadius: 0,
   },
+  customMargin: {
+    margin: "100px 0px 10px",
+  },
   notchedOutline: {},
   disabled: {},
   focused: {},
