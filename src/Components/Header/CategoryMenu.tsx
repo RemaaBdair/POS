@@ -5,6 +5,7 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import Link from "@material-ui/core/Link";
+//import { Link } from "@reach/router";
 import Typography from "@material-ui/core/Typography";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { MenuItem } from "@material-ui/core";
@@ -47,7 +48,7 @@ const CategoryMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
         <MenuItem onClick={handleCategoriesClose}>
           <Typography className={props.classes.listItem} color="primary">
             <ReceiptIcon color="primary" fontSize="small" />
-            <Link href="#" onClick={preventDefault} color="inherit">
+            <Link href="/" onClick={preventDefault} color="inherit">
               Sales
             </Link>
           </Typography>
@@ -55,7 +56,7 @@ const CategoryMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
         <MenuItem onClick={handleCategoriesClose}>
           <Typography className={props.classes.listItem} color="primary">
             <AttachMoneyIcon color="primary" fontSize="small" />
-            <Link href="#" onClick={preventDefault} color="inherit">
+            <Link href="/CategoriesList/" color="inherit">
               Expense
             </Link>
           </Typography>
