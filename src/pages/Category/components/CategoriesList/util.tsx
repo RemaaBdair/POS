@@ -16,14 +16,9 @@ export const editCategory = (CategoryName: string) => {};
 export const deleteCategory = async (id: string) => {
   await fetch(`http://localhost:3001/categories/${id}`, {
     method: "DELETE",
-  })
-    .then((response) => response.json())
-    .then((data) => {
-      console.log("Success:", data);
-    })
-    .catch((error) => {
-      console.error("Error:", error);
-    });
+  }).catch((error) => {
+    console.error("Error:", error);
+  });
 };
 export const sortTable = async (
   orderBy: keyof Category,
