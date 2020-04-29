@@ -10,5 +10,27 @@
       "email": "admin",
       "password": "admin1"
     }
+  ],
+  "categories": [
+    {
+      "id": "1",
+      "name": "Food",
+      "date": "2020-04-18 20:53:16"
+    },
+    {
+      "id": "2",
+      "name": "Clothes",
+      "date": "2020-04-20 17:22:34"
+    },
+    {
+      "id": "3",
+      "name": "Supplies",
+      "date": "2020-04-26 15:12:48"
+    },
+    {
+      "id": "4",
+      "name": "Elctronics",
+      "date": "2020-04-28 10:48:19"
+    }
   ]
 }
