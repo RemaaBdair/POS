@@ -3,10 +3,10 @@ import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
-import { MyButton } from "../Button/Button";
-import { MyTextField } from "../TextField/TextField";
+import { MyButton } from "../../../../components/Button/Button";
+import { MyTextField } from "../../../../components/TextField/TextField";
 import Typography from "@material-ui/core/Typography";
-import Logo from "../../logo.png";
+import Logo from "../../../../images/logo.png";
 import { navigate, RouteComponentProps } from "@reach/router";
 import { WithStyles, withStyles } from "@material-ui/core";
 import { validateEmail, validatePassword, fetchLogin } from "./utils";
@@ -48,7 +48,7 @@ const LogInForm: React.FunctionComponent<
       if (!loginRes) setError(true);
       else {
         setError(false);
-        // localStorage.setItem("LoggedIn", "true");
+        localStorage.setItem("LoggedIn", "true");
         navigate("/Main/");
       }
     }
@@ -70,15 +70,19 @@ const LogInForm: React.FunctionComponent<
           )}
           <MyTextField
             labelName="Email"
+            required={true}
             type="text"
             errorText={emailErrorText}
+            value={email}
             OnChangehandle={(email) => setEmail(email)}
           >
             Email
           </MyTextField>
           <MyTextField
             labelName="Password"
+            required={true}
             type="password"
+            value={password}
             errorText={passwordErrorText}
             OnChangehandle={(password) => setPassword(password)}
           >
