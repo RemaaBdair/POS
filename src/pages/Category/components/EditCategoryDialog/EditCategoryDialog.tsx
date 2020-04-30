@@ -59,7 +59,7 @@ const EditCategoryDialog: React.FunctionComponent<
               value={name}
               labelName="CategoryName"
               type="text"
-              OnChangehandle={setName}
+              onChange={setName}
             />
           </DialogContent>
           <DialogActions classes={{ root: classes.actions }}>

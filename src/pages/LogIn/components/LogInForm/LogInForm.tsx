@@ -74,7 +74,7 @@ const LogInForm: React.FunctionComponent<
             type="text"
             errorText={emailErrorText}
             value={email}
-            OnChangehandle={(email) => setEmail(email)}
+            onChange={(email) => setEmail(email)}
           >
             Email
           </MyTextField>
@@ -84,7 +84,7 @@ const LogInForm: React.FunctionComponent<
             type="password"
             value={password}
             errorText={passwordErrorText}
-            OnChangehandle={(password) => setPassword(password)}
+            onChange={(password) => setPassword(password)}
           >
             Password
           </MyTextField>

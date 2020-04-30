@@ -5,7 +5,7 @@ import { styles } from "./styles";
 interface Props {
   type: string;
   labelName: string;
-  OnChangehandle?: (arg: string) => void;
+  onChange?: (arg: string) => void;
   errorText?: string;
   value?: string;
   required?: boolean;
@@ -18,7 +18,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
     classes,
     labelName,
     type,
-    OnChangehandle = () => {},
+    onChange = () => {},
     errorText,
     fullWidth = true,
     required = false,
@@ -33,7 +33,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
       color="secondary"
       variant="outlined"
       fullWidth={fullWidth}
-      onChange={(event) => OnChangehandle(event.target.value)}
+      onChange={(event) => onChange(event.target.value)}
       required={required}
       helperText={errorText}
       error={errorText ? true : false}
