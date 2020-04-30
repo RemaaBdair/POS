@@ -18,7 +18,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
     classes,
     labelName,
     type,
-    OnChangehandle,
+    OnChangehandle = () => {},
     errorText,
     fullWidth = true,
     required = false,
@@ -33,9 +33,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
       color="secondary"
       variant="outlined"
       fullWidth={fullWidth}
-      onChange={(event) =>
-        OnChangehandle ? OnChangehandle(event.target.value) : null
-      }
+      onChange={(event) => OnChangehandle(event.target.value)}
       required={required}
       helperText={errorText}
       error={errorText ? true : false}
