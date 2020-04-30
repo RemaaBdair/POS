@@ -53,42 +53,44 @@ const EditCategoryDialog: React.FunctionComponent<
         <DialogTitle id="form-dialog-title" classes={{ root: classes.title }}>
           Add Category
         </DialogTitle>
-        <DialogContent classes={{ root: classes.content }}>
-          <MyTextField
-            value={name}
-            labelName="CategoryName"
-            type="text"
-            OnChangehandle={setName}
-          />
-        </DialogContent>
-        <DialogActions classes={{ root: classes.actions }}>
-          <MyButton
-            OnClickHandle={handleClose}
-            type="submit"
-            variant="text"
-            fullWidth={false}
-            classes={{ root: classes.button }}
-          >
-            Cancel
-          </MyButton>
-          <MyButton
-            OnClickHandle={handleSubmit}
-            type="submit"
-            variant="contained"
-            fullWidth={false}
-            classes={{ root: classes.button }}
-            disable={disableButton}
-          >
-            Submit
-          </MyButton>
-          {disableButton ? (
-            <CircularProgress
-              color="secondary"
-              size={68}
-              classes={{ root: classes.propgress }}
+        <form onSubmit={handleSubmit}>
+          <DialogContent classes={{ root: classes.content }}>
+            <MyTextField
+              value={name}
+              labelName="CategoryName"
+              type="text"
+              OnChangehandle={setName}
             />
-          ) : null}
-        </DialogActions>
+          </DialogContent>
+          <DialogActions classes={{ root: classes.actions }}>
+            <MyButton
+              OnClickHandle={handleClose}
+              type="submit"
+              variant="text"
+              fullWidth={false}
+              classes={{ root: classes.button }}
+            >
+              Cancel
+            </MyButton>
+            <MyButton
+              OnClickHandle={handleSubmit}
+              type="submit"
+              variant="contained"
+              fullWidth={false}
+              classes={{ root: classes.button }}
+              disable={disableButton}
+            >
+              Submit
+            </MyButton>
+            {disableButton ? (
+              <CircularProgress
+                color="secondary"
+                size={68}
+                classes={{ root: classes.propgress }}
+              />
+            ) : null}
+          </DialogActions>
+        </form>
       </Dialog>
 
       <Snackbar
