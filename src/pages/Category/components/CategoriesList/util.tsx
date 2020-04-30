@@ -11,6 +11,21 @@ export const fetchCategories = async (): Promise<Category[]> => {
       console.log(error);
     });
 };
+export const editCategory = async (
+  id: string,
+  newName: string,
+  date: string
+): Promise<string> => {
+  return await fetch(`http://localhost:3001/categories/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: `${newName}`, date: `${date}` }),
+  })
+    .then(() => "success")
+    .catch(() => "failed");
+};
 export const createCategory = async (name: string): Promise<string> => {
   const currentdate = new Date();
   const date = [
