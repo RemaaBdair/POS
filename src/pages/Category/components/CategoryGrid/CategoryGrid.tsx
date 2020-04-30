@@ -79,7 +79,7 @@ const CategoryGrid: React.FunctionComponent<
           labelName="Search"
           type="text"
           value={searchText}
-          OnChangehandle={handleSearchTextChange}
+          onChange={handleSearchTextChange}
         />
       </Grid>
 
