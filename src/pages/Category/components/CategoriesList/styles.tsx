@@ -2,7 +2,7 @@ import { createStyles } from "@material-ui/core/styles";
 export const styles = createStyles({
   table: {
     borderCollapse: "collapse",
-    border: "3px solid #ddd",
+    border: "1px solid #ddd",
     width: "100%",
     padding: 30,
   },
