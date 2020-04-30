@@ -12,7 +12,6 @@ export const fetchCategories = async (): Promise<Category[]> => {
     });
 };
 
-export const editCategory = (CategoryName: string) => {};
 export const deleteCategory = async (id: string) => {
   await fetch(`http://localhost:3001/categories/${id}`, {
     method: "DELETE",
@@ -26,8 +25,14 @@ export const sortTable = async (
 ) => {
   const categoriesData = await fetchCategories();
   return categoriesData.sort((a: Category, b: Category) => {
-    if (ascOrder) return a[orderBy] > b[orderBy] ? 1 : -1;
-    else return a[orderBy] < b[orderBy] ? 1 : -1;
+    if (ascOrder)
+      return a[orderBy].toLocaleLowerCase() > b[orderBy].toLocaleLowerCase()
+        ? 1
+        : -1;
+    else
+      return a[orderBy].toLocaleLowerCase() < b[orderBy].toLocaleLowerCase()
+        ? 1
+        : -1;
   });
 };
 export const asyncSetCategoryData = async (
