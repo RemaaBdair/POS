@@ -1,8 +1,8 @@
 import React from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
-import Header from "../../components/Header/Header";
-import CategoryGrid from "./components/CategoryGrid/CategoryGrid";
+import Header from "../../Components/Header/Header";
+import CategoryGrid from "./Components/CategoryGrid/CategoryGrid";
 import { styles } from "./styles";
 const CategoryPage: React.FunctionComponent<
   WithStyles<typeof styles> & RouteComponentProps
