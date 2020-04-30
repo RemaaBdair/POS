@@ -11,7 +11,29 @@ export const fetchCategories = async (): Promise<Category[]> => {
       console.log(error);
     });
 };
-
+export const createCategory = async (name: string): Promise<string> => {
+  const currentdate = new Date();
+  const date = [
+    currentdate.getFullYear(),
+    ("0" + (currentdate.getMonth() + 1)).slice(-2),
+    ("0" + currentdate.getDate()).slice(-2),
+  ].join("-");
+  const time = [
+    ("0" + currentdate.getHours()).slice(-2),
+    ("0" + currentdate.getMinutes()).slice(-2),
+    ("0" + currentdate.getSeconds()).slice(-2),
+  ].join(":");
+  const formatedDate = date + " " + time;
+  return await fetch(`http://localhost:3001/categories`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: `${name}`, date: `${formatedDate}` }),
+  })
+    .then(() => "success")
+    .catch(() => "failed");
+};
 export const deleteCategory = async (id: string) => {
   await fetch(`http://localhost:3001/categories/${id}`, {
     method: "DELETE",
