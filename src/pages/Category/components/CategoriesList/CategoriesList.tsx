@@ -7,8 +7,8 @@ import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 import { styles } from "./styles";
 import IconButton from "@material-ui/core/IconButton";
 import { Category, asyncSetCategoryData, sliceEntries } from "./util";
-import { EditCategoryDialog } from "./EditCategoryDialog";
-import { DeleteCategoryDialog } from "./DeleteCategoryDialog";
+import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
+import DeleteCategoryDialog from "../DeleteCategoryDialog/DeleteCategoryDialog";
 import { isArray } from "util";
 interface Props {
   searchText: string;
@@ -16,6 +16,7 @@ interface Props {
   currentPageNumber: number;
   handleNextPageEntries: (value: number) => void;
   handleEntriesLength: (value: number) => void;
+  refresh: boolean;
 }
 
 const getSortLabel = (
@@ -81,7 +82,7 @@ const getTableHeader = (
 const getTableBody = (
   categoryData: Category[],
   dataClassName: string,
-  openEditDialog: (name: string, id: string) => void,
+  openEditDialog: (name: string, id: string, date: string) => void,
   openDeleteDialog: (name: string, id: string) => void,
   searchText: string = ""
 ) => {
@@ -102,7 +103,7 @@ const getTableBody = (
               aria-label="Edit Category"
               aria-haspopup="true"
               color="primary"
-              onClick={() => openEditDialog(name, id)}
+              onClick={() => openEditDialog(name, id, date)}
             >
               <EditIcon fontSize="small" />
             </IconButton>
@@ -140,6 +141,7 @@ const CategoriesList: React.FunctionComponent<
     currentPageNumber,
     handleNextPageEntries,
     handleEntriesLength,
+    refresh,
   } = props;
   const [categoryData, setCategoryData] = useState<Category[]>([]);
   const [tableBody, setTableBody] = useState<JSX.Element | JSX.Element[]>([]);
@@ -150,11 +152,13 @@ const CategoriesList: React.FunctionComponent<
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const [categoryName, setCategoryName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
+  const [categoryDate, setCategoryDate] = React.useState("");
   const [NameAscendingOrder, setNameAscendingOrder] = React.useState(true);
   const [DateAscendingOrder, setDateAscendingOrder] = React.useState(true);
-  const handleOpenEditDialog = (name: string, id: string) => {
+  const handleOpenEditDialog = (name: string, id: string, date: string) => {
     setCategoryName(name);
     setCategoryId(id);
+    setCategoryDate(date);
     setOpenEditDialog(true);
   };
   const handleOpenDeleteDialog = (name: string, id: string) => {
@@ -164,6 +168,7 @@ const CategoriesList: React.FunctionComponent<
   };
   const handleCloseEditDialog = () => {
     setOpenEditDialog(false);
+    asyncSetCategoryData(setCategoryData);
   };
   const handleCloseDeleteDialog = () => {
     setOpenDeleteDialog(false);
@@ -172,6 +177,9 @@ const CategoriesList: React.FunctionComponent<
   useEffect(() => {
     asyncSetCategoryData(setCategoryData);
   }, []);
+  useEffect(() => {
+    if (refresh) asyncSetCategoryData(setCategoryData);
+  }, [refresh]);
   useEffect(() => {
     const header = getTableHeader(
       classes.header,
@@ -219,6 +227,9 @@ const CategoriesList: React.FunctionComponent<
           openDialog={openEditDialog}
           handleClose={handleCloseEditDialog}
           name={categoryName}
+          id={categoryId}
+          setName={setCategoryName}
+          date={categoryDate}
         />
         <DeleteCategoryDialog
           openDialog={openDeleteDialog}
