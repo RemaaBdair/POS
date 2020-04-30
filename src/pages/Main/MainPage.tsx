@@ -3,7 +3,7 @@ import { navigate } from "@reach/router";
 import { WithStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
-import Header from "../../components/Header/Header";
+import Header from "../../Components/Header/Header";
 import { styles } from "./styles";
 const MainPage: React.FunctionComponent<
   WithStyles<typeof styles> & RouteComponentProps

@@ -1,5 +1,5 @@
 import React from "react";
-import { MyButton } from "../../../../components/Button/Button";
+import { MyButton } from "../../../../Components/Button/Button";
 
 interface Props {
   currentPageNumber: number;

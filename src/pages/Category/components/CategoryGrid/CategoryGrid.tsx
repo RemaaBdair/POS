@@ -5,10 +5,11 @@ import Grid from "@material-ui/core/Grid";
 import { SvgIconProps } from "@material-ui/core/SvgIcon";
 import { RouteComponentProps } from "@reach/router";
 import CategoriesList from "../CategoriesList/CategoriesList";
-import { MyTextField } from "../../../../components/TextField/TextField";
-import { MyButton } from "../../../../components/Button/Button";
-import SelectMenu from "../selectMenu/SelectMenu";
+import { MyTextField } from "../../../../Components/TextField/TextField";
+import { MyButton } from "../../../../Components/Button/Button";
+import SelectMenu from "../SelectMenu/SelectMenu";
 import PageButtons from "../PageButtons/PageButton";
+import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import { styles } from "./styles";
 const CategoryGrid: React.FunctionComponent<
   WithStyles<typeof styles> & SvgIconProps & RouteComponentProps
@@ -19,6 +20,9 @@ const CategoryGrid: React.FunctionComponent<
   const [currentPageNumber, setCurrentPagesNumber] = useState(0);
   const [nextPageEntries, setNextPageEntries] = useState(0);
   const [entriesLength, setEntriesLength] = useState(0);
+  const [openEditDialog, setOpenEditDialog] = React.useState(false);
+  const [categoryName, setCategoryName] = React.useState("");
+  const [categoryAdded, setCategoryAdded] = useState(false);
   const handleSearchTextChange = (text: string) => {
     setSearchText(text);
   };
@@ -50,13 +54,23 @@ const CategoryGrid: React.FunctionComponent<
 
       <Grid item xs={6}>
         <MyButton
-          OnClickHandle={(event) => {}}
+          OnClickHandle={() => setOpenEditDialog(true)}
           type="submit"
           variant="contained"
           fullWidth={false}
         >
           Add Category
         </MyButton>
+
+        <EditCategoryDialog
+          openDialog={openEditDialog}
+          handleClose={() => {
+            setOpenEditDialog(false);
+            setCategoryAdded(true);
+          }}
+          setName={setCategoryName}
+          name={categoryName}
+        />
       </Grid>
 
       <Grid item xs={6} justify="flex-end" container>
@@ -76,6 +90,7 @@ const CategoryGrid: React.FunctionComponent<
           currentPageNumber={currentPageNumber}
           handleNextPageEntries={handleNextPageEntries}
           handleEntriesLength={handleEntriesLength}
+          refresh={categoryAdded}
         />
       </Grid>
 
