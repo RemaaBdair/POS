@@ -29,7 +29,6 @@ const CategoriesList: React.FunctionComponent<
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const [rowsLength, setRowsLength] = useState(categoryData.length);
-
   const handleOpenEditDialog = (name: string, id: string, date: string) => {
     setCategoryName(name);
     setCategoryId(id);
