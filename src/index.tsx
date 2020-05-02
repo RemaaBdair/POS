@@ -10,6 +10,9 @@ import CategoryPage from "./pages/Category/CategoryPage";
 
 const theme = createMuiTheme({
   palette: {
+    text: {
+      primary: "#777",
+    },
     primary: {
       main: "#777",
     },
