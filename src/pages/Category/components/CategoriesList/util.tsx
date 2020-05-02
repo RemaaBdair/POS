@@ -4,6 +4,7 @@ export interface Category {
   name: string;
   date: string;
 }
+export type Order = "asc" | "desc";
 export const fetchCategories = async (): Promise<Category[]> => {
   return await fetch("http://localhost:3001/categories")
     .then((response) => response.json())
@@ -81,14 +82,4 @@ export const asyncSetCategoryData = async (
   if (orderBy) categoryData = await sortTable(orderBy, ascendingOrder);
   else categoryData = await fetchCategories();
   setCategoryData(categoryData);
-};
-export const sliceEntries = (
-  entries: JSX.Element[],
-  entriesPerPage: number,
-  currentPageNumber: number
-): JSX.Element[] => {
-  return entries.slice(
-    currentPageNumber * entriesPerPage,
-    currentPageNumber * entriesPerPage + entriesPerPage
-  );
 };
