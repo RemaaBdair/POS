@@ -11,8 +11,5 @@ export const styles = createStyles({
   container: {
     marginTop: "80px",
     padding: "30px",
-    color: "#777",
   },
-  showEntriesLabel: { margin: "10px" },
-  selectMenuContainer: { padding: "10px" },
 });
