@@ -46,7 +46,7 @@ const CategoriesList: React.FunctionComponent<
     onChangeData();
   };
 
-  const handleRequestSort = (
+  const handleSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Category
   ) => {
@@ -79,7 +79,7 @@ const CategoriesList: React.FunctionComponent<
           <CustomizedTableHeader
             order={order}
             orderBy={orderBy}
-            onRequestSort={handleRequestSort}
+            onSort={handleSort}
           />
 
           <TableBody>
