@@ -11,8 +11,12 @@ interface BodyProps {
   categoryData: Category[];
   page: number;
   rowsPerPage: number;
-  openEditDialog: (name: string, id: string, date: string) => void;
-  openDeleteDialog: (name: string, id: string) => void;
+  onOpenDialog: (
+    type: "create" | "edit" | "delete" | null,
+    name: string,
+    id: string,
+    date?: string
+  ) => void;
   searchText?: string;
   setRowsLength: React.Dispatch<React.SetStateAction<number>>;
 }
@@ -25,8 +29,7 @@ export const CustomizedTableBody: React.FunctionComponent<
     rowsPerPage,
     page,
     categoryData,
-    openEditDialog,
-    openDeleteDialog,
+    onOpenDialog,
     searchText = "",
     setRowsLength,
   } = props;
@@ -52,7 +55,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                     aria-label="Edit Category"
                     aria-haspopup="true"
                     color="primary"
-                    onClick={() => openEditDialog(name, id, date)}
+                    onClick={() => onOpenDialog("edit", name, id, date)}
                   >
                     <EditIcon fontSize="small" />
                   </IconButton>
@@ -62,7 +65,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                     aria-label="Delete Category"
                     aria-haspopup="true"
                     color="primary"
-                    onClick={() => openDeleteDialog(name, id)}
+                    onClick={() => onOpenDialog("delete", name, id)}
                   >
                     <DeleteIcon fontSize="small" />
                   </IconButton>
