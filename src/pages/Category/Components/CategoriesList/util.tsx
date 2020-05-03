@@ -73,13 +73,3 @@ export const sortTable = async (
         : -1;
   });
 };
-export const asyncSetCategoryData = async (
-  setCategoryData: React.Dispatch<React.SetStateAction<Category[]>>,
-  orderBy?: keyof Category,
-  ascendingOrder?: boolean
-) => {
-  let categoryData = [];
-  if (orderBy) categoryData = await sortTable(orderBy, ascendingOrder);
-  else categoryData = await fetchCategories();
-  setCategoryData(categoryData);
-};
