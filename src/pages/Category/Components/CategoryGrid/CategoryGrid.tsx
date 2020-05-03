@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { SvgIconProps } from "@material-ui/core/SvgIcon";
@@ -13,9 +13,12 @@ const CategoryGrid: React.FunctionComponent<
 > = (props) => {
   const { classes } = props;
   const [searchText, setSearchText] = useState("");
-  const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const [categoryName, setCategoryName] = React.useState("");
-  const [categoryAdded, setCategoryAdded] = useState(false);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+    setCategoryName("");
+  };
   const handleSearchTextChange = (text: string) => {
     setSearchText(text);
   };
@@ -23,7 +26,7 @@ const CategoryGrid: React.FunctionComponent<
     <Grid container className={classes.container}>
       <Grid item xs={6}>
         <MyButton
-          OnClickHandle={() => setOpenEditDialog(true)}
+          OnClickHandle={() => setOpenDialog(true)}
           type="submit"
           variant="contained"
           fullWidth={false}
@@ -32,15 +35,8 @@ const CategoryGrid: React.FunctionComponent<
         </MyButton>
 
         <EditCategoryDialog
-          openDialog={openEditDialog}
-          handleClose={() => {
-            setOpenEditDialog(false);
-            setCategoryAdded(true);
-            setCategoryName("");
-            setInterval(() => {
-              setCategoryAdded(false);
-            }, 6000);
-          }}
+          openDialog={openDialog}
+          handleClose={handleCloseDialog}
           setName={setCategoryName}
           name={categoryName}
         />
@@ -57,7 +53,7 @@ const CategoryGrid: React.FunctionComponent<
       </Grid>
 
       <Grid item xs={12} justify="center" container>
-        <CategoriesList searchText={searchText} refresh={categoryAdded} />
+        <CategoriesList searchText={searchText} />
       </Grid>
     </Grid>
   );
