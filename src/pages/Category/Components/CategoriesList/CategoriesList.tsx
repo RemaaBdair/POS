@@ -54,11 +54,14 @@ const CategoriesList: React.FunctionComponent<
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+  const sortedData = React.useMemo(
+    () => sortData(categoryData, orderBy, order === "asc" ? true : false),
+    [order, categoryData, orderBy]
+  );
 
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
-
   const handleChangeRowsPerPage = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -85,7 +88,7 @@ const CategoriesList: React.FunctionComponent<
               page={page}
               rowsPerPage={rowsPerPage}
               onOpenDialog={handleOpenDialog}
-              categoryData={categoryData}
+              categoryData={sortedData}
               searchText={searchText}
               setRowsLength={setRowsLength}
             />
