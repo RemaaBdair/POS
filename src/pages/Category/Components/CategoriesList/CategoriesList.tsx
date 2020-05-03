@@ -29,33 +29,24 @@ const CategoriesList: React.FunctionComponent<
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
   const [rowsLength, setRowsLength] = useState(categoryData.length);
-  const handleOpenEditDialog = (name: string, id: string, date: string) => {
+  const [openDialog, setOpenDialog] = React.useState<
+    "create" | "edit" | "delete" | null
+  >(null);
+  const handleOpenDialog = (
+    type: "create" | "edit" | "delete" | null,
+    name: string,
+    id: string,
+    date?: string
+  ) => {
     setCategoryName(name);
     setCategoryId(id);
-    setCategoryDate(date);
-    setOpenEditDialog(true);
+    if (date) setCategoryDate(date);
+    setOpenDialog(type);
   };
-  const handleOpenDeleteDialog = (name: string, id: string) => {
-    setCategoryName(name);
-    setCategoryId(id);
-    setOpenDeleteDialog(true);
+  const handleCloseDialog = () => {
+    setOpenDialog(null);
   };
-  const handleCloseEditDialog = () => {
-    setOpenEditDialog(false);
-    asyncSetCategoryData(
-      setCategoryData,
-      orderBy,
-      order === "asc" ? true : false
-    );
-  };
-  const handleCloseDeleteDialog = () => {
-    setOpenDeleteDialog(false);
-    asyncSetCategoryData(
-      setCategoryData,
-      orderBy,
-      order === "asc" ? true : false
-    );
-  };
+
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Category
@@ -104,24 +95,23 @@ const CategoriesList: React.FunctionComponent<
               classes={classes}
               page={page}
               rowsPerPage={rowsPerPage}
-              openDeleteDialog={handleOpenDeleteDialog}
-              openEditDialog={handleOpenEditDialog}
+              onOpenDialog={handleOpenDialog}
               categoryData={categoryData}
               searchText={searchText}
               setRowsLength={setRowsLength}
             />
 
             <EditCategoryDialog
-              openDialog={openEditDialog}
-              handleClose={handleCloseEditDialog}
+              openDialog={openDialog === "edit" ? true : false}
+              handleClose={handleCloseDialog}
               name={categoryName}
               id={categoryId}
               setName={setCategoryName}
               date={categoryDate}
             />
             <DeleteCategoryDialog
-              openDialog={openDeleteDialog}
-              handleClose={handleCloseDeleteDialog}
+              openDialog={openDialog === "delete" ? true : false}
+              handleClose={handleCloseDialog}
               name={categoryName}
               id={categoryId}
             />
