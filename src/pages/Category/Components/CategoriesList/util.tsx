@@ -57,7 +57,7 @@ export const deleteCategory = async (id: string) => {
     console.error("Error:", error);
   });
 };
-export const sortTable = (
+export const sortData = (
   categoryData: Category[],
   orderBy: keyof Category,
   ascOrder: boolean = true
