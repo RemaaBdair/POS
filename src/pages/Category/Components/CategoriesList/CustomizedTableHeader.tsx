@@ -8,19 +8,16 @@ import { Category, Order } from "./util";
 interface HeaderProps {
   order: Order;
   orderBy: keyof Category;
-  onRequestSort: (
-    event: React.MouseEvent<unknown>,
-    property: keyof Category
-  ) => void;
+  onSort: (event: React.MouseEvent<unknown>, property: keyof Category) => void;
 }
 export const CustomizedTableHeader: React.FunctionComponent<HeaderProps> = (
   props
 ) => {
-  const { order, orderBy, onRequestSort } = props;
+  const { order, orderBy, onSort } = props;
   const createSortHandler = (property: keyof Category) => (
     event: React.MouseEvent<unknown>
   ) => {
-    onRequestSort(event, property);
+    onSort(event, property);
   };
   return (
     <TableHead>
