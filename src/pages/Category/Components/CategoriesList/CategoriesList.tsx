@@ -1,26 +1,24 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
-import { Category, asyncSetCategoryData, Order } from "./util";
+import { Category, sortData, Order } from "./util";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import DeleteCategoryDialog from "../DeleteCategoryDialog/DeleteCategoryDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 interface Props {
   searchText: string;
-  refresh: boolean;
+  categoryData: Category[];
+  onChangeData: () => void;
 }
 const CategoriesList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
-  let { classes, searchText, refresh } = props;
-  const [categoryData, setCategoryData] = useState<Category[]>([]);
-  const [openEditDialog, setOpenEditDialog] = React.useState(false);
-  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+  let { classes, searchText, categoryData, onChangeData } = props;
   const [categoryName, setCategoryName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const [categoryDate, setCategoryDate] = React.useState("");
@@ -45,6 +43,7 @@ const CategoriesList: React.FunctionComponent<
   };
   const handleCloseDialog = () => {
     setOpenDialog(null);
+    onChangeData();
   };
 
   const handleRequestSort = (
@@ -55,6 +54,7 @@ const CategoriesList: React.FunctionComponent<
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
@@ -65,17 +65,6 @@ const CategoriesList: React.FunctionComponent<
     setRowsPerPage(parseInt(event.target.value, 10));
     setPage(0);
   };
-
-  useEffect(() => {
-    asyncSetCategoryData(setCategoryData);
-  }, []);
-  useEffect(() => {
-    asyncSetCategoryData(
-      setCategoryData,
-      orderBy,
-      order === "asc" ? true : false
-    );
-  }, [order, orderBy, refresh]);
   return (
     <div className={classes.root}>
       <TableContainer>
