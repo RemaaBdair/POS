@@ -57,12 +57,12 @@ export const deleteCategory = async (id: string) => {
     console.error("Error:", error);
   });
 };
-export const sortTable = async (
+export const sortTable = (
+  categoryData: Category[],
   orderBy: keyof Category,
   ascOrder: boolean = true
-) => {
-  const categoriesData = await fetchCategories();
-  return categoriesData.sort((a: Category, b: Category) => {
+): Category[] => {
+  return categoryData.sort((a: Category, b: Category) => {
     if (ascOrder)
       return a[orderBy].toLocaleLowerCase() > b[orderBy].toLocaleLowerCase()
         ? 1
