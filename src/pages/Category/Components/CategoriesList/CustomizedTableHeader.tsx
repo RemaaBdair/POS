@@ -27,8 +27,9 @@ export const CustomizedTableHeader: React.FunctionComponent<HeaderProps> = (
             active={orderBy === "name"}
             direction={orderBy === "name" ? order : "asc"}
             onClick={createSortHandler("name")}
-          ></TableSortLabel>
-          Category Name
+          >
+            Category Name
+          </TableSortLabel>
         </TableCell>
 
         <TableCell align="left" key="date">
