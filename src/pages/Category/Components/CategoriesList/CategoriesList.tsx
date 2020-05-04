@@ -45,7 +45,9 @@ const CategoriesList: React.FunctionComponent<
     setOpenDialog(null);
     onChangeData();
   };
-
+  const handleDeleteDialogSubmit = (id: string) => {
+    deleteCategory(id).then(() => handleCloseDialog());
+  };
   const handleSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Category
@@ -104,6 +106,7 @@ const CategoriesList: React.FunctionComponent<
             <DeleteCategoryDialog
               openDialog={openDialog === "delete" ? true : false}
               handleClose={handleCloseDialog}
+              handleSubmit={handleDeleteDialogSubmit}
               name={categoryName}
               id={categoryId}
             />
