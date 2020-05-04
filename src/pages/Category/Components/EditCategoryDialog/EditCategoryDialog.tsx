@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
-import RootRef from "@material-ui/core/RootRef";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -41,9 +40,8 @@ const EditCategoryDialog: React.FunctionComponent<
     setDisableButton(false);
     handleClose();
   };
-  const nodeRef = React.useRef();
   return (
-    <RootRef rootRef={nodeRef}>
+    <>
       <Dialog
         open={openDialog}
         onClose={handleClose}
@@ -113,7 +111,7 @@ const EditCategoryDialog: React.FunctionComponent<
           </IconButton>
         }
       />
-    </RootRef>
+    </>
   );
 };
 export default withStyles(styles)(EditCategoryDialog);
