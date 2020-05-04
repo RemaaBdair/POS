@@ -23,12 +23,12 @@ const CategoryGrid: React.FunctionComponent<
   const handleCloseDialog = () => {
     setOpenDialog(false);
     setCategoryName("");
-    onChangeData();
+    onFetchCategories();
   };
   const handleSearchTextChange = (text: string) => {
     setSearchText(text);
   };
-  const onChangeData = () => {
+  const onFetchCategories = () => {
     fetchCategories().then((res) => setCategoryData(res));
   };
   return (
@@ -65,7 +65,7 @@ const CategoryGrid: React.FunctionComponent<
         <CategoriesList
           searchText={searchText}
           categoryData={categoryData}
-          onChangeData={onChangeData}
+          onFetchCategories={onFetchCategories}
         />
       </Grid>
     </Grid>

@@ -5,7 +5,7 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
-import { Category, sortData, Order } from "./util";
+import { Category, sortData, Order, deleteCategory } from "./util";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import DeleteCategoryDialog from "../DeleteCategoryDialog/DeleteCategoryDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
@@ -13,12 +13,12 @@ import { CustomizedTableBody } from "./CustomizedTableBody";
 interface Props {
   searchText: string;
   categoryData: Category[];
-  onChangeData: () => void;
+  onFetchCategories: () => void;
 }
 const CategoriesList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
-  let { classes, searchText, categoryData, onChangeData } = props;
+  let { classes, searchText, categoryData, onFetchCategories } = props;
   const [categoryName, setCategoryName] = React.useState("");
   const [categoryId, setCategoryId] = React.useState("");
   const [categoryDate, setCategoryDate] = React.useState("");
@@ -43,7 +43,7 @@ const CategoriesList: React.FunctionComponent<
   };
   const handleCloseDialog = () => {
     setOpenDialog(null);
-    onChangeData();
+    onFetchCategories();
   };
   const handleDeleteDialogSubmit = (id: string) => {
     deleteCategory(id).then(() => handleCloseDialog());
@@ -60,7 +60,6 @@ const CategoriesList: React.FunctionComponent<
     () => sortData(categoryData, orderBy, order === "asc" ? true : false),
     [order, categoryData, orderBy]
   );
-
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
   };
