@@ -33,8 +33,14 @@ export const CustomizedTableBody: React.FunctionComponent<
     searchText = "",
     setRowsLength,
   } = props;
-  let rows = categoryData.filter((category: Category) =>
-    category.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
+  const rows = React.useMemo(
+    () =>
+      categoryData.filter((category: Category) =>
+        category.name
+          .toLocaleLowerCase()
+          .includes(searchText.toLocaleLowerCase())
+      ),
+    [searchText, categoryData]
   );
   setRowsLength(rows.length);
   if (rows.length === 0) {
