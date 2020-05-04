@@ -5,7 +5,6 @@ import ReceiptIcon from "@material-ui/icons/Receipt";
 import Button from "@material-ui/core/Button";
 import Menu from "@material-ui/core/Menu";
 import Link from "@material-ui/core/Link";
-//import { Link } from "@reach/router";
 import Typography from "@material-ui/core/Typography";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { MenuItem } from "@material-ui/core";
