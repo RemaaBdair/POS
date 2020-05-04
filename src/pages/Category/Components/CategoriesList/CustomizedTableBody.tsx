@@ -37,7 +37,13 @@ export const CustomizedTableBody: React.FunctionComponent<
     category.name.toLocaleLowerCase().includes(searchText.toLocaleLowerCase())
   );
   setRowsLength(rows.length);
-  if (rows.length !== 0) {
+  if (rows.length === 0) {
+    return (
+      <TableRow key="noMatch">
+        <TableCell colSpan={3}>No Matching</TableCell>
+      </TableRow>
+    );
+  } else {
     return (
       <>
         {rows
@@ -75,10 +81,5 @@ export const CustomizedTableBody: React.FunctionComponent<
           })}
       </>
     );
-  } else
-    return (
-      <TableRow key="noMatch">
-        <TableCell colSpan={3}>No Matching</TableCell>
-      </TableRow>
-    );
+  }
 };
