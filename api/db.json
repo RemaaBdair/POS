@@ -42,5 +42,25 @@
       "date": "2020-04-30 02:59:58",
       "id": "7djnO0u"
     }
+  ],
+  "products": [
+    {
+      "code": "123321",
+      "name": "Clothes",
+      "category": "Clothes",
+      "description": "Female clothes",
+      "tax": "14%",
+      "price": "100.00$",
+      "expirationDate": "2020-08-20"
+    },
+    {
+      "code": "123322",
+      "name": "Computer",
+      "category": "Electronics",
+      "description": "computer....",
+      "tax": "15%",
+      "price": "5500.00$",
+      "expirationDate": "2025-01-01"
+    }
   ]
 }
