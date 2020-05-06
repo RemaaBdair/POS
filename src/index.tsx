@@ -7,7 +7,7 @@ import MainPage from "./pages/Main/MainPage";
 import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CategoryPage from "./pages/Category/CategoryPage";
-
+import ProductPage from "./pages/Products/ProductPage";
 const theme = createMuiTheme({
   palette: {
     text: {
@@ -29,6 +29,7 @@ ReactDOM.render(
         <LogInPage path="/" />
         <MainPage path="/Main/" />
         <CategoryPage path="/CategoriesList/" />
+        <ProductPage path="/ProductsList/" />
       </Router>
     </ThemeProvider>
   </React.StrictMode>,
