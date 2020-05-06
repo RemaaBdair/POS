@@ -29,15 +29,16 @@ const CategoriesList: React.FunctionComponent<
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-  const filteredData = React.useMemo(
-    () =>
-      productsData.filter((product: Product) =>
-        product.name
-          .toLocaleLowerCase()
-          .includes(searchText.toLocaleLowerCase())
-      ),
-    [productsData, searchText]
-  );
+  const filteredData = React.useMemo(() => {
+    return productsData.filter((product: Product) => {
+      const values = Object.values(product);
+      values.forEach((elem) => {
+        if (elem.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()))
+          return true;
+      });
+      return false;
+    });
+  }, [productsData, searchText]);
   const sortedData = React.useMemo(
     () => sortData(filteredData, orderBy, order === "asc" ? true : false),
     [order, filteredData, orderBy]
