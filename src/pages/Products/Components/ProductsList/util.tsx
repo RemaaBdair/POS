@@ -15,3 +15,19 @@ export const fetchProducts = async (): Promise<Product[]> => {
       console.log(error);
     });
 };
+export const sortData = (
+  categoryData: Product[],
+  orderBy: keyof Product,
+  ascOrder: boolean = true
+): Product[] => {
+  return categoryData.sort((a: Product, b: Product) => {
+    if (ascOrder)
+      return a[orderBy].toLocaleLowerCase() > b[orderBy].toLocaleLowerCase()
+        ? 1
+        : -1;
+    else
+      return a[orderBy].toLocaleLowerCase() < b[orderBy].toLocaleLowerCase()
+        ? 1
+        : -1;
+  });
+};
