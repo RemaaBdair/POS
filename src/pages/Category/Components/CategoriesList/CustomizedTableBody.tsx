@@ -17,33 +17,13 @@ interface BodyProps {
     id: string,
     date?: string
   ) => void;
-  searchText?: string;
-  setRowsLength: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const CustomizedTableBody: React.FunctionComponent<
   WithStyles<typeof styles> & BodyProps
 > = (props) => {
-  const {
-    classes,
-    rowsPerPage,
-    page,
-    categoryData,
-    onOpenDialog,
-    searchText = "",
-    setRowsLength,
-  } = props;
-  const rows = React.useMemo(
-    () =>
-      categoryData.filter((category: Category) =>
-        category.name
-          .toLocaleLowerCase()
-          .includes(searchText.toLocaleLowerCase())
-      ),
-    [searchText, categoryData]
-  );
-  setRowsLength(rows.length);
-  if (rows.length === 0) {
+  const { classes, rowsPerPage, page, categoryData, onOpenDialog } = props;
+  if (categoryData.length === 0) {
     return (
       <TableRow key="noMatch">
         <TableCell colSpan={3}>No Matching</TableCell>
@@ -52,7 +32,7 @@ export const CustomizedTableBody: React.FunctionComponent<
   } else {
     return (
       <>
-        {rows
+        {categoryData
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((category: Category) => {
             const { id, name, date } = category;

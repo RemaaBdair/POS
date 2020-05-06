@@ -26,7 +26,6 @@ const CategoriesList: React.FunctionComponent<
   const [orderBy, setOrderBy] = React.useState<keyof Category>("name");
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [page, setPage] = useState(0);
-  const [rowsLength, setRowsLength] = useState(categoryData.length);
   const [openDialog, setOpenDialog] = React.useState<
     "create" | "edit" | "delete" | null
   >(null);
@@ -56,9 +55,18 @@ const CategoriesList: React.FunctionComponent<
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+  const filteredData = React.useMemo(
+    () =>
+      categoryData.filter((category: Category) =>
+        category.name
+          .toLocaleLowerCase()
+          .includes(searchText.toLocaleLowerCase())
+      ),
+    [searchText, categoryData]
+  );
   const sortedData = React.useMemo(
-    () => sortData(categoryData, orderBy, order === "asc" ? true : false),
-    [order, categoryData, orderBy]
+    () => sortData(filteredData, orderBy, order === "asc" ? true : false),
+    [order, filteredData, orderBy]
   );
   const handleChangePage = (event: unknown, newPage: number) => {
     setPage(newPage);
@@ -90,8 +98,6 @@ const CategoriesList: React.FunctionComponent<
               rowsPerPage={rowsPerPage}
               onOpenDialog={handleOpenDialog}
               categoryData={sortedData}
-              searchText={searchText}
-              setRowsLength={setRowsLength}
             />
 
             <EditCategoryDialog
@@ -115,7 +121,7 @@ const CategoriesList: React.FunctionComponent<
       <TablePagination
         rowsPerPageOptions={[3, 5, 25, 50, 100]}
         component="div"
-        count={rowsLength}
+        count={sortedData.length}
         rowsPerPage={rowsPerPage}
         page={page}
         onChangePage={handleChangePage}
