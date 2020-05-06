@@ -47,7 +47,7 @@ const CategoryMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
         <MenuItem onClick={handleCategoriesClose}>
           <Typography className={props.classes.listItem} color="primary">
             <ReceiptIcon color="primary" fontSize="small" />
-            <Link href="#" onClick={preventDefault} color="inherit">
+            <Link href="/" onClick={preventDefault} color="inherit">
               Sales
             </Link>
           </Typography>
@@ -55,7 +55,7 @@ const CategoryMenu: React.FunctionComponent<WithStyles<typeof styles>> = (
         <MenuItem onClick={handleCategoriesClose}>
           <Typography className={props.classes.listItem} color="primary">
             <AttachMoneyIcon color="primary" fontSize="small" />
-            <Link href="#" onClick={preventDefault} color="inherit">
+            <Link href="/CategoriesList/" color="inherit">
               Expense
             </Link>
           </Typography>
