@@ -16,11 +16,11 @@ export const fetchProducts = async (): Promise<Product[]> => {
     });
 };
 export const sortData = (
-  categoryData: Product[],
+  productData: Product[],
   orderBy: keyof Product,
   ascOrder: boolean = true
 ): Product[] => {
-  return categoryData.sort((a: Product, b: Product) => {
+  return productData.sort((a: Product, b: Product) => {
     if (ascOrder)
       return a[orderBy].toLocaleLowerCase() > b[orderBy].toLocaleLowerCase()
         ? 1
