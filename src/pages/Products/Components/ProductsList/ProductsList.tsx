@@ -32,10 +32,10 @@ const CategoriesList: React.FunctionComponent<
   const filteredData = React.useMemo(() => {
     return productsData.filter((product: Product) => {
       const values = Object.values(product);
-      values.forEach((elem) => {
+      for (let elem of values) {
         if (elem.toLocaleLowerCase().includes(searchText.toLocaleLowerCase()))
           return true;
-      });
+      }
       return false;
     });
   }, [productsData, searchText]);
