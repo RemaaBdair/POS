@@ -11,12 +11,4 @@ export const styles = createStyles({
   iconButton: {
     padding: "10px 0px ",
   },
-  "@global": {
-    "tbody > tr:nth-of-type(odd)": {
-      backgroundColor: "#f5f5f5",
-    },
-    " tr>td ,tr>th": {
-      border: "1px solid #ddd",
-    },
-  },
 });

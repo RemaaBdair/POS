@@ -23,6 +23,15 @@ const theme = createMuiTheme({
       main: "#1861ab",
     },
   },
+  overrides: {
+    MuiTableBody: {
+      root: {
+        "& tr:nth-of-type(odd)": {
+          backgroundColor: "#f5f5f5",
+        },
+      },
+    },
+  },
 });
 
 ReactDOM.render(
