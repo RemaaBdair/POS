@@ -6,9 +6,9 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import { Product, sortData } from "./util";
-import useSort from "./useSort";
-import usePagination from "./usePagination";
-import useSearch from "./useSearch";
+import useSort from "../../../useSort";
+import usePagination from "../../../usePagination";
+import useSearch from "../../../useSearch";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 interface Props {
