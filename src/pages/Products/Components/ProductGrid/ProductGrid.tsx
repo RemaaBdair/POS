@@ -38,8 +38,8 @@ const ProductGrid: React.FunctionComponent<
         <FilterGrid
           initDate={initDate}
           endDate={endDate}
-          handleInitDateChange={handleInitDateChange}
-          handleEndDateChange={handleEndDateChange}
+          onInitDateChange={handleInitDateChange}
+          onEndDateChange={handleEndDateChange}
         />
       </Grid>
       <Grid item xs={6}>

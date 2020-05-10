@@ -13,8 +13,8 @@ import { styles } from "./styles";
 interface Props {
   initDate: Date | null;
   endDate: Date | null;
-  handleInitDateChange: (date: Date | null) => void;
-  handleEndDateChange: (date: Date | null) => void;
+  onInitDateChange: (date: Date | null) => void;
+  onEndDateChange: (date: Date | null) => void;
 }
 export const FilterGrid: React.FunctionComponent<
   WithStyles<typeof styles> & Props
@@ -23,8 +23,8 @@ export const FilterGrid: React.FunctionComponent<
     classes,
     initDate,
     endDate,
-    handleInitDateChange,
-    handleEndDateChange,
+    onInitDateChange,
+    onEndDateChange,
   } = props;
 
   return (
@@ -44,7 +44,7 @@ export const FilterGrid: React.FunctionComponent<
           color="secondary"
           className={classes.datePicker}
           value={initDate}
-          onChange={handleInitDateChange}
+          onChange={onInitDateChange}
           KeyboardButtonProps={{
             "aria-label": "change date",
           }}
@@ -60,7 +60,7 @@ export const FilterGrid: React.FunctionComponent<
           color="secondary"
           className={classes.datePicker}
           value={endDate}
-          onChange={handleEndDateChange}
+          onChange={onEndDateChange}
           KeyboardButtonProps={{
             "aria-label": "change date",
           }}
