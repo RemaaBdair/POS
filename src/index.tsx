@@ -1,5 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import DateFnsUtils from "@date-io/date-fns";
+import "date-fns";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "./index.css";
 import LogInPage from "./pages/LogIn/LogInPage";
 import { Router } from "@reach/router";
@@ -24,14 +27,16 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Router>
-        <LogInPage path="/" />
-        <MainPage path="/Main/" />
-        <CategoryPage path="/CategoriesList/" />
-        <ProductPage path="/ProductsList/" />
-      </Router>
-    </ThemeProvider>
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <ThemeProvider theme={theme}>
+        <Router>
+          <LogInPage path="/" />
+          <MainPage path="/Main/" />
+          <CategoryPage path="/CategoriesList/" />
+          <ProductPage path="/ProductsList/" />
+        </Router>
+      </ThemeProvider>
+    </MuiPickersUtilsProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
