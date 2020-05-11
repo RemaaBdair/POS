@@ -6,7 +6,7 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import "./index.css";
 import LogInPage from "./pages/LogIn/LogInPage";
 import { Router } from "@reach/router";
-import MainPage from "./pages/Main/MainPage";
+import DashBoard from "./Components/DashBoard/DashBoard";
 import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CategoryPage from "./pages/Category/CategoryPage";
@@ -40,9 +40,10 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <Router>
           <LogInPage path="/" />
-          <MainPage path="/Main/" />
-          <CategoryPage path="/CategoriesList/" />
-          <ProductPage path="/ProductsList/" />
+          <DashBoard path="/dashboard/">
+            <CategoryPage path="CategoriesList" />
+            <ProductPage path="ProductsList" />
+          </DashBoard>
         </Router>
       </ThemeProvider>
     </MuiPickersUtilsProvider>
