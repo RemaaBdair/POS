@@ -3,15 +3,20 @@ import { navigate } from "@reach/router";
 import { WithStyles } from "@material-ui/core/styles";
 import { withStyles } from "@material-ui/core/styles";
 import { RouteComponentProps } from "@reach/router";
-import Header from "../../Components/Header/Header";
+import Header from "../Header/Header";
 import { styles } from "./styles";
-const MainPage: React.FunctionComponent<
+const DashBoard: React.FunctionComponent<
   WithStyles<typeof styles> & RouteComponentProps
-> = (props) => {
+> = ({ children }) => {
   const token = localStorage.getItem("LoggedIn");
   useEffect(() => {
     if (token !== "true") navigate("/");
   });
-  return <Header />;
+  return (
+    <div>
+      <Header />
+      {children}
+    </div>
+  );
 };
-export default withStyles(styles)(MainPage);
+export default withStyles(styles)(DashBoard);
