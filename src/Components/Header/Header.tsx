@@ -42,7 +42,7 @@ const Header: React.FunctionComponent<
           </Typography>
           <Typography className={props.classes.listItem} color="primary">
             <StorefrontIcon color="primary" fontSize="small" />
-            <Link href="/ProductsList/" color="inherit">
+            <Link href="ProductsList" color="inherit">
               Product
             </Link>
           </Typography>
