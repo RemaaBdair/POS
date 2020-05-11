@@ -16,7 +16,7 @@ interface Props {
   productsData: Product[];
   onFetchProducts: () => void;
 }
-const CategoriesList: React.FunctionComponent<
+const ProductsList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   let { classes, searchText, productsData } = props;
@@ -69,4 +69,4 @@ const CategoriesList: React.FunctionComponent<
   );
 };
 
-export default withStyles(styles)(CategoriesList);
+export default withStyles(styles)(ProductsList);
