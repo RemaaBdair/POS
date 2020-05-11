@@ -8,7 +8,7 @@ import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
 import FilterGrid from "../FilterGrid/FilterGrid";
 import { styles } from "./styles";
-import { Product, fetchProducts } from "../ProductsList/util";
+import { Product, fetchProducts, filterData } from "../ProductsList/util";
 const ProductGrid: React.FunctionComponent<
   WithStyles<typeof styles> & SvgIconProps & RouteComponentProps
 > = (props) => {
@@ -25,12 +25,29 @@ const ProductGrid: React.FunctionComponent<
   const [endDate, setSelectedEndDate] = React.useState<Date | null>(null);
   const handleInitDateChange = (date: Date | null) => {
     setSelectedInitDate(date);
+    if (!date) onFetchProducts(); //on Clear date field
   };
   const handleEndDateChange = (date: Date | null) => {
     setSelectedEndDate(date);
+    if (!date) onFetchProducts();
   };
   const onFetchProducts = () => {
     fetchProducts().then((res) => setProductsData(res));
+  };
+  const onApplyFilter = async () => {
+    const data = await fetchProducts();
+    const filteredData = filterData(
+      {
+        filterOption1: "more than or equal",
+        filterValue1: initDate ? initDate.toJSON().slice(0, 10) : null,
+        filter1By: "expirationDate",
+        filterOption2: "less than or equal",
+        filterValue2: endDate ? endDate.toJSON().slice(0, 10) : null,
+        filter2By: "expirationDate",
+      },
+      data
+    );
+    setProductsData(filteredData);
   };
   return (
     <Grid container className={classes.container}>
@@ -40,6 +57,7 @@ const ProductGrid: React.FunctionComponent<
           endDate={endDate}
           onInitDateChange={handleInitDateChange}
           onEndDateChange={handleEndDateChange}
+          onClick={onApplyFilter}
         />
       </Grid>
       <Grid item xs={6}>
