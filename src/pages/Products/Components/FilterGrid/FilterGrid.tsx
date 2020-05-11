@@ -10,6 +10,7 @@ interface Props {
   endDate: Date | null;
   onInitDateChange: (date: Date | null) => void;
   onEndDateChange: (date: Date | null) => void;
+  onClick: () => void;
 }
 export const FilterGrid: React.FunctionComponent<
   WithStyles<typeof styles> & Props
@@ -20,6 +21,7 @@ export const FilterGrid: React.FunctionComponent<
     endDate,
     onInitDateChange,
     onEndDateChange,
+    onClick,
   } = props;
 
   return (
@@ -60,7 +62,7 @@ export const FilterGrid: React.FunctionComponent<
         }}
       />
       <MyButton
-        OnClickHandle={() => { }}
+        OnClickHandle={onClick}
         type="submit"
         variant="outlined"
         classes={{ root: classes.submitButton }}
