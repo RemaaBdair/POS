@@ -9,7 +9,7 @@ const LogInComponent = (
 ) => {
   const token = localStorage.getItem("LoggedIn");
   useEffect(() => {
-    if (token === "true") navigate("/Main/");
+    if (token === "true") navigate("/dashboard/");
   });
 
   return <LogInForm />;
