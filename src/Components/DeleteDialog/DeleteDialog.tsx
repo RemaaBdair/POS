@@ -37,7 +37,7 @@ const DeleteDialog: React.FunctionComponent<
       </DialogContent>
       <DialogActions classes={{ root: classes.actions }}>
         <MyButton
-          OnClickHandle={onClose}
+          OnClick={onClose}
           type="submit"
           variant="text"
           fullWidth={false}
@@ -46,7 +46,7 @@ const DeleteDialog: React.FunctionComponent<
           Cancel
         </MyButton>
         <MyButton
-          OnClickHandle={() => onSubmit(id)}
+          OnClick={() => onSubmit(id)}
           type="submit"
           variant="contained"
           fullWidth={false}

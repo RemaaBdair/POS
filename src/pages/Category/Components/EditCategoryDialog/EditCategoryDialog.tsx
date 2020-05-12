@@ -61,7 +61,7 @@ const EditCategoryDialog: React.FunctionComponent<
           </DialogContent>
           <DialogActions classes={{ root: classes.actions }}>
             <MyButton
-              OnClickHandle={onClose}
+              OnClick={onClose}
               type="submit"
               variant="text"
               fullWidth={false}
@@ -70,7 +70,7 @@ const EditCategoryDialog: React.FunctionComponent<
               Cancel
             </MyButton>
             <MyButton
-              OnClickHandle={handleSubmit}
+              OnClick={handleSubmit}
               type="submit"
               variant="contained"
               fullWidth={false}
