@@ -10,10 +10,10 @@ import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
-import useSort from "../../../../utils/useSort";
-import usePagination from "../../../../utils/usePagination";
-import useSearch from "../../../../utils/useSearch";
-import useDialog from "../../../../utils/useDialog";
+import useSort from "../../../../hooks/useSort";
+import usePagination from "../../../../hooks/usePagination";
+import useSearch from "../../../../hooks/useSearch";
+import useDialog from "../../../../hooks/useDialog";
 interface Props {
   searchText: string;
   categoryData: Category[];
