@@ -12,6 +12,7 @@ import useSearch from "../../../../utils/useSearch";
 import useDialog from "../../../../utils/useDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
+import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
 interface Props {
   searchText: string;
   productsData: Product[];
@@ -65,6 +66,14 @@ const ProductsList: React.FunctionComponent<
               rowsPerPage={rowsPerPage}
               productData={sortedData}
               onOpenDialog={handleOpenDialog}
+            />
+            <DeleteDialog
+              openDialog={openDialog === "delete" ? true : false}
+              handleClose={handleCloseDialog}
+              handleSubmit={handleDeleteSubmit}
+              name={name}
+              id={id}
+              label="Product"
             />
           </TableBody>
         </Table>
