@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
-import { Category, sortData, Order, deleteCategory } from "./util";
+import { Category, sortData, deleteCategory } from "./util";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
