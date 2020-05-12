@@ -45,7 +45,7 @@ const CategoryGrid: React.FunctionComponent<
 
         <EditCategoryDialog
           openDialog={openDialog}
-          handleClose={handleCloseDialog}
+          onClose={handleCloseDialog}
           setName={setCategoryName}
           name={categoryName}
         />
