@@ -1,4 +1,3 @@
-import React from "react";
 export interface Category {
   id: string;
   name: string;
@@ -13,16 +12,16 @@ export const fetchCategories = async (): Promise<Category[]> => {
     });
 };
 export const editCategory = async (
-  id: string,
   newName: string,
-  date: string
+  category: Category
 ): Promise<string> => {
+  const { id } = category;
   return await fetch(`http://localhost:3001/categories/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name: `${newName}`, date: `${date}` }),
+    body: JSON.stringify({ ...category, name: `${newName}` }),
   })
     .then(() => "success")
     .catch(() => "failed");
