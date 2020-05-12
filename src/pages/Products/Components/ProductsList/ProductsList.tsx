@@ -69,8 +69,8 @@ const ProductsList: React.FunctionComponent<
             />
             <DeleteDialog
               openDialog={openDialog === "delete" ? true : false}
-              handleClose={handleCloseDialog}
-              handleSubmit={handleDeleteSubmit}
+              onClose={handleCloseDialog}
+              onSubmit={handleDeleteSubmit}
               name={name}
               id={id}
               label="Product"
