@@ -91,7 +91,6 @@ const LogInForm: React.FunctionComponent<
         </CardContent>
         <CardActions className={classes.controls}>
           <MyButton
-            // classes={{ root: classes.submitButton }}
             OnClick={onClickHandle}
             size="large"
             variant="contained"
