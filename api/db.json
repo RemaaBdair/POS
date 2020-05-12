@@ -45,6 +45,7 @@
   ],
   "products": [
     {
+      "id": "1",
       "code": "123321",
       "name": "Clothes",
       "category": "Clothes",
@@ -54,6 +55,7 @@
       "expirationDate": "2020-08-20"
     },
     {
+      "id": "2",
       "code": "123322",
       "name": "Computer",
       "category": "Electronics",
