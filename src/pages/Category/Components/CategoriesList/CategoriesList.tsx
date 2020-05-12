@@ -71,7 +71,7 @@ const CategoriesList: React.FunctionComponent<
 
             <EditCategoryDialog
               openDialog={openDialog === "edit" ? true : false}
-              handleClose={handleCloseDialog}
+              onClose={handleCloseDialog}
               name={name}
               setName={setName}
               category={element}

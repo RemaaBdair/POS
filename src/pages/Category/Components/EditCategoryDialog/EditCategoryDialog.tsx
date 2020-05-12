@@ -14,7 +14,7 @@ import { editCategory, createCategory, Category } from "../CategoriesList/util";
 import { styles } from "./styles";
 interface Props {
   openDialog: boolean;
-  handleClose: () => void;
+  onClose: () => void;
   name?: string;
   category?: Category;
   setName: React.Dispatch<React.SetStateAction<string>>;
@@ -23,7 +23,7 @@ const EditCategoryDialog: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes } = props;
-  const { openDialog, handleClose, name, setName, category } = props;
+  const { openDialog, onClose, name, setName, category } = props;
   const [disableButton, setDisableButton] = useState(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const handleSubmit = async () => {
@@ -37,13 +37,13 @@ const EditCategoryDialog: React.FunctionComponent<
     if (result === "failed") setOpenSnackBar(true);
 
     setDisableButton(false);
-    handleClose();
+    onClose();
   };
   return (
     <>
       <Dialog
         open={openDialog}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="form-dialog-title"
         fullWidth
       >
@@ -61,7 +61,7 @@ const EditCategoryDialog: React.FunctionComponent<
           </DialogContent>
           <DialogActions classes={{ root: classes.actions }}>
             <MyButton
-              OnClickHandle={handleClose}
+              OnClickHandle={onClose}
               type="submit"
               variant="text"
               fullWidth={false}
