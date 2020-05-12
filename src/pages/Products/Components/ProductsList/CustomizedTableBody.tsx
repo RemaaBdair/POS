@@ -12,12 +12,18 @@ interface BodyProps {
   page: number;
   rowsPerPage: number;
   productData: Product[];
+  onOpenDialog: (
+    type: "details" | "edit" | "delete" | null,
+    name: string,
+    id: string,
+    element: Product
+  ) => void;
 }
 
 export const CustomizedTableBody: React.FunctionComponent<
   WithStyles<typeof styles> & BodyProps
 > = (props) => {
-  const { classes, rowsPerPage, page, productData } = props;
+  const { classes, rowsPerPage, page, productData, onOpenDialog } = props;
 
   if (productData.length === 0) {
     return (
@@ -32,6 +38,7 @@ export const CustomizedTableBody: React.FunctionComponent<
           .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           .map((product: Product) => {
             const {
+              id,
               code,
               name,
               category,
@@ -41,7 +48,7 @@ export const CustomizedTableBody: React.FunctionComponent<
               expirationDate,
             } = product;
             return (
-              <TableRow key={code}>
+              <TableRow key={id}>
                 <TableCell align="left">{code}</TableCell>
                 <TableCell align="left">{name}</TableCell>
                 <TableCell align="left">{category}</TableCell>
@@ -56,7 +63,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                     aria-label="Edit Product"
                     aria-haspopup="true"
                     color="primary"
-                    onClick={() => {}}
+                    onClick={() => onOpenDialog("edit", name, id, product)}
                   >
                     <EditIcon fontSize="small" />
                   </IconButton>
@@ -66,7 +73,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                     aria-label="Delete Product"
                     aria-haspopup="true"
                     color="primary"
-                    onClick={() => {}}
+                    onClick={() => onOpenDialog("delete", name, id, product)}
                   >
                     <DeleteIcon fontSize="small" />
                   </IconButton>
