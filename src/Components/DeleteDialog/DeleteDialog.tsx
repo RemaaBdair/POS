@@ -5,7 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import { MyButton } from "../../../../Components/Button/Button";
+import { MyButton } from "../Button/Button";
 import { styles } from "./styles";
 interface Props {
   openDialog: boolean;
@@ -13,12 +13,13 @@ interface Props {
   handleSubmit: (id: string) => void;
   name: string;
   id: string;
+  label: string;
 }
-const DeleteCategoryDialog: React.FunctionComponent<
+const DeleteDialog: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes } = props;
-  const { openDialog, handleClose, handleSubmit, name, id } = props;
+  const { openDialog, handleClose, handleSubmit, name, id, label } = props;
   return (
     <Dialog
       open={openDialog}
@@ -27,11 +28,11 @@ const DeleteCategoryDialog: React.FunctionComponent<
       fullWidth
     >
       <DialogTitle id="form-dialog-title" classes={{ root: classes.title }}>
-        Delete Category
+        Delete {label}
       </DialogTitle>
       <DialogContent classes={{ root: classes.content }}>
         <DialogContentText>
-          Are you sure you want to deltete {name} category?
+          Are you sure you want to deltete {name} {label}?
         </DialogContentText>
       </DialogContent>
       <DialogActions classes={{ root: classes.actions }}>
@@ -57,4 +58,4 @@ const DeleteCategoryDialog: React.FunctionComponent<
     </Dialog>
   );
 };
-export default withStyles(styles)(DeleteCategoryDialog);
+export default withStyles(styles)(DeleteDialog);
