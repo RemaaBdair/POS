@@ -88,3 +88,10 @@ export const filterData = (
     );
   else return rows;
 };
+export const deleteProduct = async (id: string) => {
+  await fetch(`http://localhost:3001/products/${id}`, {
+    method: "DELETE",
+  }).catch((error) => {
+    console.error("Error:", error);
+  });
+};
