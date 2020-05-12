@@ -34,7 +34,7 @@ const ProductGrid: React.FunctionComponent<
   const onFetchProducts = () => {
     fetchProducts().then((res) => setProductsData(res));
   };
-  const onApplyFilter = async () => {
+  const applyFilter = async () => {
     const data = await fetchProducts();
     const filteredData = filterData(
       {
@@ -57,7 +57,7 @@ const ProductGrid: React.FunctionComponent<
           endDate={endDate}
           onInitDateChange={handleInitDateChange}
           onEndDateChange={handleEndDateChange}
-          onClick={onApplyFilter}
+          onClick={applyFilter}
         />
       </Grid>
       <Grid item xs={6}>
