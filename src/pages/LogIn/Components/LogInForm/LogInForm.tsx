@@ -30,7 +30,7 @@ const LogInForm: React.FunctionComponent<
       password: validatePassword(inputs.password),
     };
   };
-  const onClickHandle = async (e: React.SyntheticEvent) => {
+  const handleClick = async (e: React.SyntheticEvent) => {
     e.preventDefault();
     setError(false);
     setPasswordErrorText("");
@@ -54,7 +54,7 @@ const LogInForm: React.FunctionComponent<
     }
   };
   return (
-    <form onSubmit={onClickHandle}>
+    <form onSubmit={handleClick}>
       <Card classes={{ root: classes.card }}>
         <CardMedia className={classes.logo} image={Logo} title="Logo" />
         <CardContent className={classes.content}>
@@ -91,7 +91,7 @@ const LogInForm: React.FunctionComponent<
         </CardContent>
         <CardActions className={classes.controls}>
           <MyButton
-            OnClick={onClickHandle}
+            OnClick={handleClick}
             size="large"
             variant="contained"
             type="submit"
