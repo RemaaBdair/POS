@@ -10,28 +10,27 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
-import { editCategory, createCategory } from "../CategoriesList/util";
+import { editCategory, createCategory, Category } from "../CategoriesList/util";
 import { styles } from "./styles";
 interface Props {
   openDialog: boolean;
   handleClose: () => void;
   name?: string;
-  id?: string;
-  date?: string;
+  category?: Category;
   setName: React.Dispatch<React.SetStateAction<string>>;
 }
 const EditCategoryDialog: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes } = props;
-  const { openDialog, handleClose, name, id, date, setName } = props;
+  const { openDialog, handleClose, name, setName, category } = props;
   const [disableButton, setDisableButton] = useState(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const handleSubmit = async () => {
     let result: string = "";
     setDisableButton(true);
-    if (id && name && date) {
-      result = await editCategory(id, name, date);
+    if (category && name) {
+      result = await editCategory(name, category);
     } else if (name) {
       result = await createCategory(name);
     }
