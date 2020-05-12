@@ -5,10 +5,11 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
-import { Product, sortData } from "./util";
+import { Product, sortData, deleteProduct } from "./util";
 import useSort from "../../../../utils/useSort";
 import usePagination from "../../../../utils/usePagination";
 import useSearch from "../../../../utils/useSearch";
+import useDialog from "../../../../utils/useDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 interface Props {
@@ -19,7 +20,7 @@ interface Props {
 const ProductsList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
-  let { classes, searchText, productsData } = props;
+  let { classes, searchText, productsData, onFetchProducts } = props;
   const [result] = useSearch(productsData, searchText);
   const { order, orderBy, sortedData, handleSort } = useSort<Product>(
     "name",
@@ -32,6 +33,17 @@ const ProductsList: React.FunctionComponent<
     handleChangePage,
     handleChangeRowsPerPage,
   } = usePagination(5);
+  type dialogTypes = "edit" | "delete" | "details";
+  const {
+    name,
+    id,
+    element,
+    openDialog,
+    setName,
+    handleOpenDialog,
+    handleCloseDialog,
+    handleDeleteSubmit,
+  } = useDialog<Product, dialogTypes>(deleteProduct, onFetchProducts);
   return (
     <div className={classes.root}>
       <TableContainer>
@@ -52,6 +64,7 @@ const ProductsList: React.FunctionComponent<
               page={page}
               rowsPerPage={rowsPerPage}
               productData={sortedData}
+              onOpenDialog={handleOpenDialog}
             />
           </TableBody>
         </Table>
