@@ -8,7 +8,8 @@ import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
 import FilterGrid from "../../../../Components/FilterGrid/FilterGrid";
 import { styles } from "./styles";
-import { Product, fetchProducts, filterData } from "../ProductsList/util";
+import { Product, filterData } from "../../util";
+import { fetchProducts } from "../../api";
 const ProductGrid: React.FunctionComponent<
   WithStyles<typeof styles> & SvgIconProps & RouteComponentProps
 > = (props) => {

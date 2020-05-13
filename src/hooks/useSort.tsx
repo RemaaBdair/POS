@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Order } from "../pages/Products/Components/ProductsList/util";
+import { Order } from "../pages/Products/util";
 const useSort = <T,>(
   defaultOrderBy: keyof T,
   data: T[],

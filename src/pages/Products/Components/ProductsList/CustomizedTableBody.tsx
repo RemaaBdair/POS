@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DescriptionIcon from "@material-ui/icons/Description";
-import { Product } from "./util";
+import { Product } from "../../util";
 import { WithStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 interface BodyProps {
