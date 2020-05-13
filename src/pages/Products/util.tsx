@@ -26,14 +26,10 @@ export const sortData = (
   });
 };
 type FilterOptions = "less than or equal" | "more than or equal";
-
-interface FilterValues {
-  filterOption1: FilterOptions;
-  filterValue1: string | null;
-  filter1By: keyof Product;
-  filterOption2: FilterOptions;
-  filterValue2: string | null;
-  filter2By: keyof Product;
+interface Filter {
+  option: FilterOptions;
+  value: string | null;
+  key: keyof Product;
 }
 const evaluate = (
   filterOption: FilterOptions,
@@ -53,31 +49,43 @@ const evaluate = (
   else return false;
 };
 export const filterData = (
-  filterValues: FilterValues,
+  filterValues: Filter[],
   rows: Product[]
 ): Product[] => {
-  const {
-    filterOption1,
-    filter1By,
-    filterValue1,
-    filter2By,
-    filterValue2,
-    filterOption2,
-  } = filterValues;
-  if (!filterValue1 && !filterValue2) return rows;
-  else if (filterValue1 && filterValue2)
+  if (!filterValues[0].value && !filterValues[1].value) return rows;
+  else if (filterValues[0].value && filterValues[1].value)
     return rows.filter(
       (row: Product) =>
-        evaluate(filterOption1, filterValue1, filter1By, row) &&
-        evaluate(filterOption2, filterValue2, filter2By, row)
+        evaluate(
+          filterValues[0].option,
+          filterValues[0].value,
+          filterValues[0].key,
+          row
+        ) &&
+        evaluate(
+          filterValues[1].option,
+          filterValues[1].value,
+          filterValues[1].key,
+          row
+        )
     );
-  else if (filterValue1 && !filterValue2)
+  else if (filterValues[0].value && !filterValues[1].value)
     return rows.filter((row: Product) =>
-      evaluate(filterOption1, filterValue1, filter1By, row)
+      evaluate(
+        filterValues[0].option,
+        filterValues[0].value,
+        filterValues[0].key,
+        row
+      )
     );
-  else if (!filterValue1 && filterValue2)
+  else if (!filterValues[0].value && !filterValues[1].value)
     return rows.filter((row: Product) =>
-      evaluate(filterOption2, filterValue2, filter2By, row)
+      evaluate(
+        filterValues[1].option,
+        filterValues[1].value,
+        filterValues[1].key,
+        row
+      )
     );
   else return rows;
 };
