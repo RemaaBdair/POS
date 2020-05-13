@@ -38,14 +38,18 @@ const ProductGrid: React.FunctionComponent<
   const applyFilter = async () => {
     const data = await fetchProducts();
     const filteredData = filterData(
-      {
-        filterOption1: "more than or equal",
-        filterValue1: startDate ? startDate.toJSON().slice(0, 10) : null,
-        filter1By: "expirationDate",
-        filterOption2: "less than or equal",
-        filterValue2: endDate ? endDate.toJSON().slice(0, 10) : null,
-        filter2By: "expirationDate",
-      },
+      [
+        {
+          option: "more than or equal",
+          value: startDate ? startDate.toJSON().slice(0, 10) : null,
+          key: "expirationDate",
+        },
+        {
+          option: "less than or equal",
+          value: endDate ? endDate.toJSON().slice(0, 10) : null,
+          key: "expirationDate",
+        },
+      ],
       data
     );
     setProductsData(filteredData);
