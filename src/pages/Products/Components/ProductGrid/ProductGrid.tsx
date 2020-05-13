@@ -62,7 +62,7 @@ const ProductGrid: React.FunctionComponent<
       </Grid>
       <Grid item xs={6}>
         <MyButton
-          OnClick={() => {}}
+          onClick={() => {}}
           type="submit"
           variant="contained"
           fullWidth={false}

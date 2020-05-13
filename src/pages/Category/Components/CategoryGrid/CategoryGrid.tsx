@@ -35,7 +35,7 @@ const CategoryGrid: React.FunctionComponent<
     <Grid container className={classes.container}>
       <Grid item xs={6}>
         <MyButton
-          OnClick={() => setOpenDialog(true)}
+          onClick={() => setOpenDialog(true)}
           type="submit"
           variant="contained"
           fullWidth={false}

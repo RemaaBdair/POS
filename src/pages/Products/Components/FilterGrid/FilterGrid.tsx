@@ -62,7 +62,7 @@ export const FilterGrid: React.FunctionComponent<
         }}
       />
       <MyButton
-        OnClick={onClick}
+        onClick={onClick}
         type="submit"
         variant="outlined"
         classes={{ root: classes.submitButton }}
