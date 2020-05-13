@@ -8,7 +8,8 @@ import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import { styles } from "./styles";
-import { Category, fetchCategories } from "../CategoriesList/util";
+import { Category } from "../../util";
+import { fetchCategories } from "../../api";
 const CategoryGrid: React.FunctionComponent<
   WithStyles<typeof styles> & SvgIconProps & RouteComponentProps
 > = (props) => {

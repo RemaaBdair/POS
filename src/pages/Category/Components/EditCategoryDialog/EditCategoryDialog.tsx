@@ -10,7 +10,8 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
-import { editCategory, createCategory, Category } from "../CategoriesList/util";
+import { Category } from "../../util";
+import { editCategory, createCategory } from "../../api";
 import { styles } from "./styles";
 interface Props {
   openDialog: boolean;

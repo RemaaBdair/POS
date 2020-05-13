@@ -4,7 +4,7 @@ import TableCell from "@material-ui/core/TableCell";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { Category } from "./util";
+import { Category } from "../../util";
 import { WithStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 interface BodyProps {
@@ -18,7 +18,6 @@ interface BodyProps {
     element: Category
   ) => void;
 }
-
 export const CustomizedTableBody: React.FunctionComponent<
   WithStyles<typeof styles> & BodyProps
 > = (props) => {
