@@ -9,13 +9,6 @@ export interface Product {
   expirationDate: string;
 }
 export type Order = "asc" | "desc";
-export const fetchProducts = async (): Promise<Product[]> => {
-  return await fetch("http://localhost:3001/products")
-    .then((response) => response.json())
-    .catch((error) => {
-      console.log(error);
-    });
-};
 export const sortData = (
   productData: Product[],
   orderBy: keyof Product,
@@ -87,11 +80,4 @@ export const filterData = (
       evaluate(filterOption2, filterValue2, filter2By, row)
     );
   else return rows;
-};
-export const deleteProduct = async (id: string) => {
-  await fetch(`http://localhost:3001/products/${id}`, {
-    method: "DELETE",
-  }).catch((error) => {
-    console.error("Error:", error);
-  });
 };
