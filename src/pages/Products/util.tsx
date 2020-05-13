@@ -52,40 +52,21 @@ export const filterData = (
   filterValues: Filter[],
   rows: Product[]
 ): Product[] => {
-  if (!filterValues[0].value && !filterValues[1].value) return rows;
-  else if (filterValues[0].value && filterValues[1].value)
-    return rows.filter(
-      (row: Product) =>
-        evaluate(
-          filterValues[0].option,
-          filterValues[0].value,
-          filterValues[0].key,
-          row
-        ) &&
-        evaluate(
-          filterValues[1].option,
-          filterValues[1].value,
-          filterValues[1].key,
-          row
-        )
-    );
-  else if (filterValues[0].value && !filterValues[1].value)
-    return rows.filter((row: Product) =>
-      evaluate(
-        filterValues[0].option,
-        filterValues[0].value,
-        filterValues[0].key,
-        row
-      )
-    );
-  else if (!filterValues[0].value && !filterValues[1].value)
-    return rows.filter((row: Product) =>
-      evaluate(
-        filterValues[1].option,
-        filterValues[1].value,
-        filterValues[1].key,
-        row
-      )
-    );
-  else return rows;
+  const operand1 = rows.filter((row: Product) =>
+    evaluate(
+      filterValues[0].option,
+      filterValues[0].value,
+      filterValues[0].key,
+      row
+    )
+  );
+  const operand2 = rows.filter((row: Product) =>
+    evaluate(
+      filterValues[1].option,
+      filterValues[1].value,
+      filterValues[1].key,
+      row
+    )
+  );
+  return operand1 && operand2;
 };
