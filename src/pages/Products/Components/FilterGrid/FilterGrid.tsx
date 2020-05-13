@@ -6,7 +6,7 @@ import { MyButton } from "../../../../Components/Button/Button";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 interface Props {
-  initDate: Date | null;
+  startDate: Date | null;
   endDate: Date | null;
   onInitDateChange: (date: Date | null) => void;
   onEndDateChange: (date: Date | null) => void;
@@ -17,7 +17,7 @@ export const FilterGrid: React.FunctionComponent<
 > = (props) => {
   const {
     classes,
-    initDate,
+    startDate,
     endDate,
     onInitDateChange,
     onEndDateChange,
@@ -39,7 +39,7 @@ export const FilterGrid: React.FunctionComponent<
         label="From"
         color="secondary"
         className={classes.datePicker}
-        value={initDate}
+        value={startDate}
         onChange={onInitDateChange}
         KeyboardButtonProps={{
           "aria-label": "change date",

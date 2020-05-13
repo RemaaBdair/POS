@@ -21,10 +21,10 @@ const ProductGrid: React.FunctionComponent<
   const handleSearchTextChange = (text: string) => {
     setSearchText(text);
   };
-  const [initDate, setSelectedInitDate] = React.useState<Date | null>(null);
+  const [startDate, setSelectedStartDate] = React.useState<Date | null>(null);
   const [endDate, setSelectedEndDate] = React.useState<Date | null>(null);
   const handleInitDateChange = (date: Date | null) => {
-    setSelectedInitDate(date);
+    setSelectedStartDate(date);
     if (!date) onFetchProducts(); //on Clear date field
   };
   const handleEndDateChange = (date: Date | null) => {
@@ -39,7 +39,7 @@ const ProductGrid: React.FunctionComponent<
     const filteredData = filterData(
       {
         filterOption1: "more than or equal",
-        filterValue1: initDate ? initDate.toJSON().slice(0, 10) : null,
+        filterValue1: startDate ? startDate.toJSON().slice(0, 10) : null,
         filter1By: "expirationDate",
         filterOption2: "less than or equal",
         filterValue2: endDate ? endDate.toJSON().slice(0, 10) : null,
@@ -53,7 +53,7 @@ const ProductGrid: React.FunctionComponent<
     <Grid container className={classes.container}>
       <Grid item xs={12} justify="flex-end" container>
         <FilterGrid
-          initDate={initDate}
+          startDate={startDate}
           endDate={endDate}
           onInitDateChange={handleInitDateChange}
           onEndDateChange={handleEndDateChange}
