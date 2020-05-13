@@ -32,20 +32,20 @@ interface Filter {
   key: keyof Product;
 }
 const evaluate = (
-  filterOption: FilterOptions,
-  filterValue: string,
-  filterBy: keyof Product,
+  option: FilterOptions,
+  value: string | null,
+  key: keyof Product,
   row: Product
 ): boolean => {
   let results = {
     "less than or equal": function () {
-      return row[filterBy].toLowerCase() <= filterValue.toLowerCase();
+      return value ? row[key].toLowerCase() <= value.toLowerCase() : true;
     },
     "more than or equal": function () {
-      return row[filterBy].toLowerCase() >= filterValue.toLowerCase();
+      return value ? row[key].toLowerCase() >= value.toLowerCase() : true;
     },
   };
-  if (row[filterBy]) return results[filterOption]();
+  if (row[key]) return results[option]();
   else return false;
 };
 export const filterData = (
