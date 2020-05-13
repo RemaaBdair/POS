@@ -27,14 +27,14 @@ export const sortData = (
 };
 type FilterOptions = "less than or equal" | "more than or equal";
 
-type FilterValues = {
+interface FilterValues {
   filterOption1: FilterOptions;
   filterValue1: string | null;
   filter1By: keyof Product;
   filterOption2: FilterOptions;
   filterValue2: string | null;
   filter2By: keyof Product;
-};
+}
 const evaluate = (
   filterOption: FilterOptions,
   filterValue: string,
