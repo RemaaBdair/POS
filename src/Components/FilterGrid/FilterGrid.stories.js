@@ -2,7 +2,7 @@ import React from "react";
 import FilterGrid from "./FilterGrid";
 
 export default {
-  title: "ProductPage",
+  title: "FilterGrid",
 };
 
 export const filterGrid = () => <FilterGrid />;

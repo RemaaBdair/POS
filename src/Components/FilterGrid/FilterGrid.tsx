@@ -2,7 +2,7 @@ import React from "react";
 import Grid from "@material-ui/core/Grid";
 import { KeyboardDatePicker } from "@material-ui/pickers";
 import Typography from "@material-ui/core/Typography";
-import { MyButton } from "../../../../Components/Button/Button";
+import { MyButton } from "../Button/Button";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 interface Props {

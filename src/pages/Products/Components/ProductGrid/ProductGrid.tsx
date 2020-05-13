@@ -6,7 +6,7 @@ import { RouteComponentProps } from "@reach/router";
 import ProductsList from "../ProductsList/ProductsList";
 import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
-import FilterGrid from "../FilterGrid/FilterGrid";
+import FilterGrid from "../../../../Components/FilterGrid/FilterGrid";
 import { styles } from "./styles";
 import { Product, fetchProducts, filterData } from "../ProductsList/util";
 const ProductGrid: React.FunctionComponent<
