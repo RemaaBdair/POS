@@ -29,47 +29,46 @@ export const CustomizedTableBody: React.FunctionComponent<
         <TableCell colSpan={3}>No Matching</TableCell>
       </TableRow>
     );
-  } else {
-    return (
-      <>
-        {categoryData
-          .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-          .map((category: Category) => {
-            const { id, name, date } = category;
-            return (
-              <TableRow key={id}>
-                <TableCell align="left">{name}</TableCell>
-                <TableCell align="left">{date}</TableCell>
-                <TableCell align="left">
-                  <IconButton
-                    edge={false}
-                    classes={{ root: classes.iconButton }}
-                    aria-label="Edit Category"
-                    aria-haspopup="true"
-                    color="primary"
-                    onClick={() =>
-                      onOpenDialog("edit", name, id, { name, id, date })
-                    }
-                  >
-                    <EditIcon fontSize="small" />
-                  </IconButton>
-                  <IconButton
-                    classes={{ root: classes.iconButton }}
-                    edge={false}
-                    aria-label="Delete Category"
-                    aria-haspopup="true"
-                    color="primary"
-                    onClick={() =>
-                      onOpenDialog("delete", name, id, { name, id, date })
-                    }
-                  >
-                    <DeleteIcon fontSize="small" />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            );
-          })}
-      </>
-    );
   }
+  return (
+    <>
+      {categoryData
+        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+        .map((category: Category) => {
+          const { id, name, date } = category;
+          return (
+            <TableRow key={id}>
+              <TableCell align="left">{name}</TableCell>
+              <TableCell align="left">{date}</TableCell>
+              <TableCell align="left">
+                <IconButton
+                  edge={false}
+                  classes={{ root: classes.iconButton }}
+                  aria-label="Edit Category"
+                  aria-haspopup="true"
+                  color="primary"
+                  onClick={() =>
+                    onOpenDialog("edit", name, id, { name, id, date })
+                  }
+                >
+                  <EditIcon fontSize="small" />
+                </IconButton>
+                <IconButton
+                  classes={{ root: classes.iconButton }}
+                  edge={false}
+                  aria-label="Delete Category"
+                  aria-haspopup="true"
+                  color="primary"
+                  onClick={() =>
+                    onOpenDialog("delete", name, id, { name, id, date })
+                  }
+                >
+                  <DeleteIcon fontSize="small" />
+                </IconButton>
+              </TableCell>
+            </TableRow>
+          );
+        })}
+    </>
+  );
 };
