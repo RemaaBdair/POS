@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 import Table from "@material-ui/core/Table";
@@ -6,7 +6,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import { Category, sortData } from "../../util";
-import { deleteCategory } from "../../api";
+import { deleteCategory, editCategory } from "../../api";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
@@ -14,7 +14,8 @@ import { CustomizedTableBody } from "./CustomizedTableBody";
 import useSort from "../../../../hooks/useSort";
 import usePagination from "../../../../hooks/usePagination";
 import useSearch from "../../../../hooks/useSearch";
-import useDialog from "../../../../hooks/useDialog";
+import useDeleteDialog from "../../../../hooks/useDeleteDialog";
+import useEditDialog from "../hooks/useEditDialog";
 interface Props {
   searchText: string;
   categoryData: Category[];
@@ -37,16 +38,37 @@ const CategoriesList: React.FunctionComponent<
     handleChangeRowsPerPage,
   } = usePagination(5);
   type dialogTypes = "edit" | "delete";
+  const [openDialog, setOpenDialog] = useState<dialogTypes | null>(null);
+  const handleOpenDialog = (
+    type: dialogTypes | null,
+    name: string,
+    id: string,
+    category: Category
+  ) => {
+    if (type === "edit") handleOpenEditDialog(name, category);
+    else if (type === "delete") handleOpenDeleteDialog(name, id);
+    setOpenDialog(type);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(null);
+  };
   const {
     name,
     id,
-    element,
-    openDialog,
-    setName,
-    handleOpenDialog,
-    handleCloseDialog,
+    handleOpenDeleteDialog,
     handleDeleteSubmit,
-  } = useDialog<Category, dialogTypes>(deleteCategory, onFetchCategories);
+  } = useDeleteDialog<Category>(
+    deleteCategory,
+    onFetchCategories,
+    handleCloseDialog
+  );
+  const {
+    editingName,
+    setEditingName,
+    category,
+    handleOpenEditDialog,
+    handleEditSubmit,
+  } = useEditDialog();
   return (
     <div className={classes.root}>
       <TableContainer>
