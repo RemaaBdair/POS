@@ -5,4 +5,4 @@ export default {
   title: "CategoryPage",
 };
 
-export const categoryList = () => <CategoriesList />;
+export const categoryList = () => <CategoriesList categoryData={[]} />;
