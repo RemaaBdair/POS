@@ -25,7 +25,15 @@ const EditCategoryDialog: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes } = props;
-  const { openDialog, onClose, name, setName, category, onSubmit, onFetch } = props;
+  const {
+    openDialog,
+    onClose,
+    name,
+    setName,
+    category,
+    onSubmit,
+    onFetch,
+  } = props;
   const [disableButton, setDisableButton] = useState(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const handleSubmit = async () => {
@@ -58,7 +66,10 @@ const EditCategoryDialog: React.FunctionComponent<
           </DialogContent>
           <DialogActions classes={{ root: classes.actions }}>
             <MyButton
-              onClick={onClose}
+              onClick={(e) => {
+                e.preventDefault();
+                onClose();
+              }}
               type="submit"
               variant="text"
               fullWidth={false}
