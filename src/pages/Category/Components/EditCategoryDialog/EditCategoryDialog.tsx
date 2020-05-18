@@ -11,12 +11,13 @@ import CloseIcon from "@material-ui/icons/Close";
 import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
 import { Category } from "../../util";
-import { editCategory, createCategory } from "../../api";
 import { styles } from "./styles";
 interface Props {
   openDialog: boolean;
   onClose: () => void;
-  name?: string;
+  onSubmit: (name: string, category?: Category) => Promise<string>;
+  onFetch: () => void;
+  name: string;
   category?: Category;
   setName: React.Dispatch<React.SetStateAction<string>>;
 }
@@ -24,20 +25,15 @@ const EditCategoryDialog: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes } = props;
-  const { openDialog, onClose, name, setName, category } = props;
+  const { openDialog, onClose, name, setName, category, onSubmit, onFetch } = props;
   const [disableButton, setDisableButton] = useState(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const handleSubmit = async () => {
-    let result: string = "";
     setDisableButton(true);
-    if (category && name) {
-      result = await editCategory(name, category);
-    } else if (name) {
-      result = await createCategory(name);
-    }
+    let result: string = await onSubmit(name, category);
     if (result === "failed") setOpenSnackBar(true);
-
     setDisableButton(false);
+    onFetch();
     onClose();
   };
   return (
