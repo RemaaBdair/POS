@@ -13,7 +13,7 @@ interface BodyProps {
   rowsPerPage: number;
   productData: Product[];
   onOpenDialog: (
-    type: "details" | "edit" | "delete" | null,
+    type: "details" | "delete" | null,
     name: string,
     id: string,
     element: Product
@@ -63,7 +63,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                   aria-label="Edit Product"
                   aria-haspopup="true"
                   color="primary"
-                  onClick={() => onOpenDialog("edit", name, id, product)}
+                  onClick={() => {}}
                 >
                   <EditIcon fontSize="small" />
                 </IconButton>
