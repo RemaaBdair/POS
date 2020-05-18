@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 import Table from "@material-ui/core/Table";
@@ -10,7 +10,7 @@ import { deleteProduct } from "../../api";
 import useSort from "../../../../hooks/useSort";
 import usePagination from "../../../../hooks/usePagination";
 import useSearch from "../../../../hooks/useSearch";
-import useDialog from "../../../../hooks/useDialog";
+import useDeleteDialog from "../../../../hooks/useDeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
@@ -35,17 +35,29 @@ const ProductsList: React.FunctionComponent<
     handleChangePage,
     handleChangeRowsPerPage,
   } = usePagination(5);
-  type dialogTypes = "edit" | "delete" | "details";
+  type dialogTypes = "delete" | "details";
+  const [openDialog, setOpenDialog] = useState<dialogTypes | null>(null);
+  const handleOpenDialog = (
+    type: dialogTypes | null,
+    name: string,
+    id: string
+  ) => {
+    if (type === "delete") handleOpenDeleteDialog(name, id);
+    setOpenDialog(type);
+  };
+  const handleCloseDialog = () => {
+    setOpenDialog(null);
+  };
   const {
     name,
     id,
-    element,
-    openDialog,
-    setName,
-    handleOpenDialog,
-    handleCloseDialog,
+    handleOpenDeleteDialog,
     handleDeleteSubmit,
-  } = useDialog<Product, dialogTypes>(deleteProduct, onFetchProducts);
+  } = useDeleteDialog<Product>(
+    deleteProduct,
+    onFetchProducts,
+    handleCloseDialog
+  );
   return (
     <div className={classes.root}>
       <TableContainer>
