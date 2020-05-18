@@ -15,7 +15,7 @@ interface BodyProps {
     type: "edit" | "delete" | null,
     name: string,
     id: string,
-    element: Category
+    category: Category
   ) => void;
 }
 export const CustomizedTableBody: React.FunctionComponent<
