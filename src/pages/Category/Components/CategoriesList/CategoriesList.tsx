@@ -95,9 +95,11 @@ const CategoriesList: React.FunctionComponent<
             <EditCategoryDialog
               openDialog={openDialog === "edit" ? true : false}
               onClose={handleCloseDialog}
-              name={name}
-              setName={setName}
-              category={element}
+              onSubmit={handleEditSubmit}
+              onFetch={onFetchCategories}
+              name={editingName}
+              setName={setEditingName}
+              category={category}
             />
             <DeleteDialog
               openDialog={openDialog === "delete" ? true : false}
