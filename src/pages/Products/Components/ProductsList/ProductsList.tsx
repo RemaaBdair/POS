@@ -14,6 +14,7 @@ import useDeleteDialog from "../../../../hooks/useDeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
+import useDetailsDialog from "../../hooks/useDetails";
 interface Props {
   searchText: string;
   productsData: Product[];
@@ -40,9 +41,11 @@ const ProductsList: React.FunctionComponent<
   const handleOpenDialog = (
     type: dialogTypes | null,
     name: string,
-    id: string
+    id: string,
+    product: Product
   ) => {
     if (type === "delete") handleOpenDeleteDialog(name, id);
+    if (type === "details") handleOpenDetailsDialog(product);
     setOpenDialog(type);
   };
   const handleCloseDialog = () => {
@@ -58,6 +61,7 @@ const ProductsList: React.FunctionComponent<
     onFetchProducts,
     handleCloseDialog
   );
+  const { product, handleOpenDetailsDialog } = useDetailsDialog();
   return (
     <div className={classes.root}>
       <TableContainer>
