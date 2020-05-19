@@ -83,7 +83,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                   aria-label="View Details"
                   aria-haspopup="true"
                   color="primary"
-                  onClick={() => {}}
+                  onClick={() => onOpenDialog("details", name, id, product)}
                 >
                   <DescriptionIcon fontSize="small" />
                 </IconButton>
