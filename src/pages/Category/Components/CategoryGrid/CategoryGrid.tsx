@@ -10,7 +10,7 @@ import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import { styles } from "./styles";
 import { Category } from "../../util";
 import { fetchCategories } from "../../api";
-import useEditDialog from "../hooks/useEditDialog";
+import useEditDialog from "../../hooks/useEditDialog";
 const CategoryGrid: React.FunctionComponent<
   WithStyles<typeof styles> & SvgIconProps & RouteComponentProps
 > = (props) => {

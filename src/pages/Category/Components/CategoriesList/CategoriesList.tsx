@@ -15,7 +15,7 @@ import useSort from "../../../../hooks/useSort";
 import usePagination from "../../../../hooks/usePagination";
 import useSearch from "../../../../hooks/useSearch";
 import useDeleteDialog from "../../../../hooks/useDeleteDialog";
-import useEditDialog from "../hooks/useEditDialog";
+import useEditDialog from "../../hooks/useEditDialog";
 interface Props {
   searchText: string;
   categoryData: Category[];

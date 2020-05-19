@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { editCategory, createCategory } from "../../api";
-import { Category } from "../../util";
+import { editCategory, createCategory } from "../api";
+import { Category } from "../util";
 const useEditDialog = () => {
   const [editingName, setEditingName] = useState("");
   const [category, setCategory] = useState<Category>({} as any);
