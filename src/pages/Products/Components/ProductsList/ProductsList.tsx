@@ -14,6 +14,7 @@ import useDeleteDialog from "../../../../hooks/useDeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
+import DetailsDialog from "../DetailsDialog/DetailsDialog";
 import useDetailsDialog from "../../hooks/useDetails";
 interface Props {
   searchText: string;
@@ -91,6 +92,11 @@ const ProductsList: React.FunctionComponent<
               name={name}
               id={id}
               label="Product"
+            />
+            <DetailsDialog
+              openDialog={openDialog === "details" ? true : false}
+              onClose={handleCloseDialog}
+              product={product}
             />
           </TableBody>
         </Table>
