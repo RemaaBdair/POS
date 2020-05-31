@@ -78,5 +78,5 @@ export const filterData = (
       row
     )
   );
-  return operand1 && operand2;
+  return operand1.filter((value) => operand2.includes(value));
 };
