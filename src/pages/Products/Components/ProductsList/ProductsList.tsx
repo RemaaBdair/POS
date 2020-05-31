@@ -67,48 +67,46 @@ const ProductsList: React.FunctionComponent<
     handleCloseDialog
   );
   return (
-    <div className={classes.root}>
-      <TableContainer>
-        <Table
-          className={classes.table}
-          aria-labelledby="Products Table"
-          size="small"
-        >
-          <CustomizedTableHeader
-            order={order}
-            orderBy={orderBy}
-            onSort={handleSort}
-          />
+    <SortTableContext.Provider value={{ order, orderBy, handleSort }}>
+      <div className={classes.root}>
+        <TableContainer>
+          <Table
+            className={classes.table}
+            aria-labelledby="Products Table"
+            size="small"
+          >
+            <CustomizedTableHeader />
 
-          <TableBody>
-            <CustomizedTableBody
-              classes={classes}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              productData={sortedData}
-              onOpenDialog={handleOpenDialog}
-            />
-            <DeleteDialog
-              openDialog={openDialog === "delete" ? true : false}
-              onClose={handleCloseDialog}
-              onSubmit={handleDeleteSubmit}
-              name={name}
-              id={id}
-              label="Product"
-            />
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[3, 5, 25, 50, 100]}
-        component="div"
-        count={sortedData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </div>
+            <TableBody>
+              <CustomizedTableBody
+                classes={classes}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                productData={sortedData}
+                onOpenDialog={handleOpenDialog}
+              />
+              <DeleteDialog
+                openDialog={openDialog === "delete" ? true : false}
+                onClose={handleCloseDialog}
+                onSubmit={handleDeleteSubmit}
+                name={name}
+                id={id}
+                label="Product"
+              />
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[3, 5, 25, 50, 100]}
+          component="div"
+          count={sortedData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </div>
+    </SortTableContext.Provider>
   );
 };
 
