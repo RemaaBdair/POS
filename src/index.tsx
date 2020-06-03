@@ -32,6 +32,11 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiFormControl: {
+      root: {
+        marginBottom: 20,
+      },
+    },
   },
 });
 
