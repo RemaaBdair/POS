@@ -42,3 +42,10 @@ export const createProduct = async (product: Product): Promise<string> => {
     .then(() => "success")
     .catch(() => "failed");
 };
+export const getProductById = async (id: string): Promise<Product> => {
+  return await fetch(`http://localhost:3001/products/${id}`)
+    .then((response) => response.json())
+    .catch((error) => {
+      console.log(error);
+    });
+};
