@@ -5,11 +5,17 @@ import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
-import { Category, sortData, Order, deleteCategory } from "./util";
+import { Category, sortData } from "../../util";
+import { deleteCategory, editCategory } from "../../api";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
-import DeleteCategoryDialog from "../DeleteCategoryDialog/DeleteCategoryDialog";
+import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
+import useSort from "../../../../hooks/useSort";
+import usePagination from "../../../../hooks/usePagination";
+import useSearch from "../../../../hooks/useSearch";
+import useDeleteDialog from "../../../../hooks/useDeleteDialog";
+import useEditDialog from "../../hooks/useEditDialog";
 interface Props {
   searchText: string;
   categoryData: Category[];
@@ -18,65 +24,42 @@ interface Props {
 const CategoriesList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
-  let { classes, searchText, categoryData, onFetchCategories } = props;
-  const [categoryName, setCategoryName] = React.useState("");
-  const [categoryId, setCategoryId] = React.useState("");
-  const [categoryDate, setCategoryDate] = React.useState("");
-  const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Category>("name");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [page, setPage] = useState(0);
-  const [openDialog, setOpenDialog] = React.useState<
-    "create" | "edit" | "delete" | null
-  >(null);
+ let { classes, searchText, productsData, onFetchProducts } = props;
+  const [result] = useSearch(productsData, searchText);
+  const { order, orderBy, sortedData, handleSort } = useSort<Product>(
+    "name",
+    result,
+    sortData
+  );
+  const {
+    page,
+    rowsPerPage,
+    handleChangePage,
+    handleChangeRowsPerPage,
+  } = usePagination(5);
+  type dialogTypes = "delete" | "details";
+  const [openDialog, setOpenDialog] = useState<dialogTypes | null>(null);
   const handleOpenDialog = (
-    type: "create" | "edit" | "delete" | null,
+    type: dialogTypes | null,
     name: string,
-    id: string,
-    date?: string
+    id: string
   ) => {
-    setCategoryName(name);
-    setCategoryId(id);
-    if (date) setCategoryDate(date);
+    if (type === "delete") handleOpenDeleteDialog(name, id);
     setOpenDialog(type);
   };
   const handleCloseDialog = () => {
     setOpenDialog(null);
-    onFetchCategories();
   };
-  const handleDeleteDialogSubmit = (id: string) => {
-    deleteCategory(id).then(() => handleCloseDialog());
-  };
-  const handleSort = (
-    event: React.MouseEvent<unknown>,
-    property: keyof Category
-  ) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
-  const filteredData = React.useMemo(
-    () =>
-      categoryData.filter((category: Category) =>
-        category.name
-          .toLocaleLowerCase()
-          .includes(searchText.toLocaleLowerCase())
-      ),
-    [searchText, categoryData]
+  const {
+    name,
+    id,
+    handleOpenDeleteDialog,
+    handleDeleteSubmit,
+  } = useDeleteDialog<Product>(
+    deleteProduct,
+    onFetchProducts,
+    handleCloseDialog
   );
-  const sortedData = React.useMemo(
-    () => sortData(filteredData, orderBy, order === "asc" ? true : false),
-    [order, filteredData, orderBy]
-  );
-  const handleChangePage = (event: unknown, newPage: number) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
   return (
     <div className={classes.root}>
       <TableContainer>
@@ -102,18 +85,20 @@ const CategoriesList: React.FunctionComponent<
 
             <EditCategoryDialog
               openDialog={openDialog === "edit" ? true : false}
-              handleClose={handleCloseDialog}
-              name={categoryName}
-              id={categoryId}
-              setName={setCategoryName}
-              date={categoryDate}
+              onClose={handleCloseDialog}
+              onSubmit={handleEditSubmit}
+              onFetch={onFetchCategories}
+              name={editingName}
+              setName={setEditingName}
+              category={category}
             />
-            <DeleteCategoryDialog
+            <DeleteDialog
               openDialog={openDialog === "delete" ? true : false}
-              handleClose={handleCloseDialog}
-              handleSubmit={handleDeleteDialogSubmit}
-              name={categoryName}
-              id={categoryId}
+              onClose={handleCloseDialog}
+              onSubmit={handleDeleteSubmit}
+              name={name}
+              id={id}
+              label="Category"
             />
           </TableBody>
         </Table>

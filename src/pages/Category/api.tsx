@@ -1,10 +1,4 @@
-import React from "react";
-export interface Category {
-  id: string;
-  name: string;
-  date: string;
-}
-export type Order = "asc" | "desc";
+import { Category } from "./util";
 export const fetchCategories = async (): Promise<Category[]> => {
   return await fetch("http://localhost:3001/categories")
     .then((response) => response.json())
@@ -13,16 +7,16 @@ export const fetchCategories = async (): Promise<Category[]> => {
     });
 };
 export const editCategory = async (
-  id: string,
   newName: string,
-  date: string
+  category: Category
 ): Promise<string> => {
+  const { id } = category;
   return await fetch(`http://localhost:3001/categories/${id}`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name: `${newName}`, date: `${date}` }),
+    body: JSON.stringify({ ...category, name: `${newName}` }),
   })
     .then(() => "success")
     .catch(() => "failed");
@@ -55,21 +49,5 @@ export const deleteCategory = async (id: string) => {
     method: "DELETE",
   }).catch((error) => {
     console.error("Error:", error);
-  });
-};
-export const sortData = (
-  categoryData: Category[],
-  orderBy: keyof Category,
-  ascOrder: boolean = true
-): Category[] => {
-  return categoryData.sort((a: Category, b: Category) => {
-    if (ascOrder)
-      return a[orderBy].toLocaleLowerCase() > b[orderBy].toLocaleLowerCase()
-        ? 1
-        : -1;
-    else
-      return a[orderBy].toLocaleLowerCase() < b[orderBy].toLocaleLowerCase()
-        ? 1
-        : -1;
   });
 };

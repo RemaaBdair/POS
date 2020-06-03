@@ -10,7 +10,6 @@ const CategoryPage: React.FunctionComponent<
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <Header />
       <CategoryGrid />
     </div>
   );

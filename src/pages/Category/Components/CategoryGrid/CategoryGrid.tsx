@@ -8,7 +8,9 @@ import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
 import EditCategoryDialog from "../EditCategoryDialog/EditCategoryDialog";
 import { styles } from "./styles";
-import { Category, fetchCategories } from "../CategoriesList/util";
+import { Category } from "../../util";
+import { fetchCategories } from "../../api";
+import useEditDialog from "../../hooks/useEditDialog";
 const CategoryGrid: React.FunctionComponent<
   WithStyles<typeof styles> & SvgIconProps & RouteComponentProps
 > = (props) => {
@@ -18,12 +20,11 @@ const CategoryGrid: React.FunctionComponent<
     fetchCategories().then((res) => setCategoryData(res));
   }, []);
   const [searchText, setSearchText] = useState("");
-  const [categoryName, setCategoryName] = React.useState("");
+  const { editingName, setEditingName, handleEditSubmit } = useEditDialog();
   const [openDialog, setOpenDialog] = React.useState(false);
   const handleCloseDialog = () => {
     setOpenDialog(false);
-    setCategoryName("");
-    onFetchCategories();
+    setEditingName("");
   };
   const handleSearchTextChange = (text: string) => {
     setSearchText(text);
@@ -35,7 +36,7 @@ const CategoryGrid: React.FunctionComponent<
     <Grid container className={classes.container}>
       <Grid item xs={6}>
         <MyButton
-          OnClickHandle={() => setOpenDialog(true)}
+          onClick={() => setOpenDialog(true)}
           type="submit"
           variant="contained"
           fullWidth={false}
@@ -45,9 +46,11 @@ const CategoryGrid: React.FunctionComponent<
 
         <EditCategoryDialog
           openDialog={openDialog}
-          handleClose={handleCloseDialog}
-          setName={setCategoryName}
-          name={categoryName}
+          onClose={handleCloseDialog}
+          onSubmit={handleEditSubmit}
+          onFetch={onFetchCategories}
+          setName={setEditingName}
+          name={editingName}
         />
       </Grid>
 

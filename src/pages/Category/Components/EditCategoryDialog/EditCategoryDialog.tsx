@@ -10,41 +10,45 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
-import { editCategory, createCategory } from "../CategoriesList/util";
+import { Category } from "../../util";
 import { styles } from "./styles";
 interface Props {
   openDialog: boolean;
-  handleClose: () => void;
-  name?: string;
-  id?: string;
-  date?: string;
+  onClose: () => void;
+  onSubmit: (name: string, category?: Category) => Promise<string>;
+  onFetch: () => void;
+  name: string;
+  category?: Category;
   setName: React.Dispatch<React.SetStateAction<string>>;
 }
 const EditCategoryDialog: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes } = props;
-  const { openDialog, handleClose, name, id, date, setName } = props;
+  const {
+    openDialog,
+    onClose,
+    name,
+    setName,
+    category,
+    onSubmit,
+    onFetch,
+  } = props;
   const [disableButton, setDisableButton] = useState(false);
   const [openSnackBar, setOpenSnackBar] = React.useState(false);
   const handleSubmit = async () => {
-    let result: string = "";
     setDisableButton(true);
-    if (id && name && date) {
-      result = await editCategory(id, name, date);
-    } else if (name) {
-      result = await createCategory(name);
-    }
+    let result: string = await onSubmit(name, category);
     if (result === "failed") setOpenSnackBar(true);
-
     setDisableButton(false);
-    handleClose();
+    onFetch();
+    onClose();
   };
   return (
     <>
       <Dialog
         open={openDialog}
-        onClose={handleClose}
+        onClose={onClose}
         aria-labelledby="form-dialog-title"
         fullWidth
       >
@@ -62,7 +66,10 @@ const EditCategoryDialog: React.FunctionComponent<
           </DialogContent>
           <DialogActions classes={{ root: classes.actions }}>
             <MyButton
-              OnClickHandle={handleClose}
+              onClick={(e) => {
+                e.preventDefault();
+                onClose();
+              }}
               type="submit"
               variant="text"
               fullWidth={false}
@@ -71,7 +78,7 @@ const EditCategoryDialog: React.FunctionComponent<
               Cancel
             </MyButton>
             <MyButton
-              OnClickHandle={handleSubmit}
+              onClick={handleSubmit}
               type="submit"
               variant="contained"
               fullWidth={false}

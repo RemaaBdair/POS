@@ -26,8 +26,4 @@ export const styles = createStyles({
     margin: 10,
     fontSize: 18,
   },
-  submitButton: {
-    //color: "white",
-    //backgroundColor: "secondary",
-  },
 });

@@ -9,7 +9,7 @@ export interface Props {
   disable?: boolean;
   fullWidth?: boolean;
   variant: "contained" | "text" | "outlined";
-  OnClickHandle: (e: React.SyntheticEvent) => void;
+  onClick: (e: React.SyntheticEvent) => void;
 }
 const button: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
   props
@@ -17,7 +17,7 @@ const button: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
   const {
     children,
     classes,
-    OnClickHandle,
+    onClick,
     size = "large",
     disable = false,
     fullWidth = true,
@@ -30,7 +30,7 @@ const button: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
       size={size}
       type={props.type}
       className={classes.root}
-      onClick={OnClickHandle}
+      onClick={onClick}
       color="secondary"
     >
       {children}
