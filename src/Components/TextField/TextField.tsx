@@ -10,6 +10,7 @@ interface Props {
   value?: string;
   required?: boolean;
   fullWidth?: boolean;
+  multiline?: boolean;
 }
 const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
   props
@@ -23,6 +24,7 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
     fullWidth = true,
     required = false,
     value,
+    multiline = false,
   } = props;
   return (
     <TextField
@@ -36,6 +38,8 @@ const textField: React.FunctionComponent<Props & WithStyles<typeof styles>> = (
       onChange={(event) => onChange(event.target.value)}
       required={required}
       helperText={errorText}
+      multiline={multiline}
+      rows={7}
       error={errorText ? true : false}
       InputProps={{
         classes: {
