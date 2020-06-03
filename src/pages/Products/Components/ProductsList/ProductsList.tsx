@@ -16,6 +16,7 @@ import { CustomizedTableBody } from "./CustomizedTableBody";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
 import DetailsDialog from "../DetailsDialog/DetailsDialog";
 import useDetailsDialog from "../../hooks/useDetails";
+import { SortTableContext } from "./context";
 interface Props {
   searchText: string;
   productsData: Product[];
@@ -64,53 +65,50 @@ const ProductsList: React.FunctionComponent<
   );
   const { product, handleOpenDetailsDialog } = useDetailsDialog();
   return (
-    <div className={classes.root}>
-      <TableContainer>
-        <Table
-          className={classes.table}
-          aria-labelledby="Products Table"
-          size="small"
-        >
-          <CustomizedTableHeader
-            order={order}
-            orderBy={orderBy}
-            onSort={handleSort}
-          />
-
-          <TableBody>
-            <CustomizedTableBody
-              classes={classes}
-              page={page}
-              rowsPerPage={rowsPerPage}
-              productData={sortedData}
-              onOpenDialog={handleOpenDialog}
-            />
-            <DeleteDialog
-              openDialog={openDialog === "delete" ? true : false}
-              onClose={handleCloseDialog}
-              onSubmit={handleDeleteSubmit}
-              name={name}
-              id={id}
-              label="Product"
-            />
-            <DetailsDialog
+    <SortTableContext.Provider value={{ order, orderBy, handleSort }}>
+      <div className={classes.root}>
+        <TableContainer>
+          <Table
+            className={classes.table}
+            aria-labelledby="Products Table"
+            size="small"
+          >
+            <CustomizedTableHeader />
+            <TableBody>
+              <CustomizedTableBody
+                classes={classes}
+                page={page}
+                rowsPerPage={rowsPerPage}
+                productData={sortedData}
+                onOpenDialog={handleOpenDialog}
+              />
+              <DeleteDialog
+                openDialog={openDialog === "delete" ? true : false}
+                onClose={handleCloseDialog}
+                onSubmit={handleDeleteSubmit}
+                name={name}
+                id={id}
+                label="Product"
+              />
+               <DetailsDialog
               openDialog={openDialog === "details" ? true : false}
               onClose={handleCloseDialog}
               product={product}
             />
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <TablePagination
-        rowsPerPageOptions={[3, 5, 25, 50, 100]}
-        component="div"
-        count={sortedData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onChangePage={handleChangePage}
-        onChangeRowsPerPage={handleChangeRowsPerPage}
-      />
-    </div>
+            </TableBody>
+          </Table>
+        </TableContainer>
+        <TablePagination
+          rowsPerPageOptions={[3, 5, 25, 50, 100]}
+          component="div"
+          count={sortedData.length}
+          rowsPerPage={rowsPerPage}
+          page={page}
+          onChangePage={handleChangePage}
+          onChangeRowsPerPage={handleChangeRowsPerPage}
+        />
+      </div>
+    </SortTableContext.Provider>
   );
 };
 

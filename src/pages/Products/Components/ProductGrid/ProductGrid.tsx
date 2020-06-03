@@ -41,12 +41,12 @@ const ProductGrid: React.FunctionComponent<
       [
         {
           option: "more than or equal",
-          value: startDate ? startDate.toJSON().slice(0, 10) : null,
+          value: startDate,
           key: "expirationDate",
         },
         {
           option: "less than or equal",
-          value: endDate ? endDate.toJSON().slice(0, 10) : null,
+          value: endDate,
           key: "expirationDate",
         },
       ],
