@@ -22,6 +22,8 @@ export const editProduct = async (product: Product): Promise<string> => {
     },
     body: JSON.stringify({
       ...product,
+      price: product.price + "$",
+      rawPrice: product.rawPrice + "$",
       expirationDate: product.expirationDate.slice(0, 10),
     }),
   })
@@ -36,6 +38,8 @@ export const createProduct = async (product: Product): Promise<string> => {
     },
     body: JSON.stringify({
       ...product,
+      price: product.price + "$",
+      rawPrice: product.rawPrice + "$",
       expirationDate: product.expirationDate.slice(0, 10),
     }),
   })
