@@ -1,4 +1,5 @@
 import { fetchProducts } from "../../api";
+import { Product } from "../../util";
 export const validateName = (name: string): string => {
   if (!name) return "Name can't be empy!";
   return "";
@@ -16,21 +17,24 @@ export const validateRawPrice = (rawPrice: string): string => {
   else if (isNaN(+rawPrice.slice(0, -1))) return "Raw Price must be a number!";
   return "";
 };
-const validateUniqueCode = async (
+const validateUniqueCode = (
   code: string,
-  id: string
-): Promise<boolean> => {
-  return fetchProducts().then((products) => {
-    for (let elem of products) {
-      if (elem.code === code && elem.id !== id) return true;
-    }
-    return false;
-  });
+  id: string,
+  products: Product[]
+): boolean => {
+  for (let elem of products) {
+    if (elem.code === code && elem.id !== id) return true;
+  }
+  return false;
 };
-export const validateCode = async (code: string, id: string) => {
+export const validateCode = async (
+  code: string,
+  id: string,
+  products: Product[]
+) => {
   let result: boolean = false;
   if (!code) return "Code can't be empy!";
-  result = await validateUniqueCode(code, id);
+  result = validateUniqueCode(code, id, products);
   if (result) return "This code is already used. Try another one!";
   if (!code.match(/^([a-zA-Z0-9]+)$/))
     return "Code contains alphabets and numbers only.";
