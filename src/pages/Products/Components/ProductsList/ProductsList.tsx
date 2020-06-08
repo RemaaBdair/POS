@@ -14,6 +14,8 @@ import useDeleteDialog from "../../../../hooks/useDeleteDialog";
 import { CustomizedTableHeader } from "./CustomizedTableHeader";
 import { CustomizedTableBody } from "./CustomizedTableBody";
 import DeleteDialog from "../../../../Components/DeleteDialog/DeleteDialog";
+import DetailsDialog from "../DetailsDialog/DetailsDialog";
+import useDetailsDialog from "../../hooks/useDetails";
 import { SortTableContext } from "./context";
 interface Props {
   searchText: string;
@@ -41,9 +43,11 @@ const ProductsList: React.FunctionComponent<
   const handleOpenDialog = (
     type: dialogTypes | null,
     name: string,
-    id: string
+    id: string,
+    product: Product
   ) => {
     if (type === "delete") handleOpenDeleteDialog(name, id);
+    if (type === "details") handleOpenDetailsDialog(product);
     setOpenDialog(type);
   };
   const handleCloseDialog = () => {
@@ -59,6 +63,7 @@ const ProductsList: React.FunctionComponent<
     onFetchProducts,
     handleCloseDialog
   );
+  const { product, handleOpenDetailsDialog } = useDetailsDialog();
   return (
     <SortTableContext.Provider value={{ order, orderBy, handleSort }}>
       <div className={classes.root}>
@@ -69,7 +74,6 @@ const ProductsList: React.FunctionComponent<
             size="small"
           >
             <CustomizedTableHeader />
-
             <TableBody>
               <CustomizedTableBody
                 classes={classes}
@@ -86,6 +90,11 @@ const ProductsList: React.FunctionComponent<
                 id={id}
                 label="Product"
               />
+               <DetailsDialog
+              openDialog={openDialog === "details" ? true : false}
+              onClose={handleCloseDialog}
+              product={product}
+            />
             </TableBody>
           </Table>
         </TableContainer>

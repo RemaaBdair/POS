@@ -9,6 +9,9 @@ export interface Product {
   price: string;
   tax: string;
   expirationDate: string;
+  rawPrice: string;
+  count: string;
+  image: string;
 }
 export type Order = "asc" | "desc";
 export const sortData = (
