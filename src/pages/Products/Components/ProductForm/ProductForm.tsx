@@ -25,7 +25,13 @@ import {
   validateCategory,
   getBase64,
 } from "./util";
-import { editProduct, createProduct, getProductById } from "../../api";
+import { Product } from "../../util";
+import {
+  editProduct,
+  createProduct,
+  getProductById,
+  fetchProducts,
+} from "../../api";
 import { fetchCategories } from "../../../Category/api";
 import { Category } from "../../../Category/util";
 import { useEditProduct } from "./hook";
@@ -58,6 +64,10 @@ const ProductForm: React.FunctionComponent<
   React.useEffect(() => {
     fetchCategories().then((res) => setCategories(res));
   }, []);
+  const [products, setProducts] = useState<Product[]>([]);
+  React.useEffect(() => {
+    fetchProducts().then((res) => setProducts(res));
+  }, []);
   const [openDialog, setOpenDialog] = useState(false);
   const [disableButton, setDisableButton] = useState(false);
   const [productErrorText, setProductErrorText] = useState<Inputs>({} as any);
@@ -66,7 +76,7 @@ const ProductForm: React.FunctionComponent<
       name: validateName(edittedProduct.name),
       price: validatePrice(edittedProduct.price, edittedProduct.rawPrice),
       rawPrice: validateRawPrice(edittedProduct.rawPrice),
-      code: validateCode(edittedProduct.code, id),
+      code: validateCode(edittedProduct.code, id, products),
       category: validateCategory(edittedProduct.category),
       quantity: validateQuantity(edittedProduct.quantity),
       expirationDate: validateExpirationDate(
