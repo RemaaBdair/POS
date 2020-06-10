@@ -16,7 +16,7 @@ const ImageUpload: React.FunctionComponent<ImageUploadProps> = ({
     data.append(
       "source",
       event.target.files[0],
-      `/C:/Users/alisraa/Pictures/${event.target.value.name}`
+      `${event.target.value.name}`
     );
     data.append("action", "upload");
     data.append("type", "file");
