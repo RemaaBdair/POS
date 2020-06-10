@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, FormikProps } from "formik";
-import TextField from "@material-ui/core/TextField";
+import TextFieldComponent from "./TextFieldComponent";
 import * as Yup from "yup";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -138,7 +138,6 @@ const ProductForm: React.FunctionComponent<
             isSubmitting,
             handleChange,
             handleSubmit,
-            handleBlur,
             dirty,
           } = props;
 
@@ -148,44 +147,23 @@ const ProductForm: React.FunctionComponent<
                 <CardContent className={classes.content}>
                   <Field
                     name="name"
-                    component={TextField}
-                    onChange={handleChange}
-                    value={values.name}
+                    component={TextFieldComponent}
                     label="Name"
-                    helperText={errors.name && touched.name && errors.name}
-                    error={errors.name ? true : false}
                   />
-
                   <Field
-                    id="rawPrice"
-                    value={values.rawPrice}
-                    component={TextField}
-                    onChange={handleChange}
+                    name="rawPrice"
+                    component={TextFieldComponent}
                     label="Raw Price"
-                    helperText={
-                      errors.rawPrice && touched.rawPrice && errors.rawPrice
-                    }
-                    error={errors.rawPrice ? true : false}
                   />
-
                   <Field
-                    component={TextField}
+                    component={TextFieldComponent}
                     label="Price"
-                    id="price"
-                    value={values.price}
-                    onChange={handleChange}
-                    helperText={errors.price && touched.price && errors.price}
-                    error={errors.price ? true : false}
+                    name="price"
                   />
-
                   <Field
-                    component={TextField}
+                    component={TextFieldComponent}
                     label="Code"
-                    id="code"
-                    value={values.code}
-                    onChange={handleChange}
-                    helperText={errors.code && touched.code && errors.code}
-                    error={errors.code ? true : false}
+                    name="code"
                   />
                   <ImageUpload name="image" label="Choose Image" />
                   {values.image && (
@@ -195,7 +173,6 @@ const ProductForm: React.FunctionComponent<
                       title={values.image}
                     />
                   )}
-
                   <FormControl>
                     <InputLabel id="category-select-label">Category</InputLabel>
                     <Select
@@ -216,33 +193,15 @@ const ProductForm: React.FunctionComponent<
                       <FormHelperText>{errors.category}</FormHelperText>
                     )}
                   </FormControl>
-
                   <Field
-                    component={TextField}
+                    component={TextFieldComponent}
                     label="description"
-                    id="description"
-                    value={values.description}
-                    onChange={handleChange}
-                    multiline={true}
-                    rows={5}
-                    helperText={
-                      errors.description &&
-                      touched.description &&
-                      errors.description
-                    }
-                    error={errors.description ? true : false}
+                    name="description"
                   />
                   <Field
-                    component={TextField}
+                    component={TextFieldComponent}
                     label="Quantity"
-                    id="quantity"
-                    value={values.quantity}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    helperText={
-                      errors.quantity && touched.quantity && errors.quantity
-                    }
-                    error={errors.quantity ? true : false}
+                    name="quantity"
                   />
                   <KeyboardDatePicker
                     disableToolbar
@@ -264,7 +223,6 @@ const ProductForm: React.FunctionComponent<
                 <CardActions className={classes.controls}>
                   <MyButton
                     size="large"
-                    onClick={() => handleSubmit}
                     variant="contained"
                     type="submit"
                     disable={isSubmitting}
