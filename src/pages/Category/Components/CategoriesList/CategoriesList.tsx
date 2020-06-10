@@ -24,7 +24,7 @@ interface Props {
 const CategoriesList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
- let { classes, searchText, productsData, onFetchProducts } = props;
+  let { classes, searchText, categoryData, onFetchCategories } = props;
   const [result] = useSearch(productsData, searchText);
   const { order, orderBy, sortedData, handleSort } = useSort<Product>(
     "name",
@@ -55,7 +55,7 @@ const CategoriesList: React.FunctionComponent<
     id,
     handleOpenDeleteDialog,
     handleDeleteSubmit,
-  } = useDeleteDialog<Product>(
+  } = useDeleteDialog<Category>(
     deleteProduct,
     onFetchProducts,
     handleCloseDialog

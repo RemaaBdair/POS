@@ -75,7 +75,7 @@ const DetailsDialog: React.FunctionComponent<
                   <TableBody>
                     <TableRow classes={{ root: classes.tableRow }}>
                       <TableCell> {product.code}</TableCell>
-                      <TableCell> {product.count}</TableCell>
+                      <TableCell> {product.quantity}</TableCell>
                     </TableRow>
                   </TableBody>
                 </Table>
