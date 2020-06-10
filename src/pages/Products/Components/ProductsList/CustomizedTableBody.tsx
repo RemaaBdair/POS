@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import DescriptionIcon from "@material-ui/icons/Description";
+import { navigate } from "@reach/router";
 import { Product } from "../../util";
 import { WithStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
@@ -63,7 +64,7 @@ export const CustomizedTableBody: React.FunctionComponent<
                   aria-label="Edit Product"
                   aria-haspopup="true"
                   color="primary"
-                  onClick={() => {}}
+                  onClick={() => navigate(`/dashboard/ProductsList/${id}/edit`)}
                 >
                   <EditIcon fontSize="small" />
                 </IconButton>

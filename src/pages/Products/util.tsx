@@ -9,9 +9,9 @@ export interface Product {
   price: string;
   tax: string;
   expirationDate: string;
-  rawPrice: string;
-  count: string;
   image: string;
+  quantity: string;
+  rawPrice: string;
 }
 export type Order = "asc" | "desc";
 export const sortData = (
@@ -20,12 +20,24 @@ export const sortData = (
   ascOrder: boolean = true
 ): Product[] => {
   return productData.sort((a: Product, b: Product) => {
+    let operand = a[orderBy].split(orderBy === "price" ? "$" : "%");
+    let operand2 = b[orderBy].split(orderBy === "price" ? "$" : "%");
     if (ascOrder)
-      return a[orderBy].toLocaleLowerCase() > b[orderBy].toLocaleLowerCase()
+      return (/\d/.test(operand[0])
+        ? +operand[0].toLocaleLowerCase()
+        : operand[0].toLocaleLowerCase()) >
+        (/\d/.test(operand2[0])
+          ? +operand2[0].toLocaleLowerCase()
+          : operand2[0].toLocaleLowerCase())
         ? 1
         : -1;
     else
-      return a[orderBy].toLocaleLowerCase() < b[orderBy].toLocaleLowerCase()
+      return (/\d/.test(operand[0])
+        ? +operand[0].toLocaleLowerCase()
+        : operand[0].toLocaleLowerCase()) <
+        (/\d/.test(operand2[0])
+          ? +operand2[0].toLocaleLowerCase()
+          : operand2[0].toLocaleLowerCase())
         ? 1
         : -1;
   });

@@ -11,6 +11,7 @@ import * as serviceWorker from "./serviceWorker";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CategoryPage from "./pages/Category/CategoryPage";
 import ProductPage from "./pages/Products/ProductPage";
+import ProductFormPage from "./pages/Products/Components/ProductFormPage/ProductFormPage";
 const theme = createMuiTheme({
   palette: {
     text: {
@@ -31,6 +32,11 @@ const theme = createMuiTheme({
         },
       },
     },
+    MuiFormControl: {
+      root: {
+        marginBottom: 20,
+      },
+    },
   },
 });
 
@@ -40,9 +46,10 @@ ReactDOM.render(
       <ThemeProvider theme={theme}>
         <Router>
           <LogInPage path="/" />
-          <DashBoard path="/dashboard/">
+          <DashBoard path="/dashboard">
             <CategoryPage path="CategoriesList" />
             <ProductPage path="ProductsList" />
+            <ProductFormPage path="ProductsList/:id/edit/" />
           </DashBoard>
         </Router>
       </ThemeProvider>

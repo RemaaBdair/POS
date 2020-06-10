@@ -7,6 +7,7 @@ import ProductsList from "../ProductsList/ProductsList";
 import { MyTextField } from "../../../../Components/TextField/TextField";
 import { MyButton } from "../../../../Components/Button/Button";
 import FilterGrid from "../../../../Components/FilterGrid/FilterGrid";
+import ProductFormDialog from "../ProductFormDialog/ProductFormDialog";
 import { styles } from "./styles";
 import { Product, filterData } from "../../util";
 import { fetchProducts } from "../../api";
@@ -15,6 +16,14 @@ const ProductGrid: React.FunctionComponent<
 > = (props) => {
   const { classes } = props;
   const [productsData, setProductsData] = useState<Product[]>([]);
+  const [openDialog, setOpenDialog] = React.useState(false);
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
+  const handleSubmitDialog = () => {
+    handleCloseDialog();
+    onFetchProducts();
+  };
   useEffect(() => {
     fetchProducts().then((res) => setProductsData(res));
   }, []);
@@ -67,13 +76,18 @@ const ProductGrid: React.FunctionComponent<
       </Grid>
       <Grid item xs={6}>
         <MyButton
-          onClick={() => {}}
+          onClick={() => setOpenDialog(true)}
           type="submit"
           variant="contained"
           fullWidth={false}
         >
           Add Product
         </MyButton>
+        <ProductFormDialog
+          openDialog={openDialog}
+          onClose={handleCloseDialog}
+          onSubmit={handleSubmitDialog}
+        />
       </Grid>
       <Grid item xs={6} justify="flex-end" container>
         <MyTextField
