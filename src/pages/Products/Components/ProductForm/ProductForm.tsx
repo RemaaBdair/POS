@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Formik, Field, Form, FormikProps } from "formik";
+import TextField from "@material-ui/core/TextField";
 import TextFieldComponent from "./TextFieldComponent";
 import * as Yup from "yup";
 import Card from "@material-ui/core/Card";
@@ -8,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { MyButton } from "../../../../Components/Button/Button";
 import { KeyboardDatePicker } from "@material-ui/pickers";
+import { DatePicker } from "formik-material-ui-pickers";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import FormHelperText from "@material-ui/core/FormHelperText";
@@ -131,15 +133,7 @@ const ProductForm: React.FunctionComponent<
           }
         }}
         render={(props: FormikProps<any>) => {
-          const {
-            values,
-            touched,
-            errors,
-            isSubmitting,
-            handleChange,
-            handleSubmit,
-            dirty,
-          } = props;
+          const { values, errors, isSubmitting, handleChange, dirty } = props;
 
           return (
             <Form>
@@ -203,21 +197,11 @@ const ProductForm: React.FunctionComponent<
                     label="Quantity"
                     name="quantity"
                   />
-                  <KeyboardDatePicker
-                    disableToolbar
-                    variant="inline"
-                    format="yyyy-MM-dd"
-                    margin="normal"
-                    id="date"
+                  <Field
+                    component={DatePicker}
                     label="Expiration Date"
-                    color="secondary"
-                    error={errors.expirationDate ? true : false}
-                    helperText={errors.expirationDate}
-                    value={values.expirationDate}
-                    onChange={handleChange}
-                    KeyboardButtonProps={{
-                      "aria-label": "change date",
-                    }}
+                    name="expirationDate"
+                    dateFormat="yyyy-MM-dd"
                   />
                 </CardContent>
                 <CardActions className={classes.controls}>
