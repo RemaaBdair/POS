@@ -63,7 +63,7 @@ const ProductForm: React.FunctionComponent<
           })
         )
       : setProduct(initProduct);
-  }, []);
+  }, [id]);
   const [categories, setCategories] = useState<Category[]>([]);
   React.useEffect(() => {
     fetchCategories().then((res) => setCategories(res));
