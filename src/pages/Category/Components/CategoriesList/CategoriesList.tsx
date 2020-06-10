@@ -24,9 +24,9 @@ interface Props {
 const CategoriesList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
-  let { classes, searchText, categoryData, onFetchCategories } = props;
-  const [result] = useSearch(categoryData, searchText);
-  const { order, orderBy, sortedData, handleSort } = useSort<Category>(
+ let { classes, searchText, productsData, onFetchProducts } = props;
+  const [result] = useSearch(productsData, searchText);
+  const { order, orderBy, sortedData, handleSort } = useSort<Product>(
     "name",
     result,
     sortData
@@ -37,16 +37,14 @@ const CategoriesList: React.FunctionComponent<
     handleChangePage,
     handleChangeRowsPerPage,
   } = usePagination(5);
-  type dialogTypes = "edit" | "delete";
+  type dialogTypes = "delete" | "details";
   const [openDialog, setOpenDialog] = useState<dialogTypes | null>(null);
   const handleOpenDialog = (
     type: dialogTypes | null,
     name: string,
-    id: string,
-    category: Category
+    id: string
   ) => {
-    if (type === "edit") handleOpenEditDialog(name, category);
-    else if (type === "delete") handleOpenDeleteDialog(name, id);
+    if (type === "delete") handleOpenDeleteDialog(name, id);
     setOpenDialog(type);
   };
   const handleCloseDialog = () => {
@@ -57,18 +55,11 @@ const CategoriesList: React.FunctionComponent<
     id,
     handleOpenDeleteDialog,
     handleDeleteSubmit,
-  } = useDeleteDialog<Category>(
-    deleteCategory,
-    onFetchCategories,
+  } = useDeleteDialog<Product>(
+    deleteProduct,
+    onFetchProducts,
     handleCloseDialog
   );
-  const {
-    editingName,
-    setEditingName,
-    category,
-    handleOpenEditDialog,
-    handleEditSubmit,
-  } = useEditDialog();
   return (
     <div className={classes.root}>
       <TableContainer>

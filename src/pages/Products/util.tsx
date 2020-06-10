@@ -1,3 +1,5 @@
+import { isBefore, isAfter } from "date-fns/esm";
+
 export interface Product {
   id: string;
   code: string;
@@ -43,21 +45,29 @@ export const sortData = (
 type FilterOptions = "less than or equal" | "more than or equal";
 interface Filter {
   option: FilterOptions;
-  value: string | null;
+  value: string | Date | null;
   key: keyof Product;
 }
 const evaluate = (
   option: FilterOptions,
-  value: string | null,
+  value: string | Date | null,
   key: keyof Product,
   row: Product
 ): boolean => {
   let results = {
     "less than or equal": function () {
-      return value ? row[key].toLowerCase() <= value.toLowerCase() : true;
+      return value instanceof Date
+        ? isBefore(new Date(row[key]), value)
+        : value
+        ? row[key].toLowerCase() <= value.toLowerCase()
+        : true;
     },
     "more than or equal": function () {
-      return value ? row[key].toLowerCase() >= value.toLowerCase() : true;
+      return value instanceof Date
+        ? isAfter(new Date(row[key]), value)
+        : value
+        ? row[key].toLowerCase() >= value.toLowerCase()
+        : true;
     },
   };
   if (row[key]) return results[option]();
@@ -83,5 +93,5 @@ export const filterData = (
       row
     )
   );
-  return operand1 && operand2;
+  return operand1.filter((value) => operand2.includes(value));
 };
