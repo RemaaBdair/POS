@@ -5,6 +5,7 @@ import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import { addItem } from "../../../../actions";
 import { State } from "../../../../reducers";
+import { selectProducts } from "../../../../selectors";
 import { connect, ConnectedProps } from "react-redux";
 import { styles } from "./styles";
 import { Product, filterData } from "../../../Products/util";
@@ -62,7 +63,7 @@ const ItemsList: React.FunctionComponent<
 };
 
 const mapStateToProps = (state: State) => ({
-  products: state.products,
+  products: selectProducts(state),
 });
 
 const mapDispatchToProps = { addItem };
