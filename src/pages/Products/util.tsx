@@ -1,4 +1,4 @@
-import { isBefore, isAfter } from "date-fns/esm";
+import { isBefore, isAfter, isEqual } from "date-fns/esm";
 
 export interface Product {
   id: string;
@@ -42,7 +42,7 @@ export const sortData = (
         : -1;
   });
 };
-type FilterOptions = "less than or equal" | "more than or equal";
+type FilterOptions = "less than or equal" | "more than or equal" | "equals";
 interface Filter {
   option: FilterOptions;
   value: string | Date | null;
@@ -69,6 +69,13 @@ const evaluate = (
         ? row[key].toLowerCase() >= value.toLowerCase()
         : true;
     },
+    equals: function () {
+      return value instanceof Date
+        ? isEqual(new Date(row[key]), value)
+        : value
+        ? row[key].toLowerCase() === value.toLowerCase()
+        : true;
+    },
   };
   if (row[key]) return results[option]();
   else return false;
@@ -85,13 +92,15 @@ export const filterData = (
       row
     )
   );
-  const operand2 = rows.filter((row: Product) =>
-    evaluate(
-      filterValues[1].option,
-      filterValues[1].value,
-      filterValues[1].key,
-      row
-    )
-  );
+  const operand2 = filterValues[1]
+    ? rows.filter((row: Product) =>
+        evaluate(
+          filterValues[1].option,
+          filterValues[1].value,
+          filterValues[1].key,
+          row
+        )
+      )
+    : rows;
   return operand1.filter((value) => operand2.includes(value));
 };
