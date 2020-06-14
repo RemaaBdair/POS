@@ -14,6 +14,7 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CategoryPage from "./pages/Category/CategoryPage";
 import ProductPage from "./pages/Products/ProductPage";
 import ProductFormPage from "./pages/Products/Components/ProductFormPage/ProductFormPage";
+import POSPage from "./pages/POS/POSPage";
 const theme = createMuiTheme({
   palette: {
     text: {
@@ -53,6 +54,7 @@ ReactDOM.render(
               <CategoryPage path="CategoriesList" />
               <ProductPage path="ProductsList" />
               <ProductFormPage path="ProductsList/:id/edit/" />
+              <POSPage path="POS" />
             </DashBoard>
           </Router>
         </ThemeProvider>
