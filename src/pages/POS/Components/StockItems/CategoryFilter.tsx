@@ -14,7 +14,6 @@ export const CategoryFilter: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
   const { classes, activeFilter, categories, onClick } = props;
-  console.log(categories);
   return (
     <Grid container alignItems="flex-start">
       <Button

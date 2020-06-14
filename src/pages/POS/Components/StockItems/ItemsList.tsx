@@ -35,7 +35,6 @@ const ItemsList: React.FunctionComponent<
   );
   const handleClick = (product: Product) => {
     addItem(product);
-    console.log("hi");
   };
   return (
     <Grid item xs={12} justify="flex-start" container>
