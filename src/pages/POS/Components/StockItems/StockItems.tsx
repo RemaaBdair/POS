@@ -5,6 +5,7 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
 import { State } from "../../../../reducers";
+import { selectCategories } from "../../../../selectors";
 import { connect, ConnectedProps } from "react-redux";
 import ItemsList from "./ItemsList";
 import CategoryFilter from "./CategoryFilter";
@@ -62,7 +63,7 @@ const StockItems: React.FunctionComponent<
   );
 };
 const mapStateToProps = (state: State) => ({
-  categories: state.categories,
+  categories: selectCategories(state),
 });
 
 const connector = connect(mapStateToProps);
