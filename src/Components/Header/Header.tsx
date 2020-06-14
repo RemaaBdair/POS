@@ -36,7 +36,7 @@ const Header: React.FunctionComponent<
         <Toolbar className={props.classes.toolBar}>
           <Typography className={props.classes.listItem} color="primary">
             <CreditCardIcon color="inherit" fontSize="small" />
-            <Link href="#" onClick={preventDefault} color="inherit">
+            <Link href="POS" color="inherit">
               POS
             </Link>
           </Typography>
