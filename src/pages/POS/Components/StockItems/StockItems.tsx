@@ -51,7 +51,7 @@ const StockItems: React.FunctionComponent<
           }}
         />
       </Grid>
-      <Grid item xs={12} justify="flex-start" container>
+      <Grid item xs={12} justify="center" container>
         <ItemsList searchText={searchText} categoryFilter={categoryFilter} />
       </Grid>
     </Grid>
