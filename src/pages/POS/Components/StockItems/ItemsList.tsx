@@ -1,5 +1,6 @@
 import React from "react";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
+import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
@@ -44,6 +45,10 @@ const ItemsList: React.FunctionComponent<
   const handleClick = (product: Product) => {
     addProduct(product);
   };
+
+  if (filteredProducts.length === 0)
+    return <Box className={classes.div}>There is no products</Box>;
+
   return (
     <Grid item xs={12} justify="flex-start" container>
       {filteredProducts.map((product) => {
