@@ -2,6 +2,8 @@ import { addDecorator } from "@storybook/react";
 import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import DateFnsUtils from "@date-io/date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import { Provider } from "react-redux";
+import store from "../src/store";
 import React from "react";
 const theme = createMuiTheme({
   palette: {
@@ -15,8 +17,10 @@ const theme = createMuiTheme({
 });
 addDecorator((story) => {
   return (
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <ThemeProvider theme={theme}>{story()}</ThemeProvider>
-    </MuiPickersUtilsProvider>
+    <Provider store={store}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={theme}>{story()}</ThemeProvider>
+      </MuiPickersUtilsProvider>
+    </Provider>
   );
 });
