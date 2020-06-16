@@ -22,11 +22,12 @@ export const CategoryFilter: React.FunctionComponent<
         variant="outlined"
         onClick={() => onClick(null)}
         className={classes.button}
-        classes={
-          activeFilter === null
-            ? { root: classes.activeFilter }
-            : { root: classes.inActiveFilter }
-        }
+        classes={{
+          root:
+            activeFilter === null
+              ? classes.activeFilter
+              : classes.inActiveFilter,
+        }}
       >
         <HomeIcon />
       </Button>
@@ -37,11 +38,12 @@ export const CategoryFilter: React.FunctionComponent<
           type="button"
           variant="outlined"
           className={classes.button}
-          classes={
-            activeFilter === category.name
-              ? { root: classes.activeFilter }
-              : { root: classes.inActiveFilter }
-          }
+          classes={{
+            root:
+              activeFilter === category.name
+                ? classes.activeFilter
+                : classes.inActiveFilter,
+          }}
         >
           {category.name}
         </Button>
