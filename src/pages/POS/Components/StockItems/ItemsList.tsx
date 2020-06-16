@@ -11,6 +11,7 @@ import { connect, ConnectedProps } from "react-redux";
 import { styles } from "./styles";
 import { Product, filterData } from "../../../Products/util";
 import useSearch from "../../../../hooks/useSearch";
+import { Typography } from "@material-ui/core";
 type PropsFromRedux = ConnectedProps<typeof connector>;
 interface Props {
   searchText: string;
@@ -47,7 +48,11 @@ const ItemsList: React.FunctionComponent<
   };
 
   if (filteredProducts.length === 0)
-    return <Box className={classes.div}>There is no products</Box>;
+    return (
+      <Box>
+        <Typography>There is no products</Typography>
+      </Box>
+    );
 
   return (
     <Grid item xs={12} justify="flex-start" container>
