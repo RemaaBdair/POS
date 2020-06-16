@@ -12,6 +12,7 @@ export const styles = createStyles({
     padding: 5,
     backgroundColor: "#eee",
     marginLeft: 10,
+    height: "fit-content",
   },
   button: {
     marginRight: 5,
