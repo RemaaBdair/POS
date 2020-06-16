@@ -8,9 +8,16 @@ export const styles = createStyles({
     height: "100%",
     justifyContent: "center",
   },
-
+  stockItems: {
+    padding: 5,
+    backgroundColor: "#eee",
+    marginLeft: 10,
+  },
   button: {
-    marginLeft: 5,
+    marginRight: 5,
+    marginBottom: 2,
+    backgroundColor: "#ccc",
+    color: "black",
   },
   activeFilter: {
     borderBottom: "3px solid #6EC89B",
@@ -35,5 +42,6 @@ export const styles = createStyles({
   },
   searchText: {
     marginTop: 10,
+    backgroundColor: "white",
   },
 });
