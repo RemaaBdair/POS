@@ -17,6 +17,4 @@ const store = createStore(
 );
 
 sagaMiddleware.run(rootSaga);
-store.dispatch({ type: "FETCH_ALL_PRODUCTS_REQUEST" });
-store.dispatch({ type: "FETCH_ALL_CATEGORIES_REQUEST" });
 export default store;

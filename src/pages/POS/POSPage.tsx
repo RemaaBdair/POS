@@ -4,12 +4,19 @@ import { RouteComponentProps } from "@reach/router";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import StockItems from "./Components/StockItems/StockItems";
 import Cart from "./Components/Cart/Cart";
-
+import { connect, ConnectedProps } from "react-redux";
+import { requestAllProducts, requestAllCategories } from "../../actions";
 import { styles } from "./styles";
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
 const POSPage: React.FunctionComponent<
-  WithStyles<typeof styles> & RouteComponentProps
+  WithStyles<typeof styles> & RouteComponentProps & PropsFromRedux
 > = (props) => {
-  const { classes } = props;
+  const { classes, requestAllProducts, requestAllCategories } = props;
+  React.useEffect(() => {
+    requestAllProducts();
+    requestAllCategories();
+  }, []);
   return (
     <Grid container className={classes.container}>
       <Grid item xs={6} justify="flex-start" container>
@@ -21,4 +28,8 @@ const POSPage: React.FunctionComponent<
     </Grid>
   );
 };
-export default withStyles(styles)(POSPage);
+
+const mapDispatchToProps = { requestAllProducts, requestAllCategories };
+const connector = connect(null, mapDispatchToProps);
+const WrappedComponent = connector(POSPage);
+export default withStyles(styles)(WrappedComponent);
