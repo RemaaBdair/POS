@@ -37,7 +37,7 @@ const theme = createMuiTheme({
     },
     MuiFormControl: {
       root: {
-        marginBottom: 20,
+        marginBottom: 10,
       },
     },
   },
