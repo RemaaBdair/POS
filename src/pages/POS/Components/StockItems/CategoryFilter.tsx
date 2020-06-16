@@ -6,7 +6,7 @@ import { Category } from "../../../Category/util";
 import { WithStyles, withStyles } from "@material-ui/core/styles";
 import { styles } from "./styles";
 interface Props {
-  activeFilter: string | null; //category perhaps
+  activeFilter: string | null;
   categories: Category[];
   onClick: (categoryName: string | null) => void;
 }
@@ -21,6 +21,7 @@ export const CategoryFilter: React.FunctionComponent<
         type="button"
         variant="outlined"
         onClick={() => onClick(null)}
+        className={classes.button}
         classes={
           activeFilter === null
             ? { root: classes.activeFilter }
