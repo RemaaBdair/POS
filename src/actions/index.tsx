@@ -3,6 +3,8 @@ import { Product } from "../pages/Products/util";
 import { Category } from "../pages/Category/util";
 
 export const addProduct = createAction<Product>("add product to cart");
+export const requestAllProducts = createAction("request products");
+export const requestAllCategories = createAction("request categories");
 export const fetchAllProducts = createAction<Product[]>(
   "fetch products success"
 );
