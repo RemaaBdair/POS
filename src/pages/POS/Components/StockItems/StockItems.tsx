@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import SearchIcon from "@material-ui/icons/Search";
 import TextField from "@material-ui/core/TextField";
-import { State } from "../../../../reducers";
+import { State } from "../../../../store/state";
 import { selectCategories } from "../../../../selectors";
 import { connect, ConnectedProps } from "react-redux";
 import ItemsList from "./ItemsList";
@@ -25,7 +25,7 @@ const StockItems: React.FunctionComponent<
     setCategoryFilter(categoryName);
   };
   return (
-    <Grid container>
+    <Grid container className={classes.stockItems}>
       <Grid item xs={12} justify="flex-start" container>
         <CategoryFilter
           activeFilter={categoryFilter}
@@ -34,19 +34,14 @@ const StockItems: React.FunctionComponent<
         />
       </Grid>
 
-      <Grid
-        item
-        xs={12}
-        justify="flex-start"
-        container
-        classes={{ root: classes.searchText }}
-      >
+      <Grid item xs={12} justify="flex-start" container>
         <TextField
-          label="Search"
           type="text"
           value={searchText}
           fullWidth={true}
+          variant="outlined"
           onChange={(event) => handleSearchTextChange(event.target.value)}
+          classes={{ root: classes.searchText }}
           InputProps={{
             startAdornment: (
               <InputAdornment position="start">
