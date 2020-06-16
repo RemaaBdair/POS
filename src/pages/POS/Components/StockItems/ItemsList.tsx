@@ -3,9 +3,9 @@ import { WithStyles, withStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
-import { addItem } from "../../../../actions";
-import { State } from "../../../../reducers";
-import { selectProducts } from "../../../../selectors";
+import { addProduct } from "../../../../actions";
+import { State } from "../../../../store/state";
+import { selectAllProducts } from "../../../../selectors";
 import { connect, ConnectedProps } from "react-redux";
 import { styles } from "./styles";
 import { Product, filterData } from "../../../Products/util";
@@ -18,8 +18,15 @@ interface Props {
 const ItemsList: React.FunctionComponent<
   WithStyles<typeof styles> & Props & PropsFromRedux
 > = (props) => {
-  const { classes, searchText, categoryFilter, addItem, products } = props;
-  const [result] = useSearch(products, searchText);
+  const {
+    classes,
+    searchText,
+    categoryFilter,
+    addProduct,
+    allProducts,
+  } = props;
+
+  const [result] = useSearch(allProducts, searchText);
   const filteredProducts = React.useMemo(
     () =>
       filterData(
@@ -35,7 +42,7 @@ const ItemsList: React.FunctionComponent<
     [result, categoryFilter]
   );
   const handleClick = (product: Product) => {
-    addItem(product);
+    addProduct(product);
   };
   return (
     <Grid item xs={12} justify="flex-start" container>
@@ -63,10 +70,10 @@ const ItemsList: React.FunctionComponent<
 };
 
 const mapStateToProps = (state: State) => ({
-  products: selectProducts(state),
+  allProducts: selectAllProducts(state),
 });
 
-const mapDispatchToProps = { addItem };
+const mapDispatchToProps = { addProduct };
 
 const connector = connect(mapStateToProps, mapDispatchToProps);
 const WrappedComponent = connector(ItemsList);
