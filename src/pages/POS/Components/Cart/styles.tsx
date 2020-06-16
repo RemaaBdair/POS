@@ -5,9 +5,10 @@ export const styles = createStyles({
     backgroundColor: "#eee",
     height: "fit-content",
   },
-  buttons: {},
+  buttons: { color: "black" },
   paymentButton: {
     backgroundColor: "#6EC89B",
+    marginLeft: "3px",
   },
   cancelButton: {
     backgroundColor: "#f65e48",

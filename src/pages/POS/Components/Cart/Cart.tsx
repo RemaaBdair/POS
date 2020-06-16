@@ -44,7 +44,7 @@ const Cart: React.FunctionComponent<
             onClick={handleCancel}
             type="button"
             variant="outlined"
-            className={classes.cancelButton}
+            className={`${classes.cancelButton} ${classes.buttons}`}
             fullWidth={true}
           >
             Cancel
@@ -55,7 +55,7 @@ const Cart: React.FunctionComponent<
             onClick={handlePayment}
             type="submit"
             variant="outlined"
-            className={classes.paymentButton}
+            className={`${classes.paymentButton} ${classes.buttons}`}
             fullWidth={true}
           >
             Payment
