@@ -96,5 +96,11 @@
       "quantity": "10",
       "rawPrice": "10$"
     }
+  ],
+  "payments": [
+    {
+      "success": "true",
+      "id": 1
+    }
   ]
 }
