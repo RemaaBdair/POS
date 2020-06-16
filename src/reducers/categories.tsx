@@ -1,8 +1,8 @@
 import { createReducer } from "redux-act";
-import { fetchCategoriesResult } from "../actions";
+import { fetchAllCategories } from "../actions";
 import { Category } from "../pages/Category/util";
 const reducer = createReducer<Category[]>({}, []);
-reducer.on(fetchCategoriesResult, (state, payload: Category[]) => {
+reducer.on(fetchAllCategories, (state, payload: Category[]) => {
   return payload;
 });
 export default reducer;
