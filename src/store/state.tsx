@@ -15,7 +15,7 @@ export interface State {
   allProducts: Product[];
   categories: Category[];
 }
-export const defaultState = {
+export const defaultState: State = {
   cart: { products: [] },
   products: {},
   allProducts: [],
