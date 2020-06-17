@@ -24,9 +24,9 @@ interface Props {
 const CategoriesList: React.FunctionComponent<
   WithStyles<typeof styles> & Props
 > = (props) => {
- let { classes, searchText, productsData, onFetchProducts } = props;
-  const [result] = useSearch(productsData, searchText);
-  const { order, orderBy, sortedData, handleSort } = useSort<Product>(
+  let { classes, searchText, categoryData, onFetchCategories } = props;
+  const [result] = useSearch(categoryData, searchText);
+  const { order, orderBy, sortedData, handleSort } = useSort<Category>(
     "name",
     result,
     sortData
@@ -37,12 +37,13 @@ const CategoriesList: React.FunctionComponent<
     handleChangePage,
     handleChangeRowsPerPage,
   } = usePagination(5);
-  type dialogTypes = "delete" | "details";
+  type dialogTypes = "edit" | "delete";
   const [openDialog, setOpenDialog] = useState<dialogTypes | null>(null);
   const handleOpenDialog = (
     type: dialogTypes | null,
     name: string,
-    id: string
+    id: string,
+    category: Category
   ) => {
     if (type === "delete") handleOpenDeleteDialog(name, id);
     setOpenDialog(type);
@@ -55,11 +56,18 @@ const CategoriesList: React.FunctionComponent<
     id,
     handleOpenDeleteDialog,
     handleDeleteSubmit,
-  } = useDeleteDialog<Product>(
-    deleteProduct,
-    onFetchProducts,
+  } = useDeleteDialog<Category>(
+    deleteCategory,
+    onFetchCategories,
     handleCloseDialog
   );
+  const {
+    editingName,
+    setEditingName,
+    category,
+    handleOpenEditDialog,
+    handleEditSubmit,
+  } = useEditDialog();
   return (
     <div className={classes.root}>
       <TableContainer>

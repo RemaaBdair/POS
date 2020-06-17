@@ -1,5 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
+import store from "./store";
 import DateFnsUtils from "@date-io/date-fns";
 import "date-fns";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -12,6 +14,7 @@ import { ThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import CategoryPage from "./pages/Category/CategoryPage";
 import ProductPage from "./pages/Products/ProductPage";
 import ProductFormPage from "./pages/Products/Components/ProductFormPage/ProductFormPage";
+import POSPage from "./pages/POS/POSPage";
 const theme = createMuiTheme({
   palette: {
     text: {
@@ -34,7 +37,7 @@ const theme = createMuiTheme({
     },
     MuiFormControl: {
       root: {
-        marginBottom: 20,
+        marginBottom: 10,
       },
     },
   },
@@ -42,18 +45,21 @@ const theme = createMuiTheme({
 
 ReactDOM.render(
   <React.StrictMode>
-    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-      <ThemeProvider theme={theme}>
-        <Router>
-          <LogInPage path="/" />
-          <DashBoard path="/dashboard">
-            <CategoryPage path="CategoriesList" />
-            <ProductPage path="ProductsList" />
-            <ProductFormPage path="ProductsList/:id/edit/" />
-          </DashBoard>
-        </Router>
-      </ThemeProvider>
-    </MuiPickersUtilsProvider>
+    <Provider store={store}>
+      <MuiPickersUtilsProvider utils={DateFnsUtils}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <LogInPage path="/" />
+            <DashBoard path="/dashboard">
+              <CategoryPage path="CategoriesList" />
+              <ProductPage path="ProductsList" />
+              <ProductFormPage path="ProductsList/:id/edit/" />
+              <POSPage path="POS" />
+            </DashBoard>
+          </Router>
+        </ThemeProvider>
+      </MuiPickersUtilsProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
