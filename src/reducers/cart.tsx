@@ -14,56 +14,45 @@ const defualtState = {
 };
 const reducer = createReducer<Cart>({}, defualtState as any);
 reducer.on(addProduct, (state, payload: Product) => {
-  let isFound: boolean = false;
-  const filteredProducts = state.products.filter((elem) => {
-    if (elem.id === payload.id) {
-      elem.quantity += 1;
-      isFound = true;
-    }
-    return elem;
+  let found: boolean = false;
+  const newArray = state.products.map((item) => {
+    if (item.id === payload.id) {
+      found = true;
+      return {
+        ...item,
+        quantity: item.quantity + 1,
+      };
+    } else return item;
   });
-
-  if (!isFound) {
-    return {
-      ...state,
-      products: [...state.products, { id: payload.id, quantity: 1 }],
-    };
-  } else
-    return {
-      ...state,
-
-      products: filteredProducts,
-    };
+  return {
+    products: found
+      ? [...newArray]
+      : [...newArray, { id: payload.id, quantity: 1 }],
+  };
 });
 
 reducer.on(incQuantity, (state, payload: string) => {
-  const filteredProducts = state.products.filter((elem) => {
-    if (elem.id === payload) {
-      elem.quantity += 1;
-    }
-    return elem;
+  const newArray = state.products.map((item) => {
+    if (item.id === payload) {
+      return {
+        ...item,
+        quantity: item.quantity + 1,
+      };
+    } else return item;
   });
-
-  return {
-    ...state,
-
-    products: filteredProducts,
-  };
+  return { products: newArray };
 });
 
 reducer.on(decQuantity, (state, payload: string) => {
-  const filteredProducts = state.products.filter((elem) => {
-    if (elem.id === payload && elem.quantity > 1) {
-      elem.quantity -= 1;
-    }
-    return elem;
+  const newArray = state.products.map((item) => {
+    if (item.id === payload && item.quantity > 1) {
+      return {
+        ...item,
+        quantity: item.quantity - 1,
+      };
+    } else return item;
   });
-
-  return {
-    ...state,
-
-    products: filteredProducts,
-  };
+  return { products: newArray };
 });
 reducer.on(deleteProduct, (state, payload: string) => {
   const filteredProducts = state.products.filter((elem) => elem.id !== payload);
@@ -73,7 +62,7 @@ reducer.on(deleteProduct, (state, payload: string) => {
     products: filteredProducts,
   };
 });
-reducer.on(deleteCart, (state) => {
+reducer.on(deleteCart, () => {
   return {
     products: [],
   };

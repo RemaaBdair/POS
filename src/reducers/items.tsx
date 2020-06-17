@@ -14,22 +14,25 @@ reducer.on(addProduct, (state, payload: Product) => {
     }
   }
   if (!isFound) {
-    state[payload.id] = {
-      name: payload.name,
-      price: +payload.price.slice(0, -1),
+    return {
+      ...state,
+      [payload.id]: {
+        name: payload.name,
+        price: +payload.price.slice(0, -1),
+      },
     };
   }
-
   return state;
 });
 reducer.on(deleteProduct, (state, payload: string) => {
-  const products = state;
-  for (let x in products) {
-    if (x === payload) delete products[x];
-  }
-  return products;
+  const array = Object.keys(state);
+  return array
+    .filter((elem) => elem !== payload)
+    .reduce((newObj, item) => {
+      return { ...newObj, [item]: state[item] };
+    }, {});
 });
 reducer.on(deleteCart, (state) => {
-  return [] as any;
+  return {};
 });
 export default reducer;
